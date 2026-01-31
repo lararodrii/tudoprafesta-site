@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     const getEl = (id) => document.getElementById(id);
-    const scriptURL = "http://localhost:3000/api/schedule"; // URL do Backend Node
+    const scriptURL = "https://claras-buffet-backend.onrender.com/api/schedule";
 
     // ==========================================
     // ⚙️ 1. CONFIGURAÇÕES
