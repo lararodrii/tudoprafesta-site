@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clara's Buffet | O Melhor Buffet em Domicílio de Brasília</title>
+    <link rel="icon" href="image/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="home-page">
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><img src="image/navbar_icon.png" alt="Clara's Buffet" class="logo-img"></a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="history.html">Nossa História</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn">Serviços <i class="fas fa-caret-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="comidas.html">Comidas</a>
+                            <a href="bebidas.html">Bebidas</a>
+                            <a href="alugueis.html">Alugueis</a>
+                        </div>
+                    </li>
+                    <li><a href="galeria.html">Galeria</a></li>
+                    <li><a href="#calculator">Orçamento</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2>O Melhor Buffet em Domicílio de Brasília</h2>
+            <p>Tudo pra sua festa!<br>Buffet Infantil, Crepes, Massas, Comida de Boteco & Drinks. Cama Elástica e
+                Carrocinhas.</p>
+            <a href="#calculator" class="btn-gold">Faça seu Orçamento</a>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Nossos Serviços</h2>
+
+            <!-- Brands Header -->
+            <div class="brands-header">
+                <div class="brand-item">
+                    <img src="image/claraslogo.PNG" alt="Clara's Buffet Logo" class="brand-logo">
+                    <h3 class="brand-title">Clara's Buffet</h3>
+                    <p class="brand-desc">Especialista em gastronomia completa (Buffet Infantil, Massas, Crepes e Comida
+                        de Boteco).</p>
+                </div>
+                <div class="brand-item">
+                    <img src="image/festbarlogo.PNG" alt="FestBar Drinks Logo" class="brand-logo">
+                    <h3 class="brand-title">FestBar Drinks</h3>
+                    <p class="brand-desc">Serviço de barman e coquetelaria profissional (Drinks com e sem álcool e
+                        estrutura iluminada).</p>
+                </div>
+                <div class="brand-item">
+                    <img src="image/upfestalogo.PNG" alt="Up Festas Logo" class="brand-logo">
+                    <h3 class="brand-title">Up Festas</h3>
+                    <p class="brand-desc">Locação de brinquedos e carrocinhas para diversão (Cama elástica, Pipoca e
+                        Algodão Doce).</p>
+                </div>
+            </div>
+
+            <div class="services-list" id="services-list">
+
+                <!-- Service 1: Buffet Infantil Completo -->
+                <div class="service-card-wide">
+                    <div class="service-content">
+                        <h3 class="service-title">Buffet Infantil Completo</h3>
+                        <p class="service-description">A alegria da criançada com opções deliciosas e variadas.</p>
+                        <ul class="service-checklist">
+                            <li><i class="fas fa-check"></i> <strong>Salgados Fritos na Hora:</strong> Coxinha, Delícia
+                                de queijo, Kibe e mais.</li>
+                            <li><i class="fas fa-check"></i> <strong>Salgados Assados:</strong> Pão de queijo, Mini
+                                pizza (Especial/Premium).</li>
+                            <li><i class="fas fa-check"></i> <strong>Lanchinhos:</strong> Hot Dog, Batata Frita, Pipoca,
+                                Mini Churros.</li>
+                            <li><i class="fas fa-check"></i> <strong>Empratadinhos:</strong> Estrogonoff, Macarronada ou
+                                Escondidinho.</li>
+                            <li><i class="fas fa-check"></i> <strong>Bebidas:</strong> Refrigerantes (Coca-Cola e
+                                linhas) e Sucos.</li>
+                            <li><i class="fas fa-check"></i> <strong>Equipe Completa:</strong> Garçons e Cozinha.</li>
+                            <li><i class="fas fa-check"></i> <strong>Estrutura:</strong> Descartáveis e itens inclusos.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="service-image" style="background-image: url('image/fotoprincipal.jpeg');"></div>
+                </div>
+
+                <!-- Service 2: Rodízio de Crepe Francês -->
+                <div class="service-card-wide">
+                    <div class="service-content">
+                        <h3 class="service-title">Rodízio de Crepe Francês</h3>
+                        <p class="service-description">Charme e sabor francês preparado na hora.</p>
+                        <ul class="service-checklist">
+                            <li><i class="fas fa-check"></i> <strong>Massa:</strong> Fina e crocante (Receita
+                                Exclusiva).</li>
+                            <li><i class="fas fa-check"></i> <strong>Salgados:</strong> Presunto, Mussarela, Bacon,
+                                Frango, Carne Seca e +10 opções.</li>
+                            <li><i class="fas fa-check"></i> <strong>Doces:</strong> Banana, Chocolate, Coco, Goiabada,
+                                Doce de Leite.</li>
+                            <li><i class="fas fa-check"></i> <strong>Premium (Opcional):</strong> Camarão, Gorgonzola,
+                                Morango, OREO e mais.</li>
+                            <li><i class="fas fa-check"></i> <strong>Acompanhamentos:</strong> Bebidas e Salgados fritos
+                                (conforme pacote).</li>
+                        </ul>
+                    </div>
+                    <div class="service-image" style="background-image: url('image/ingredientes_selecionados.png');">
+                    </div>
+                </div>
+
+                <!-- Service 3: Buffet de Massas -->
+                <div class="service-card-wide">
+                    <div class="service-content">
+                        <h3 class="service-title">Buffet de Massas</h3>
+                        <p class="service-description">Sofisticação e personalização para o seu jantar.</p>
+                        <ul class="service-checklist">
+                            <li><i class="fas fa-check"></i> <strong>Massas:</strong> Espaguete, Parafuso, Penne.</li>
+                            <li><i class="fas fa-check"></i> <strong>Molhos:</strong> Bolonhesa, Ao Sugo, Branco.</li>
+                            <li><i class="fas fa-check"></i> <strong>Ingredientes:</strong> +20 opções frescas (Bacon,
+                                Queijos, Legumes, etc).</li>
+                            <li><i class="fas fa-check"></i> <strong>Serviço:</strong> Pratos de Porcelana inclusos.
+                            </li>
+                            <li><i class="fas fa-check"></i> <strong>Acompanhamentos:</strong> Bebidas e Salgados
+                                fritos.</li>
+                        </ul>
+                    </div>
+                    <div class="service-image" style="background-image: url('image/kit_prataria.png');"></div>
+                </div>
+
+                <!-- Service 4: Comida de Boteco -->
+                <div class="service-card-wide">
+                    <div class="service-content">
+                        <h3 class="service-title">Comida de Boteco</h3>
+                        <p class="service-description">Descontração e sabor de barzinho na sua festa.</p>
+                        <ul class="service-checklist">
+                            <li><i class="fas fa-check"></i> <strong>Pratos Quentes:</strong> Arroz carreteiro,
+                                Galinhada.</li>
+                            <li><i class="fas fa-check"></i> <strong>Petiscos:</strong> Carne de sol, Calabresa,
+                                Torresmo, Mandioca, Fritas.</li>
+                            <li><i class="fas fa-check"></i> <strong>Salgados:</strong> Fritos na hora (4 sabores à
+                                escolha).</li>
+                            <li><i class="fas fa-check"></i> <strong>Bebidas:</strong> Refrigerantes e Sucos (opcional).
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="service-image" style="background-image: url('image/memorias_construidas.png');"></div>
+                </div>
+
+                <!-- Service 5: FestBar Drinks -->
+                <div class="service-card-wide">
+                    <div class="service-content">
+                        <h3 class="service-title">FestBar Drinks</h3>
+                        <p class="service-description">Drinks incríveis e estrutura completa de bar.</p>
+                        <ul class="service-checklist">
+                            <li><i class="fas fa-check"></i> <strong>Drinks (Sem Álcool):</strong> Mojito, Pink
+                                Lemonade, Piña Colada, Caipifrutas.</li>
+                            <li><i class="fas fa-check"></i> <strong>Estrutura:</strong> Balcão rústico iluminado (LED),
+                                Copos e frutas.</li>
+                            <li><i class="fas fa-check"></i> <strong>Equipe:</strong> Barman profissional e Auxiliar.
+                            </li>
+                            <li><i class="fas fa-check"></i> <strong>Obs:</strong> Cliente fornece o álcool.</li>
+                        </ul>
+                    </div>
+                    <div class="service-image"
+                        style="background-image: url('image/festbarlogo.PNG'); background-size: contain; background-repeat: no-repeat; background-color: #000;">
+                    </div>
+                </div>
+
+                <!-- Service 6: Up Festas (Locações) -->
+                <div class="service-card-wide">
+                    <div class="service-content">
+                        <h3 class="service-title">Up Festas (Locações)</h3>
+                        <p class="service-description">Diversão garantida com brinquedos e guloseimas.</p>
+                        <ul class="service-checklist">
+                            <li><i class="fas fa-check"></i> <strong>Cama Elástica:</strong> Pula-pula seguro e
+                                higienizado.</li>
+                            <li><i class="fas fa-check"></i> <strong>Pipoca:</strong> Carrocinha (Salgada e Gourmet).
+                            </li>
+                            <li><i class="fas fa-check"></i> <strong>Algodão Doce:</strong> Carrocinha com operador.
+                            </li>
+                            <li><i class="fas fa-check"></i> <strong>Monitor:</strong> Profissional uniformizado
+                                incluso.</li>
+                        </ul>
+                    </div>
+                    <div class="service-image"
+                        style="background-image: url('image/cama_elastica.png'); background-size: contain; background-repeat: no-repeat; background-color: #333;">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">O que dizem nossos clientes</h2>
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <div class="carousel-slide active">
+                        <div class="testimonial-card google-style">
+                            <div class="testimonial-header">
+                                <img src="image/Ruan_Carlos.png" alt="Ruan Carlos" class="client-avatar">
+                                <div class="header-info">
+                                    <p class="client-name">Ruan Carlos</p>
+                                    <div class="stars-date">
+                                        <span class="stars">★★★★★</span>
+                                        <span class="review-date">23 de nov. de 2024</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+                                    class="google-icon-small" alt="Google">
+                            </div>
+                            <p class="testimonial-text">"Sem dúvidas a melhor da região! Comidas frescas é muito gostas,
+                                preparação rápida de crepe e atendimento completo, com varias opções de recheios a
+                                serviços como louças completas!! Super indico"</p>
+                            <a href="#" target="_blank" class="google-link">Ver todas as avaliações</a>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide">
+                        <div class="testimonial-card google-style">
+                            <div class="testimonial-header">
+                                <div class="client-avatar-placeholder"
+                                    style="width: 50px; height: 50px; background: #ddd; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #555;">
+                                    MC</div>
+                                <div class="header-info">
+                                    <p class="client-name">Maria Clara</p>
+                                    <div class="stars-date">
+                                        <span class="stars">★★★★★</span>
+                                        <span class="review-date">10 de dez. de 2024</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+                                    class="google-icon-small" alt="Google">
+                            </div>
+                            <p class="testimonial-text">"Amei o serviço! Tudo muito organizado e a comida estava
+                                maravilhosa. Os convidados elogiaram muito. Com certeza contratarei novamente."</p>
+                            <a href="#" target="_blank" class="google-link">Ver todas as avaliações</a>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="carousel-slide">
+                        <div class="testimonial-card google-style">
+                            <div class="testimonial-header">
+                                <div class="client-avatar-placeholder"
+                                    style="width: 50px; height: 50px; background: #ddd; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #555;">
+                                    JO</div>
+                                <div class="header-info">
+                                    <p class="client-name">João Oliveira</p>
+                                    <div class="stars-date">
+                                        <span class="stars">★★★★★</span>
+                                        <span class="review-date">05 de jan. de 2025</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+                                    class="google-icon-small" alt="Google">
+                            </div>
+                            <p class="testimonial-text">"Profissionalismo nota 10. O crepe é sensacional e a equipe
+                                muito atenciosa. Recomendo para qualquer evento!"</p>
+                            <a href="#" target="_blank" class="google-link">Ver todas as avaliações</a>
+                        </div>
+                    </div>
+                    <!-- Slide 4 -->
+                    <div class="carousel-slide">
+                        <div class="testimonial-card google-style">
+                            <div class="testimonial-header">
+                                <div class="client-avatar-placeholder"
+                                    style="width: 50px; height: 50px; background: #ddd; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #555;">
+                                    AB</div>
+                                <div class="header-info">
+                                    <p class="client-name">Ana Beatriz</p>
+                                    <div class="stars-date">
+                                        <span class="stars">★★★★★</span>
+                                        <span class="review-date">12 de jan. de 2025</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+                                    class="google-icon-small" alt="Google">
+                            </div>
+                            <p class="testimonial-text">"Contratei para o aniversário do meu filho e foi perfeito. O
+                                buffet infantil é muito bem servido e as crianças amaram."</p>
+                            <a href="#" target="_blank" class="google-link">Ver todas as avaliações</a>
+                        </div>
+                    </div>
+                    <!-- Slide 5 -->
+                    <div class="carousel-slide">
+                        <div class="testimonial-card google-style">
+                            <div class="testimonial-header">
+                                <div class="client-avatar-placeholder"
+                                    style="width: 50px; height: 50px; background: #ddd; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #555;">
+                                    FS</div>
+                                <div class="header-info">
+                                    <p class="client-name">Fernanda Souza</p>
+                                    <div class="stars-date">
+                                        <span class="stars">★★★★★</span>
+                                        <span class="review-date">20 de jan. de 2025</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+                                    class="google-icon-small" alt="Google">
+                            </div>
+                            <p class="testimonial-text">"Experiência incrível! A equipe chegou no horário, organizou
+                                tudo e a comida estava quentinha e deliciosa. Parabéns!"</p>
+                            <a href="#" target="_blank" class="google-link">Ver todas as avaliações</a>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="calculator" class="calculator-section">
+        <div class="container">
+            <h2 class="section-title">Calcule seu Evento</h2>
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label for="guests">Número de Convidados:</label>
+                        <input type="number" id="guests" min="10" value="50">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Duração do Evento:</label>
+                        <p style="color: var(--text-gray); font-size: 14px; margin-top: 5px;">
+                            Calculada automaticamente (3h até 30 convidados, 4h acima).
+                        </p>
+                        <p style="color: var(--primary-gold); font-weight: bold; margin-top: 5px;">Hora extra é
+                            contratada à parte</p>
+                        <p style="color: var(--text-gray); font-size: 0.9em;">
+                            Cardápio completo disponível na aba serviços ou em nosso whatsapp com os consultores de
+                            vendas.
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>1. Escolha os Serviços Principais:</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-buffet-essencial"> Buffet Infantil - Essencial
+                                <p style="font-size: 0.9em; color: var(--text-gray); margin-top: 2px;">(R$ 47,00 até 49
+                                    pessoas / R$ 44,00 acima de 50)</p>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-buffet-especial"> Buffet Infantil - Especial
+                                <p style="font-size: 0.9em; color: var(--text-gray); margin-top: 2px;">(R$ 65,00 até 49
+                                    pessoas / R$ 62,00 acima de 50)</p>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-buffet-premium"> Buffet Infantil - Premium
+                                <p style="font-size: 0.9em; color: var(--text-gray); margin-top: 2px;">(R$ 75,00 até 49
+                                    pessoas / R$ 72,00 acima de 50)</p>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-massas"> Buffet de Massas (+R$ 39,99/pessoa)
+                                <p style="font-size: 0.9em; color: var(--text-gray); margin-top: 2px;">*servido em
+                                    pratos de porcelana</p>
+                                <p style="font-size: 0.8em; color: var(--primary-gold); margin-top: 0px;">*pratos já
+                                    inclusos no valor</p>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-crepe"> Estação de Crepe (+R$ 37,90/pessoa)
+                                <p style="font-size: 0.9em; color: var(--text-gray); margin-top: 2px;">*servido no cone
+                                    descartável</p>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>2. Alugueis & Carrocinhas:</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-hotdog"> Barraquinha de Hot Dog + Batata Frita (+R$
+                                750,00 fixo)
+                                <p style="font-size: 0.9em; color: var(--text-gray); margin-top: 2px;">*valor até 80
+                                    pessoas</p>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-carts"> Carrinho Pipoca + Algodão Doce (+R$ 300,00
+                                fixo)
+                                <p style="font-size: 0.9em; color: var(--text-gray); margin-top: 2px;">*valor até 100
+                                    pessoas</p>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-popcorn-premium"> Pipoca Gourmet Premium (+R$ 600,00
+                                fixo)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-cama-elastica"> Cama Elástica (+R$ 250,00 fixo)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="addons-group">
+                        <label>3. Adicionais:</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="addon-drinks" disabled> Bebidas (Refr. e Suco) - R$
+                                9,90/pessoa
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="addon-savory" disabled> Salgados variados + Churros - R$
+                                8,90/pessoa
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="addon-glass" disabled> Copos de Vidro - R$ 1,00/pessoa
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="addon-cutlery" disabled> Pratos de Porcelana + Talheres - R$
+                                2,50/pessoa
+                            </label>
+                            <label class="checkbox-label" id="container-addon-nutella" style="display: none;">
+                                <input type="checkbox" id="addon-nutella"> Calda de Nutella - R$ 120,00 fixo
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="dynamic-warnings" style="margin-top: 15px;"></div>
+                </div>
+
+                <div class="calculator-result">
+                    <h3>Estimativa de Valor</h3>
+                    <div class="price-display">
+                        <span class="currency">R$</span>
+                        <span id="total-price">0,00</span>
+                    </div>
+                    <p class="note" id="price-note">*Valores estimados. Entre em contato para um orçamento final.</p>
+                    <button id="btn-goto-booking" class="btn-gold full-width">Solicitar Reserva</button>
+                    <a href="https://api.whatsapp.com/send?phone=5561982605050" target="_blank"
+                        id="btn-whatsapp-fallback" class="btn-gold full-width"
+                        style="display: none; background: #25D366; color: white; text-align: center; text-decoration: none;">Orçamento
+                        via WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="custom-booking" class="custom-booking-section"
+        style="padding: 60px 0; background-color: var(--primary-black);">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 40px;">Verificar Disponibilidade</h2>
+            <div class="custom-calendar-container">
+                <div class="calendar-header">
+                    <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
+                    <h3 id="month-year"></h3>
+                    <button id="next-month"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="calendar-weekdays">
+                    <div>Dom</div>
+                    <div>Seg</div>
+                    <div>Ter</div>
+                    <div>Qua</div>
+                    <div>Qui</div>
+                    <div>Sex</div>
+                    <div>Sáb</div>
+                </div>
+                <div class="calendar-days" id="calendar-days"></div>
+            </div>
+        </div>
+    </section>
+
+    <div id="booking-modal" class="modal">
+        <div class="modal-content booking-modal-content">
+            <span class="close-modal" id="close-booking-modal">×</span>
+            <h3>Reservar Data</h3>
+            <p id="selected-date-display"></p>
+
+            <form id="booking-form">
+                <input type="hidden" id="selected-date-iso" name="selectedDateISO" value="">
+
+                <div id="booking-step-1">
+
+                    <div
+                        style="background-color: rgba(212, 175, 55, 0.1); padding: 15px; border: 1px solid var(--primary-gold); border-radius: 4px; text-align: center; margin-bottom: 20px;">
+                        <span style="color: var(--text-gray); font-size: 0.9em;">Orçamento Estimado:</span>
+                        <div id="modal-total-display"
+                            style="font-family: 'Playfair Display', serif; font-size: 1.8em; color: var(--primary-gold); font-weight: bold;">
+                            R$ 0,00</div>
+                    </div>
+
+                    <div class="form-group"
+                        style="border-bottom: 1px solid #333; padding-bottom: 20px; margin-bottom: 20px;">
+                        <label for="modal-guests" style="color: var(--primary-gold); font-size: 1.1em;">1º Passo:
+                            Quantos convidados?</label>
+                        <input type="number" id="modal-guests" required min="10" placeholder="Digite a quantidade..."
+                            style="font-size: 1.1em; border: 1px solid var(--primary-gold);">
+                        <small style="color: #888; display: block; margin-top: 5px;">Digite o número de pessoas para
+                            liberar as opções abaixo.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <div id="modal-guest-warning"
+                            style="color: #ff6b6b; font-weight: bold; font-size: 0.9em; margin-bottom: 10px; display: none;">
+                            ⚠️ Digite o número de convidados acima para selecionar os serviços.
+                        </div>
+
+                        <h4 style='color: var(--primary-gold); margin-bottom: 10px; border-bottom: 1px solid #333;'>
+                            Serviços Principais</h4>
+                        <div class="modal-services-grid">
+                            <label><input type="checkbox" id="modal-service-buffet-essencial" disabled> Buffet
+                                Essencial</label>
+                            <label><input type="checkbox" id="modal-service-buffet-especial" disabled> Buffet
+                                Especial</label>
+                            <label><input type="checkbox" id="modal-service-buffet-premium" disabled> Buffet
+                                Premium</label>
+                            <label style="display: block;">
+                                <input type="checkbox" id="modal-service-massas" disabled> Buffet de Massas
+                                <span
+                                    style="display: block; font-size: 0.8em; color: var(--primary-gold); margin-left: 25px;">*pratos
+                                    já inclusos no valor</span>
+                            </label>
+                            <label><input type="checkbox" id="modal-service-crepe" disabled> Estação de Crepe</label>
+                        </div>
+
+                        <h4
+                            style='color: var(--primary-gold); margin-bottom: 10px; border-bottom: 1px solid #333; margin-top: 20px;'>
+                            Alugueis & Carrocinhas</h4>
+                        <div class="modal-services-grid">
+                            <label><input type="checkbox" id="modal-service-hotdog" disabled> Barraquinha Hot
+                                Dog</label>
+                            <label><input type="checkbox" id="modal-service-carts" disabled> Carrinho
+                                Pipoca/Algodão</label>
+                            <label><input type="checkbox" id="modal-service-popcorn-premium" disabled> Pipoca
+                                Gourmet</label>
+                            <label><input type="checkbox" id="modal-service-cama-elastica" disabled> Cama
+                                Elástica</label>
+                        </div>
+
+                        <h4
+                            style='color: var(--primary-gold); margin-bottom: 10px; border-bottom: 1px solid #333; margin-top: 20px;'>
+                            Adicionais</h4>
+                        <div class="modal-services-grid">
+                            <label><input type="checkbox" id="modal-addon-drinks" disabled> Bebidas (Refri/Suco)</label>
+                            <label><input type="checkbox" id="modal-addon-savory" disabled> Salgados + Churros</label>
+                            <label><input type="checkbox" id="modal-addon-glass" disabled> Copos de Vidro</label>
+                            <label><input type="checkbox" id="modal-addon-cutlery" disabled> Pratos/Talheres</label>
+
+                            <div id="modal-container-addon-nutella" style="display: none; margin-top: 5px;">
+                                <label
+                                    style="display: flex; align-items: center; gap: 8px; color: var(--text-gray); cursor: pointer;">
+                                    <input type="checkbox" id="modal-addon-nutella" disabled> Calda de Nutella (R$
+                                    120,00)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="client-name">Nome do Cliente</label>
+                        <input type="text" id="client-name" required placeholder="Seu nome completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-location">Localização do Evento</label>
+                        <input type="text" id="event-location" required placeholder="Endereço ou Link do Google Maps">
+                    </div>
+
+                    <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div>
+                            <label for="event-time">Horário de Início</label>
+                            <input type="time" id="event-time" required>
+                        </div>
+                        <div>
+                            <label for="event-end-time">Horário de Término</label>
+                            <input type="time" id="event-end-time" readonly
+                                style="background-color: #333; cursor: not-allowed; color: #888;">
+                        </div>
+                    </div>
+
+                    <button type="button" id="review-booking-btn" class="btn-gold full-width">Revisar
+                        Agendamento</button>
+                </div>
+
+                <div id="booking-step-2" style="display: none;">
+                    <h4 style="color: var(--primary-gold); text-align: center; margin-bottom: 15px;">Resumo do
+                        Agendamento</h4>
+                    <div id="summary-content"
+                        style="background-color: var(--primary-black); padding: 15px; border-radius: 5px; margin-bottom: 15px; text-align: left;">
+                    </div>
+
+                    <p style="color: red; font-weight: bold; text-align: center; margin-bottom: 15px;">Atenção: A
+                        confirmação final será realizada pelo WhatsApp.</p>
+
+                    <div class="form-group">
+                        <label class="checkbox-label" style="font-size: 0.9em; align-items: flex-start;">
+                            <input type="checkbox" id="booking-disclaimer" style="margin-top: 3px;">
+                            <span>Estou ciente de que este envio é uma pré-reserva.</span>
+                        </label>
+                    </div>
+
+                    <div style="display: flex; gap: 10px;">
+                        <button type="button" id="back-booking-btn" class="btn-gold"
+                            style="background-color: transparent; border: 1px solid var(--primary-gold); width: 30%;">Voltar</button>
+                        <button type="submit" class="btn-gold"
+                            style="width: 70%; background-color: #25D366; border-color: #25D366; color: white;">Concluir
+                            e Ir para WhatsApp</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="image/footer_logo_new.png" alt="Clara's Buffet" class="footer-logo-img">
+                </div>
+                <div class="footer-info">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-phone"></i> 61 8260-5050</p>
+                    <p><i class="fas fa-envelope"></i> clarassbuffet@gmail.com</p>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Clara's Serviços e Buffet. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="commitment-modal" class="modal" style="display: none;">
+        <div class="modal-content commitment-content">
+            <h2 class="commitment-title">ATENÇÃO: ÚLTIMA ETAPA</h2>
+            <p class="commitment-text">Ao clicar em confirmar, você será redirecionado para o WhatsApp.</p>
+            <div class="commitment-buttons"
+                style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+                <button id="cancel-commitment" class="btn-cancel"
+                    style="background: transparent; border: 1px solid red; color: red; padding: 10px 20px; cursor: pointer;">Voltar</button>
+                <button id="confirm-commitment" class="btn-confirm"
+                    style="background: #25D366; border: none; color: white; padding: 10px 20px; font-weight: bold; cursor: pointer;">SIM,
+                    QUERO ASSINAR O CONTRATO</button>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://api.whatsapp.com/send?phone=5561982605050" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

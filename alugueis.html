@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alugueis & Diversão | Clara's Buffet</title>
+    <link rel="icon" href="image/favicon.ico">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo"><a href="index.html"><img src="image/navbar_icon.png" alt="Clara's Buffet"
+                        class="logo-img"></a></div>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="history.html">Nossa História</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn active">Serviços <i
+                                class="fas fa-caret-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="comidas.html">Comidas</a>
+                            <a href="bebidas.html">Bebidas</a>
+                            <a href="alugueis.html">Alugueis</a>
+                        </div>
+                    </li>
+                    <li><a href="galeria.html">Galeria</a></li>
+                    <li><a href="index.html#calculator">Orçamento</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="history-page-hero"
+        style="background-image: url('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1920&q=80'); min-height: 40vh;">
+        <div class="container">
+            <h1 class="page-title">Diversão & Estrutura</h1>
+        </div>
+    </section>
+
+    <section class="brand-header-section">
+        <div class="container">
+            <div style="font-size: 4rem; margin-bottom: 10px;">🎠</div>
+            <h2 style="font-family: 'Playfair Display'; color: var(--primary-gold); font-size: 2.5rem;">Up Festas</h2>
+            <p style="max-width: 700px; margin: 0 auto; color: #ccc;">A alegria da criançada garantida. Brinquedos
+                seguros, revisados e carrocinhas que trazem o gostinho de infância.</p>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <!-- Brand Header -->
+        <div class="brands-header" style="justify-content: center; margin-bottom: 40px;">
+            <div class="brand-item" style="max-width: 600px; flex: none;">
+                <img src="image/upfestalogo.PNG" alt="Up Festas Logo" class="brand-logo">
+                <h3 class="brand-title">Up Festas</h3>
+                <p class="brand-desc">Diversão e estrutura para o seu evento. Brinquedos seguros, carrocinhas com
+                    guloseimas e equipamentos.</p>
+            </div>
+        </div>
+
+        <div class="services-list">
+            <!-- Service: Up Festas (Locações) -->
+            <div class="service-card-wide">
+                <div class="service-content">
+                    <h3 class="service-title">Up Festas (Locações)</h3>
+                    <p class="service-description">Diversão garantida com brinquedos e guloseimas.</p>
+                    <ul class="service-checklist">
+                        <li><i class="fas fa-check"></i> <strong>Cama Elástica:</strong> Pula-pula seguro e higienizado.
+                        </li>
+                        <li><i class="fas fa-check"></i> <strong>Pipoca:</strong> Carrocinha (Salgada e Gourmet).</li>
+                        <li><i class="fas fa-check"></i> <strong>Algodão Doce:</strong> Carrocinha com operador.</li>
+                        <li><i class="fas fa-check"></i> <strong>Monitor:</strong> Profissional uniformizado incluso.
+                        </li>
+                    </ul>
+                </div>
+                <div class="service-image"
+                    style="background-image: url('image/cama_elastica.png'); background-size: contain; background-repeat: no-repeat; background-color: #333;">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2024 Clara's Buffet.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://api.whatsapp.com/send?phone=5561982605050" class="whatsapp-float" target="_blank"><i
+            class="fab fa-whatsapp"></i></a>
+    <script>
+        const mobileBtn = document.querySelector('.mobile-menu-btn');
+        const nav = document.querySelector('nav ul');
+        if (mobileBtn) mobileBtn.addEventListener('click', () => nav.classList.toggle('active'));
+    </script>
+</body>
+
+</html>
