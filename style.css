@@ -911,18 +911,23 @@ footer {
         font-size: 32px;
     }
 
+    /* CORREÇÃO DO BOTÃO EM TODAS AS PÁGINAS */
     .mobile-menu-btn {
-        display: block;
+        display: block !important;
+        /* Força aparecer */
+        position: relative;
+        /* Ajuste para não bugar o layout */
+        z-index: 1002;
+        /* Garante que fique acima do header preto */
     }
 
     /* =========================================================
        CORREÇÃO DO MENU MOBILE (GAVETA QUE FUNCIONA)
        ========================================================= */
-    /* Ao invés de usar 'nav ul', usamos '.main-nav' que é a classe
-       que o JS procura para adicionar o 'active' */
-    
+
     .main-nav {
-        display: none; /* Escondido por padrão no mobile */
+        display: none;
+        /* Escondido por padrão no mobile */
         position: absolute;
         top: 100%;
         left: 0;
@@ -933,7 +938,7 @@ footer {
         align-items: center;
         padding: 20px 0;
         z-index: 1000;
-        box-shadow: 0 10px 10px rgba(0,0,0,0.5);
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
     }
 
     /* Quando o JS adiciona a classe .active, ele vira flex */
@@ -948,7 +953,8 @@ footer {
         width: 100%;
         text-align: center;
         padding: 0;
-        display: flex; /* Garante que a UL apareça */
+        display: flex;
+        /* Garante que a UL apareça */
     }
 
     .main-nav li {
@@ -971,7 +977,8 @@ footer {
     }
 
     .dropdown-content {
-        position: static !important; /* Deixa de ser flutuante */
+        position: static !important;
+        /* Deixa de ser flutuante */
         background-color: transparent !important;
         box-shadow: none !important;
         border: none !important;
@@ -979,7 +986,7 @@ footer {
         padding: 10px 0;
         width: 100%;
     }
-    
+
     /* =========================================================
        FIM DA CORREÇÃO
        ========================================================= */
