@@ -320,18 +320,51 @@ document.addEventListener('DOMContentLoaded', function () {
 
         modal.style.display = 'block';
 
-        // Copia convidados do input principal se tiver valor
+        // 🔄 SINCRONIZAÇÃO: Orçamento -> Modal
         const mainGuests = getEl('guests').value;
         if (mainGuests && getEl('modal-guests')) {
             getEl('modal-guests').value = mainGuests;
-            // Dispara evento para liberar checkboxes
+            // Dispara evento para liberar checkboxes do modal
             const event = new Event('input');
             getEl('modal-guests').dispatchEvent(event);
         }
 
+        // Mapeamento de IDs do Orçamento para o Modal
+        const syncMap = {
+            'service-buffet-essencial': 'modal-service-buffet-essencial',
+            'service-buffet-especial': 'modal-service-buffet-especial',
+            'service-buffet-premium': 'modal-service-buffet-premium',
+            'service-massas': 'modal-service-massas',
+            'service-crepe': 'modal-service-crepe',
+            'service-hotdog': 'modal-service-hotdog',
+            'service-carts': 'modal-service-carts',
+            'service-popcorn-premium': 'modal-service-popcorn-premium',
+            'service-cama-elastica': 'modal-service-cama-elastica',
+            'addon-drinks': 'modal-addon-drinks',
+            'addon-savory': 'modal-addon-savory',
+            'addon-glass': 'modal-addon-glass',
+            'addon-cutlery': 'modal-addon-cutlery',
+            'addon-nutella': 'modal-addon-nutella'
+        };
+
+        // Copia estado checked
+        Object.keys(syncMap).forEach(sourceId => {
+            const source = getEl(sourceId);
+            const target = getEl(syncMap[sourceId]);
+            if (source && target && !target.disabled) {
+                target.checked = source.checked;
+            }
+        });
+
+        // Atualiza estado visual dependente (ex: Nutella Container)
+        updateModalState();
+
         // Reseta passos
         if (getEl('booking-step-1')) getEl('booking-step-1').style.display = 'block';
         if (getEl('booking-step-2')) getEl('booking-step-2').style.display = 'none';
+
+        // Atualiza total do modal logo de cara
+        calculateModalTotal();
     }
 
     // Fecha Modal
@@ -578,7 +611,41 @@ document.addEventListener('DOMContentLoaded', function () {
                 const data = await res.json();
 
                 if (data.status === 'error') {
-                    alert("⚠️ " + data.message); // Exibe mensagem do backend (ex: Dia Lotado)
+                    // TRATAMENTO DE ERRO INTELIGENTE
+                    const errorMsg = data.message.toLowerCase();
+                    let warningText = "⚠️ " + data.message;
+                    let removedItems = [];
+
+                    // Voltar para tela de seleção
+                    getEl('booking-step-1').style.display = 'block';
+                    getEl('booking-step-2').style.display = 'none';
+
+                    if (errorMsg.includes('lotado para festas principais') || errorMsg.includes('principais')) {
+                        // Desmarca serviços principais
+                        ['modal-service-buffet-essencial', 'modal-service-buffet-especial', 'modal-service-buffet-premium', 'modal-service-massas', 'modal-service-crepe'].forEach(id => {
+                            const el = getEl(id);
+                            if (el && el.checked) {
+                                el.checked = false;
+                                removedItems.push('Um ou mais serviços principais');
+                            }
+                        });
+                        warningText += "\n\nRemovemos os serviços principais conflitantes. Você pode selecionar serviços de aluguel ou tentar outra data.";
+                    }
+                    else if (errorMsg.includes('lotado para alugueis') || errorMsg.includes('reservado')) {
+                        // Desmarca alugueis
+                        ['modal-service-hotdog', 'modal-service-carts', 'modal-service-popcorn-premium', 'modal-service-cama-elastica'].forEach(id => {
+                            const el = getEl(id);
+                            if (el && el.checked) {
+                                el.checked = false;
+                                removedItems.push('Um ou mais serviços de aluguel');
+                            }
+                        });
+                        warningText += "\n\nRemovemos os itens de aluguel conflitantes para esse horário.";
+                    }
+
+                    alert(warningText);
+                    calculateModalTotal(); // Recalcula total sem os itens removidos
+
                     btn.disabled = false;
                     btn.textContent = originalText;
                 } else {
