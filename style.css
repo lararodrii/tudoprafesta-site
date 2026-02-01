@@ -566,7 +566,6 @@ footer {
     cursor: pointer;
     font-size: 24px;
     color: #444;
-    /* Cor da estrela inativa */
     border: none;
     padding: 0 5px;
     line-height: 1;
@@ -579,7 +578,6 @@ footer {
 .dot.active {
     background-color: transparent;
     color: var(--primary-gold);
-    /* Estrela ativa dourada */
 }
 
 /* Custom Booking Calendar */
@@ -917,40 +915,54 @@ footer {
         display: block;
     }
 
-    /* NAV MOBILE CORRIGIDO */
-    nav ul {
-        display: none;
-        flex-direction: column;
+    /* =========================================================
+       CORREÇÃO DO MENU MOBILE (GAVETA QUE FUNCIONA)
+       ========================================================= */
+    /* Ao invés de usar 'nav ul', usamos '.main-nav' que é a classe
+       que o JS procura para adicionar o 'active' */
+    
+    .main-nav {
+        display: none; /* Escondido por padrão no mobile */
         position: absolute;
         top: 100%;
-        /* FIX: Cola no cabeçalho */
         left: 0;
         width: 100%;
         background-color: rgba(10, 10, 10, 0.98);
-        padding: 20px 0;
-        text-align: center;
         border-bottom: 1px solid var(--primary-gold);
-        z-index: 1000;
-        max-height: 80vh;
-        overflow-y: auto;
-        align-items: center;
-        justify-content: center;
-    }
-
-    nav ul.active {
-        display: flex;
-    }
-
-    nav li {
-        margin: 15px 0;
-        width: 100%;
-        display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        padding: 20px 0;
+        z-index: 1000;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.5);
     }
 
-    /* MENU DROPDOWN MOBILE */
+    /* Quando o JS adiciona a classe .active, ele vira flex */
+    .main-nav.active {
+        display: flex;
+    }
+
+    /* Estilo da lista dentro da gaveta */
+    .main-nav ul {
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        text-align: center;
+        padding: 0;
+        display: flex; /* Garante que a UL apareça */
+    }
+
+    .main-nav li {
+        width: 100%;
+        margin: 0;
+    }
+
+    .main-nav a {
+        display: block;
+        padding: 10px;
+        font-size: 1.2rem;
+    }
+
+    /* Ajuste para o Dropdown no Mobile */
     .dropdown {
         display: flex !important;
         flex-direction: column !important;
@@ -958,44 +970,19 @@ footer {
         width: 100% !important;
     }
 
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
-
     .dropdown-content {
-        display: block !important;
-        position: static !important;
+        position: static !important; /* Deixa de ser flutuante */
         background-color: transparent !important;
         box-shadow: none !important;
-        width: 100% !important;
-        text-align: center !important;
-        padding-top: 5px;
-        padding-bottom: 15px;
         border: none !important;
-        left: auto !important;
-        right: auto !important;
-        margin: 0 auto !important;
-    }
-
-    .dropdown-content a {
-        color: var(--text-gray);
-        font-size: 13px;
-        padding: 8px 0;
-        border-bottom: none;
-        display: block !important;
         text-align: center !important;
-        width: 100% !important;
-        background-color: transparent !important;
+        padding: 10px 0;
+        width: 100%;
     }
-
-    .dropdown-content a:hover {
-        color: var(--primary-gold);
-        background: none;
-    }
-
-    .dropbtn i {
-        display: none;
-    }
+    
+    /* =========================================================
+       FIM DA CORREÇÃO
+       ========================================================= */
 
     .calculator-container {
         grid-template-columns: 1fr;
@@ -1450,82 +1437,4 @@ footer {
     font-size: 10px;
     top: 2px;
     right: 4px;
-}
-
-/* =========================================
-   📱 RESPONSIVIDADE (MENU MOBILE)
-   ========================================= */
-
-/* 1. Esconde o botão do menu em telas grandes (Desktop) */
-.mobile-menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    color: #d4af37;
-    /* Dourado */
-    font-size: 1.8rem;
-    cursor: pointer;
-}
-
-/* 2. Regras para Telas Menores (Celular/Tablet) */
-@media (max-width: 768px) {
-
-    /* Mostra o botão de hambúrguer */
-    .mobile-menu-btn {
-        display: block;
-        position: absolute;
-        top: 15px;
-        right: 20px;
-        z-index: 1001;
-    }
-
-    /* Esconde o menu normal e prepara o estilo "gaveta" */
-    .main-nav {
-        display: none;
-        /* Escondido por padrão */
-        position: absolute;
-        top: 100%;
-        /* Logo abaixo do header */
-        left: 0;
-        width: 100%;
-        background-color: #0f0f0f;
-        /* Cor do fundo do menu */
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 0;
-        border-bottom: 2px solid #d4af37;
-        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
-        z-index: 1000;
-    }
-
-    /* A MÁGICA: Quando o JS adiciona a classe .active, o menu aparece */
-    .main-nav.active {
-        display: flex;
-    }
-
-    /* Estilo dos links no celular */
-    .main-nav ul {
-        flex-direction: column;
-        width: 100%;
-        gap: 20px;
-        text-align: center;
-        padding: 0;
-    }
-
-    .main-nav ul li {
-        width: 100%;
-    }
-
-    .main-nav ul li a {
-        display: block;
-        padding: 10px;
-        font-size: 1.2rem;
-    }
-
-    /* Ajuste do Header para não quebrar */
-    header .container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
 }
