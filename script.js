@@ -1,7 +1,8 @@
-
 document.addEventListener('DOMContentLoaded', function () {
 
     const getEl = (id) => document.getElementById(id);
+
+    // URL do Backend no Render
     const scriptURL = "https://claras-buffet-backend.onrender.com/api/schedule";
 
     // ==========================================
@@ -58,13 +59,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const dynamicWarnings = getEl('dynamic-warnings');
 
     // ==========================================
-    // 🧮 2. LÓGICA DE CONTROLE (ITENS 6, 7 e 8)
+    // 🧮 2. LÓGICA DE CONTROLE
     // ==========================================
     function updateAddonsState() {
         const mainServices = [
             inputs.buffetEssencial, inputs.buffetEspecial, inputs.buffetPremium,
             inputs.massas, inputs.crepe,
-            // ITEM 6: Alugueis também liberam adicionais agora
             inputs.hotdog, inputs.carts, inputs.popcornPremium, inputs.camaElastica
         ];
 
@@ -73,13 +73,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         addons.forEach(addon => {
             if (addon) {
-                // ITEM 6: Só habilita se tiver algo selecionado
                 addon.disabled = !isMainOrRentalSelected;
                 if (!isMainOrRentalSelected) addon.checked = false;
             }
         });
 
-        // ITEM 7: Se Massas for selecionado, desabilita e desmarca Pratos/Talheres
         if (inputs.massas && inputs.massas.checked) {
             if (inputs.addonCutlery) {
                 inputs.addonCutlery.checked = false;
@@ -87,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // Lógica Nutella
         if (inputs.popcornPremium && inputs.containerNutella) {
             const showNutella = inputs.popcornPremium.checked;
             inputs.containerNutella.style.display = showNutella ? 'flex' : 'none';
@@ -97,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function () {
         calculateTotal();
     }
 
-    // ITEM 8: Teste de Preços
     function calculateTotal() {
         let total = 0;
         let guests = parseInt(guestsInput?.value) || 0;
@@ -111,14 +107,12 @@ document.addEventListener('DOMContentLoaded', function () {
             return (guests <= config.threshold) ? config.tier1 : config.tier2;
         };
 
-        // Principais
         if (inputs.buffetEssencial?.checked) total += guests * getTierPrice('essencial');
         if (inputs.buffetEspecial?.checked) total += guests * getTierPrice('especial');
         if (inputs.buffetPremium?.checked) total += guests * getTierPrice('premium');
         if (inputs.massas?.checked) total += guests * PRICES.services.massas;
         if (inputs.crepe?.checked) total += guests * PRICES.services.crepe;
 
-        // Alugueis (Fixos)
         if (inputs.popcornPremium?.checked) total += PRICES.services.popcorn_premium;
         if (inputs.camaElastica?.checked) total += PRICES.cama_elastica;
 
@@ -139,12 +133,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // Adicionais (Multiplicados por convidado)
         if (inputs.addonDrinks?.checked) total += guests * PRICES.addons.drinks;
         if (inputs.addonSavory?.checked) total += guests * PRICES.addons.savory;
         if (inputs.addonGlass?.checked) total += guests * PRICES.addons.glass;
         if (inputs.addonCutlery?.checked && !inputs.addonCutlery.disabled) total += guests * PRICES.addons.cutlery;
-        if (inputs.popcornPremium?.checked && inputs.addonNutella?.checked) total += PRICES.addons.nutella; // Nutella é fixo
+        if (inputs.popcornPremium?.checked && inputs.addonNutella?.checked) total += PRICES.addons.nutella;
 
         globalGuests = guests;
 
@@ -173,14 +166,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // ==========================================
-    // 📅 3. CALENDÁRIO COM VERMELHO E BLOQUEIO (ITENS 1 e 2)
+    // 📅 3. CALENDÁRIO COM VERMELHO E BLOQUEIO
     // ==========================================
     const calendarDays = getEl('calendar-days');
     const monthYear = getEl('month-year');
     let currentDate = new Date();
-
-    // Estado global de dias cheios para cache
-    // (Não estritamente necessário se chamarmos toda vez, mas bom para evitar flicker se quiser)
 
     async function renderCalendar() {
         if (!calendarDays || !monthYear) return;
@@ -188,10 +178,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
 
-        // Pega dias cheios do backend
+        // Pega dias cheios do backend (LINK CORRIGIDO)
         let fullDays = [];
         try {
-            const res = await fetch(`http://localhost:3000/api/month-availability?month=${month}&year=${year}`);
+            const res = await fetch(`https://claras-buffet-backend.onrender.com/api/month-availability?month=${month}&year=${year}`);
             const data = await res.json();
             fullDays = data.fullDays || [];
         } catch (e) {
@@ -202,13 +192,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const lastDay = new Date(year, month + 1, 0);
         const daysInMonth = lastDay.getDate();
         const startingDay = firstDay.getDay();
-        const today = new Date(); // Data de hoje para comparação
+        const today = new Date();
 
         const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
         monthYear.textContent = `${monthNames[month]} ${year}`;
         calendarDays.innerHTML = "";
 
-        // Dias vazios do inicio
         for (let i = 0; i < startingDay; i++) {
             const emptyDiv = document.createElement('div');
             emptyDiv.classList.add('calendar-day', 'empty');
@@ -221,19 +210,16 @@ document.addEventListener('DOMContentLoaded', function () {
             dayDiv.textContent = i;
 
             const thisDate = new Date(year, month, i);
-            const isPast = thisDate.setHours(0, 0, 0, 0) < today.setHours(0, 0, 0, 0); // Ajuste para comparar apenas datas
+            const isPast = thisDate.setHours(0, 0, 0, 0) < today.setHours(0, 0, 0, 0);
 
-            // ITEM 2: Bloqueia passado
             if (isPast) {
                 dayDiv.classList.add('past');
             }
-            // ITEM 1: Bloqueia dias cheios (Vermelho)
             else if (fullDays.includes(i)) {
                 dayDiv.classList.add('full');
                 dayDiv.title = "Dia Lotado";
             }
             else {
-                // Clique só funciona se não for passado nem cheio
                 dayDiv.addEventListener('click', () => {
                     openBookingModal(thisDate);
                 });
@@ -243,7 +229,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Navegação Mês
     getEl('prev-month')?.addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() - 1);
         renderCalendar();
@@ -254,32 +239,29 @@ document.addEventListener('DOMContentLoaded', function () {
         renderCalendar();
     });
 
-
     // ==========================================
-    // ⏰ VALIDAÇÃO DE HORÁRIO PASSADO (ITEM 2)
+    // ⏰ VALIDAÇÃO DE HORÁRIO
     // ==========================================
     function validateTime() {
         const timeInput = getEl('event-time');
-        const selectedDate = window.currentSelectedDateObj; // Definido no openBookingModal
+        const selectedDate = window.currentSelectedDateObj;
 
         if (!timeInput || !selectedDate) return;
 
         const now = new Date();
         const [h, m] = timeInput.value.split(':').map(Number);
 
-        // Se a data selecionada for HOJE
         if (selectedDate.toDateString() === now.toDateString()) {
             const selectedTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m);
             if (selectedTime < now) {
                 alert("⚠️ Não é possível agendar um horário que já passou.");
-                timeInput.value = ""; // Limpa o campo
+                timeInput.value = "";
                 return;
             }
         }
-        calculateEndTime(); // Se passou, calcula o fim
+        calculateEndTime();
     }
 
-    // Calcula fim baseado na duração
     function calculateEndTime() {
         const startInput = getEl('event-time');
         const endInput = getEl('event-end-time');
@@ -294,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let endHours = hours + duration;
         let endMinutes = minutes;
 
-        if (endHours >= 24) endHours -= 24; // Ajuste simples para virada de dia
+        if (endHours >= 24) endHours -= 24;
 
         const formattedEnd =
             String(endHours).padStart(2, '0') + ':' +
@@ -303,18 +285,15 @@ document.addEventListener('DOMContentLoaded', function () {
         endInput.value = formattedEnd;
     }
 
-
     // ==========================================
     // 🚀 ENVIO E MODAL
     // ==========================================
-
     const modal = getEl('booking-modal');
     const closeBtn = getEl('close-booking-modal');
 
-    // Abre Modal
     function openBookingModal(date) {
         if (!modal) return;
-        window.currentSelectedDateObj = date; // Guarda data objeto globalmente
+        window.currentSelectedDateObj = date;
 
         const dateStr = date.toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
         const isoDate = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
@@ -324,43 +303,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
         modal.style.display = 'block';
 
-        // Copia convidados do input principal se tiver valor
         const mainGuests = getEl('guests').value;
         if (mainGuests && getEl('modal-guests')) {
             getEl('modal-guests').value = mainGuests;
-            // Dispara evento para liberar checkboxes
             const event = new Event('input');
             getEl('modal-guests').dispatchEvent(event);
         }
 
-        // Reseta passos
         if (getEl('booking-step-1')) getEl('booking-step-1').style.display = 'block';
         if (getEl('booking-step-2')) getEl('booking-step-2').style.display = 'none';
     }
 
-    // Fecha Modal
     if (closeBtn) {
         closeBtn.addEventListener('click', () => {
             modal.style.display = 'none';
         });
     }
 
-    // Fecha clicando fora
     window.addEventListener('click', (e) => {
         if (e.target == modal) modal.style.display = 'none';
     });
 
-    // Botão Principal "Solicitar Reserva" (apenas rola para calendário)
     getEl('btn-goto-booking')?.addEventListener('click', function () {
         document.getElementById('custom-booking').scrollIntoView({ behavior: 'smooth' });
     });
 
-
-    // Lógica do Modal (Cópia simplificada da lógica principal para reatividade dentro do modal)
-    // Para simplificar, vamos assumir que o usuário deve preencher convidados no modal para liberar checkboxes
     const modalGuestsInput = getEl('modal-guests');
     const modalInputs = {
-        // Mapeie os IDs do modal aqui
         buffetEssencial: getEl('modal-service-buffet-essencial'),
         buffetEspecial: getEl('modal-service-buffet-especial'),
         buffetPremium: getEl('modal-service-buffet-premium'),
@@ -390,13 +359,11 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         } else {
             if (warning) warning.style.display = 'none';
-            // Libera principais e alugueis
             ['buffetEssencial', 'buffetEspecial', 'buffetPremium', 'massas', 'crepe', 'hotdog', 'carts', 'popcornPremium', 'camaElastica'].forEach(k => {
                 if (modalInputs[k]) modalInputs[k].disabled = false;
             });
         }
 
-        // Lógica de Adicionais no Modal (Item 6)
         const mainServices = [
             modalInputs.buffetEssencial, modalInputs.buffetEspecial, modalInputs.buffetPremium,
             modalInputs.massas, modalInputs.crepe,
@@ -411,7 +378,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Item 7 (Massas bloqueia pratos)
         if (modalInputs.massas && modalInputs.massas.checked) {
             if (modalInputs.addonCutlery) {
                 modalInputs.addonCutlery.checked = false;
@@ -419,10 +385,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // Nutella
         if (modalInputs.popcornPremium && modalInputs.containerNutella) {
             const show = modalInputs.popcornPremium.checked;
-            modalInputs.containerNutella.style.display = show ? 'block' : 'none'; // block pq esta dentro de div
+            modalInputs.containerNutella.style.display = show ? 'block' : 'none';
             if (!show && modalInputs.addonNutella) modalInputs.addonNutella.checked = false;
         }
 
@@ -430,16 +395,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function calculateModalTotal() {
-        // ... (Implementar cálculo igual ao principal para exibir total no modal se quiser)
-        // Por brevidade, vou apenas atualizar o total visual no topo se a lógica de cálculo for duplicada ou centralizada.
-        // Se for vital, copie a lógica de calculateTotal aqui usando modalInputs.
-        // Vou fazer um calculo simplificado apenas para feedback visual
-
         let total = 0;
         let guests = parseInt(modalGuestsInput?.value) || 0;
 
-        // ... (Lógica de preços duplicada do calculateTotal principal, mas apontando para modalInputs) ...
-        // É recomendável refatorar para uma função única que aceita inputs como parametro, mas para manter script.js simples (arquivo único):
         const getTierPrice = (serviceKey) => {
             const config = PRICES.buffet[serviceKey];
             return (guests <= config.threshold) ? config.tier1 : config.tier2;
@@ -454,7 +412,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (modalInputs.popcornPremium?.checked) total += PRICES.services.popcorn_premium;
         if (modalInputs.camaElastica?.checked) total += PRICES.cama_elastica;
 
-        if (modalInputs.hotdog?.checked) total += PRICES.services.hotdog; // Sem checagem overflow visual aqui
+        if (modalInputs.hotdog?.checked) total += PRICES.services.hotdog;
         if (modalInputs.carts?.checked) total += PRICES.services.carts;
 
         if (modalInputs.addonDrinks?.checked) total += guests * PRICES.addons.drinks;
@@ -474,7 +432,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Review Button
     getEl('review-booking-btn')?.addEventListener('click', () => {
-        // Coleta dados e mostra resumo
         const guests = getEl('modal-guests').value;
         const name = getEl('client-name').value;
         const time = getEl('event-time').value;
@@ -484,7 +441,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const selectedServices = [];
-        // Helper para checar checkbox do modal
         const check = (id, label) => {
             const el = document.getElementById(id);
             if (el && el.checked) selectedServices.push(label);
@@ -526,7 +482,6 @@ document.addEventListener('DOMContentLoaded', function () {
         getEl('booking-step-2').style.display = 'none';
     });
 
-
     // ENVIO DO FORMULÁRIO (ITEM 3: Verificação Backend)
     const bookingForm = getEl('booking-form');
     if (bookingForm) {
@@ -538,7 +493,6 @@ document.addEventListener('DOMContentLoaded', function () {
             btn.disabled = true;
             btn.textContent = "Verificando disponibilidade...";
 
-            // Coleta dados manualmente para montar objeto ou FormData
             const formData = new FormData();
             formData.append('clientName', getEl('client-name').value);
             formData.append('selectedDateISO', getEl('selected-date-iso').value);
@@ -548,7 +502,6 @@ document.addEventListener('DOMContentLoaded', function () {
             formData.append('eventLocation', getEl('event-location').value);
             formData.append('total', getEl('modal-total-display').textContent);
 
-            // Recoleta serviços para string
             const selectedServices = [];
             const check = (id, label) => {
                 const el = document.getElementById(id);
@@ -571,28 +524,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
             formData.append('services', selectedServices.join(', '));
 
-
             try {
-                // Tenta agendar no backend (que vai verificar se pode)
-                const res = await fetch("http://localhost:3000/api/schedule", {
+                // AGORA SIM: URL CORRETA E SINTAXE LIMPA
+                const res = await fetch("https://claras-buffet-backend.onrender.com/api/schedule", {
                     method: 'POST',
-                    body: formData // o multer no backend vai ler o form-data
+                    body: formData
                 });
 
                 const data = await res.json();
 
                 if (data.status === 'error') {
-                    alert("⚠️ " + data.message); // Exibe mensagem do backend (ex: Dia Lotado)
+                    alert("⚠️ " + data.message);
                     btn.disabled = false;
                     btn.textContent = originalText;
                 } else {
-                    // Sucesso! Redireciona WhatsApp
                     const msg = `*Novo Agendamento*\n\n*Cliente:* ${getEl('client-name').value}\n*Data:* ${getEl('selected-date-display').textContent}\n*Horário:* ${getEl('event-time').value}\n*Local:* ${getEl('event-location').value}\n*Convidados:* ${getEl('modal-guests').value}\n*Serviços:* ${selectedServices.join(', ')}\n*Total Estimado:* ${getEl('modal-total-display').textContent}\n\n_Aguardo confirmação do contrato._`;
                     const encodedMsg = encodeURIComponent(msg);
                     window.open(`https://api.whatsapp.com/send?phone=5561982605050&text=${encodedMsg}`, '_blank');
 
                     modal.style.display = 'none';
-                    // Reset form...
                     alert("Pré-reserva enviada! Verifique seu WhatsApp.");
                     window.location.reload();
                 }
@@ -613,10 +563,9 @@ document.addEventListener('DOMContentLoaded', function () {
     getEl('event-time')?.addEventListener('change', validateTime);
 
     // ==========================================
-    // 🎨 4. LÓGICA DE UI (RECUPERADA)
+    // 🎨 4. LÓGICA DE UI
     // ==========================================
 
-    // --- CARROSSEL DE DEPOIMENTOS ---
     const track = document.querySelector('.carousel-track');
     const slides = Array.from(track ? track.children : []);
     const nextButton = document.querySelector('.next-btn');
@@ -624,7 +573,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const dotsNav = document.querySelector('.carousel-dots');
 
     if (track && slides.length > 0) {
-        // Criar bolinhas
         slides.forEach((_, index) => {
             const dot = document.createElement('button');
             dot.classList.add('dot');
@@ -640,7 +588,6 @@ document.addEventListener('DOMContentLoaded', function () {
         let currentSlideIndex = 0;
 
         function moveToSlide(targetIndex) {
-            // Loop Infinito
             if (targetIndex < 0) targetIndex = slides.length - 1;
             if (targetIndex >= slides.length) targetIndex = 0;
 
@@ -650,13 +597,9 @@ document.addEventListener('DOMContentLoaded', function () {
             currentSlide.classList.remove('active');
             targetSlide.classList.add('active');
 
-            // Atualiza Dots
             dots[currentSlideIndex].classList.remove('active');
             dots[targetIndex].classList.add('active');
 
-            // Move Track (Assumindo CSS de transform se necessário, mas o CSS original usa display: none/flex com active. 
-            // O código CSS mostra .carousel-track com display: flex e transition transform, e slide min-width 100%.
-            // Vamos usar translateX para corresponder ao CSS .carousel-track)
             const slideWidth = slides[0].getBoundingClientRect().width;
             track.style.transform = 'translateX(-' + (slideWidth * targetIndex) + 'px)';
 
@@ -675,19 +618,16 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
-        // Auto Play
         setInterval(() => {
             moveToSlide(currentSlideIndex + 1);
         }, 5000);
 
-        // Ajuste de resize
         window.addEventListener('resize', () => {
             const slideWidth = slides[0].getBoundingClientRect().width;
             track.style.transform = 'translateX(-' + (slideWidth * currentSlideIndex) + 'px)';
         });
     }
 
-    // --- MENU MOBILE ---
     const mobileBtn = document.querySelector('.mobile-menu-btn');
     const nav = document.querySelector('.main-nav');
     const header = document.querySelector('header');
@@ -697,7 +637,6 @@ document.addEventListener('DOMContentLoaded', function () {
             nav.classList.toggle('active');
             if (header) header.classList.toggle('menu-open');
 
-            // Ícone
             const icon = mobileBtn.querySelector('i');
             if (icon) {
                 if (nav.classList.contains('active')) {
@@ -710,7 +649,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Fechar ao clicar em link
         nav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 nav.classList.remove('active');
@@ -723,20 +661,17 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-        // Dropdown Mobile (Accordion)
         const dropdowns = document.querySelectorAll('.dropdown');
         dropdowns.forEach(drop => {
             const btn = drop.querySelector('.dropbtn');
             if (btn) {
                 btn.addEventListener('click', (e) => {
-                    // Se for mobile (checar largura ou se nav tem active/estilo mobile)
                     if (window.innerWidth <= 768) {
                         e.preventDefault();
-                        drop.classList.toggle('active'); // O CSS deve ter .dropdown.active .dropdown-content {display:block}
-                        // Se não tiver, precisamos adicionar inline ou garantir CSS
+                        drop.classList.toggle('active');
                         const content = drop.querySelector('.dropdown-content');
                         if (content) {
-                            content.style.position = (content.style.position === 'static') ? 'absolute' : 'static'; // Truque comum
+                            content.style.position = (content.style.position === 'static') ? 'absolute' : 'static';
                             content.style.display = (content.style.display === 'block') ? 'none' : 'block';
                         }
                     }
@@ -745,7 +680,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // --- HEADER SCROLL ---
     window.addEventListener('scroll', () => {
         if (header) {
             if (window.scrollY > 50) {
