@@ -12,7 +12,7 @@ app.use(express.json());
 // CONFIGURAÇÃO DO GOOGLE CALENDAR
 // SUBSTITUA PELO SEU ID REAL AQUI SE AINDA NÃO TIVER FEITO
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
-const CALENDAR_ID = 'seu.email@gmail.com'; // <--- COLOQUE SEU EMAIL AQUI
+const CALENDAR_ID = 'rodrigueslarab@gmail.com'; // <--- COLOQUE SEU EMAIL AQUI
 
 async function getCalendarService() {
     const auth = new google.auth.GoogleAuth({
