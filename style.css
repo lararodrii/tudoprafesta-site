@@ -968,7 +968,7 @@ footer {
         font-size: 1.2rem;
     }
 
-    /* Ajuste para o Dropdown no Mobile */
+    /* CORREÇÃO MENU MOBILE - DROPDOWN CENTRALIZADO */
     .dropdown {
         display: flex !important;
         flex-direction: column !important;
@@ -977,14 +977,37 @@ footer {
     }
 
     .dropdown-content {
+        display: flex !important;
+        /* Garante que apareça */
+        flex-direction: column !important;
         position: static !important;
-        /* Deixa de ser flutuante */
+        /* Remove o flutuante */
+        width: 100% !important;
         background-color: transparent !important;
         box-shadow: none !important;
         border: none !important;
+        padding: 10px 0 !important;
+        align-items: center !important;
+    }
+
+    .dropdown-content a {
+        color: #b0b0b0 !important;
+        /* Cinza um pouco mais claro para diferenciar */
+        font-size: 16px !important;
+        padding: 8px 0 !important;
         text-align: center !important;
-        padding: 10px 0;
-        width: 100%;
+        width: 100% !important;
+        display: block !important;
+    }
+
+    .dropdown-content a:hover {
+        color: var(--primary-gold) !important;
+        background: none !important;
+    }
+
+    /* Remove a setinha para baixo no mobile para simplificar */
+    .dropbtn i {
+        display: none !important;
     }
 
     /* =========================================================

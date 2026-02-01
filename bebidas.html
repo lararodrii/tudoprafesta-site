@@ -11,6 +11,47 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* AJUSTES RESPONSIVOS PARA MOBILE */
+        @media (max-width: 768px) {
+
+            /* Empilha imagem no topo e conteúdo embaixo */
+            .service-card-wide {
+                flex-direction: column-reverse !important;
+                height: auto !important;
+                margin-bottom: 30px;
+            }
+
+            /* Ajusta espaçamento do conteúdo */
+            .service-content {
+                padding: 30px 20px !important;
+                text-align: center;
+                /* Centraliza para ficar mais bonito no mobile */
+            }
+
+            /* Ajusta altura da imagem */
+            .service-image {
+                min-height: 250px !important;
+                width: 100% !important;
+            }
+
+            /* Alinha a lista de itens à esquerda, mas centralizada no bloco */
+            .service-checklist {
+                display: inline-block;
+                text-align: left;
+                margin-top: 20px !important;
+            }
+
+            /* Ajustes de Títulos */
+            .service-title {
+                font-size: 1.8rem !important;
+            }
+
+            .brand-header-section h2 {
+                font-size: 2rem !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -48,35 +89,52 @@
         </div>
     </section>
 
-    <section class="brand-header-section" style="border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 60px;">
+    <section class="brand-header-section"
+        style="border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 60px;">
         <div class="container">
             <div style="font-size: 4rem; margin-bottom: 10px;">🍸</div>
             <h2 style="font-family: 'Playfair Display'; color: var(--primary-gold); font-size: 2.5rem;">Festbar Drinks
             </h2>
-            <p style="max-width: 700px; margin: 0 auto; color: #ccc; font-size: 1.1rem;">A arte da coquetelaria no seu evento. Estrutura de
+            <p style="max-width: 700px; margin: 0 auto; color: #ccc; font-size: 1.1rem;">A arte da coquetelaria no seu
+                evento. Estrutura de
                 bar iluminada, bartenders profissionais e taças de vidro.</p>
         </div>
     </section>
 
     <div class="container" style="padding-top: 60px; padding-bottom: 80px;">
 
-        <div class="brands-header" style="justify-content: center; margin-bottom: 50px;">
-            <div class="brand-item" style="max-width: 600px; flex: none;">
-                <img src="image/festbarlogo.PNG" alt="FestBar Drinks Logo" class="brand-logo" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
-            </div>
-        </div>
+
 
         <div class="services-list">
-            <div class="service-card-wide" style="display: flex; flex-direction: row; box-shadow: 0 15px 40px rgba(0,0,0,0.6); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.2);">
+            <div class="service-card-wide"
+                style="display: flex; flex-direction: row; box-shadow: 0 15px 40px rgba(0,0,0,0.6); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.2);">
                 <div class="service-content" style="padding: 50px; flex: 1;">
                     <h3 class="service-title" style="font-size: 2.2rem; color: var(--primary-gold);">FestBar Drinks</h3>
-                    <p class="service-description" style="font-size: 1.2rem;">Coquetelaria profissional com estrutura iluminada.</p>
+                    <p class="service-description" style="font-size: 1.2rem;">Coquetelaria profissional com estrutura
+                        iluminada.</p>
                     <ul class="service-checklist" style="margin-top: 30px; list-style: none; padding: 0;">
-                        <li style="margin-bottom: 15px; display: flex; align-items: start; font-size: 1.05rem;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Drinks (Sem Álcool):</strong> Mojito, Piña Colada e Caipifrutas.</span></li>
-                        <li style="margin-bottom: 15px; display: flex; align-items: start; font-size: 1.05rem;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Estrutura:</strong> Balcão iluminado (LED) e Copos de vidro.</span></li>
-                        <li style="margin-bottom: 15px; display: flex; align-items: start; font-size: 1.05rem;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Equipe:</strong> Barman e Auxiliar uniformizados.</span></li>
-                        <li style="margin-bottom: 15px; display: flex; align-items: start; font-size: 1.05rem;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Obs:</strong> Cliente fornece o álcool.</span></li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: start; font-size: 1.05rem;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Drinks (Sem Álcool):</strong> Mojito, Piña Colada e Caipifrutas.</span>
+                        </li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: start; font-size: 1.05rem;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Estrutura:</strong> Balcão iluminado (LED) e Copos de vidro.</span>
+                        </li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: start; font-size: 1.05rem;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Equipe:</strong> Barman e Auxiliar uniformizados.</span>
+                        </li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: start; font-size: 1.05rem;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Obs:</strong> Cliente fornece o álcool.</span>
+                        </li>
                     </ul>
+                    <div style="margin-top: 25px;">
+                        <a href="index.html#calculator" class="btn-gold"
+                            style="font-size: 0.9rem; padding: 12px 25px; display: inline-block;">Solicitar
+                            Orçamento</a>
+                    </div>
                 </div>
 
                 <div class="service-image"

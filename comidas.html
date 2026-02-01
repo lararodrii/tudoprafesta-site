@@ -11,6 +11,47 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* AJUSTES RESPONSIVOS PARA MOBILE */
+        @media (max-width: 768px) {
+
+            /* Empilha imagem no topo e conteúdo embaixo */
+            .service-card-wide {
+                flex-direction: column-reverse !important;
+                height: auto !important;
+                margin-bottom: 30px;
+            }
+
+            /* Ajusta espaçamento do conteúdo */
+            .service-content {
+                padding: 30px 20px !important;
+                text-align: center;
+                /* Centraliza para ficar mais bonito no mobile */
+            }
+
+            /* Ajusta altura da imagem */
+            .service-image {
+                min-height: 250px !important;
+                width: 100% !important;
+            }
+
+            /* Alinha a lista de itens à esquerda, mas centralizada no bloco */
+            .service-checklist {
+                display: inline-block;
+                text-align: left;
+                margin-top: 20px !important;
+            }
+
+            /* Ajustes de Títulos */
+            .service-title {
+                font-size: 1.8rem !important;
+            }
+
+            .brand-header-section h2 {
+                font-size: 2rem !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -48,87 +89,169 @@
         </div>
     </section>
 
-    <section class="brand-header-section" style="border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 60px;">
+    <section class="brand-header-section"
+        style="border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 60px;">
         <div class="container">
             <div style="font-size: 4rem; margin-bottom: 10px;">🍽️</div>
             <h2 style="font-family: 'Playfair Display'; color: var(--primary-gold); font-size: 2.5rem;">Clara's Buffet
             </h2>
-            <p style="max-width: 700px; margin: 0 auto; color: #ccc; font-size: 1.1rem;">Sabor caseiro, apresentação impecável e
+            <p style="max-width: 700px; margin: 0 auto; color: #ccc; font-size: 1.1rem;">Sabor caseiro, apresentação
+                impecável e
                 ingredientes selecionados. Levamos a estrutura completa de restaurante para o seu evento.</p>
         </div>
     </section>
 
     <div class="container" style="padding-top: 60px; padding-bottom: 60px;">
 
-        <div class="brands-header" style="justify-content: center; margin-bottom: 50px;">
-            <div class="brand-item" style="max-width: 600px; flex: none;">
-                <img src="image/claraslogo.PNG" alt="Clara's Buffet Logo" class="brand-logo" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
-            </div>
-        </div>
+
 
         <div class="services-list" style="display: flex; flex-direction: column; gap: 60px;">
 
-            <div class="service-card-wide" style="display: flex; flex-direction: row; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
+            <div class="service-card-wide"
+                style="display: flex; flex-direction: row; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
                 <div class="service-content" style="padding: 40px; flex: 1;">
-                    <h3 class="service-title" style="font-size: 2rem; color: var(--primary-gold);">Buffet Infantil Completo</h3>
+                    <h3 class="service-title" style="font-size: 2rem; color: var(--primary-gold);">Buffet Infantil
+                        Completo</h3>
                     <p class="service-description" style="font-size: 1.1rem;">Opções Essencial, Especial e Premium.</p>
                     <ul class="service-checklist" style="margin-top: 25px; list-style: none; padding: 0;">
-                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Salgados Fritos:</strong> Coxinha, Kibe, Queijo e mais.</span></li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Assados:</strong> Pão de queijo e Mini Pizza.</span></li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Lanchinhos:</strong> Hot Dog, Batata, Pipoca, Churros.</span></li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Empratados:</strong> Estrogonoff ou Macarronada.</span></li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Bebidas:</strong> Refrigerantes e Sucos inclusos.</span></li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Salgados Fritos:</strong> Coxinha, Kibe, Queijo e mais.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Assados:</strong> Pão de queijo e Mini Pizza.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Lanchinhos:</strong> Hot Dog, Batata, Pipoca, Churros.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Empratados:</strong> Estrogonoff ou Macarronada.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Bebidas:</strong> Refrigerantes e Sucos inclusos.</span>
+                        </li>
                     </ul>
+                    <div style="margin-top: 25px;">
+                        <a href="index.html#calculator" class="btn-gold"
+                            style="font-size: 0.9rem; padding: 12px 25px; display: inline-block;">Solicitar
+                            Orçamento</a>
+                    </div>
                 </div>
-                
-                <div class="service-image" style="background-image: url('image/fotoprincipal.jpeg'); min-height: 400px; flex: 1; background-size: cover; background-position: center;"></div>
-                
+
+                <div class="service-image"
+                    style="background-image: url('image/fotoprincipal.jpeg'); min-height: 400px; flex: 1; background-size: cover; background-position: center;">
+                </div>
+
             </div>
 
-            <div class="service-card-wide" style="display: flex; flex-direction: row-reverse; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
+            <div class="service-card-wide"
+                style="display: flex; flex-direction: row-reverse; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
                 <div class="service-content" style="padding: 40px; flex: 1;">
-                    <h3 class="service-title" style="font-size: 2rem; color: var(--primary-gold);">Buffet de Massas (Jantar)</h3>
-                    <p class="service-description" style="font-size: 1.1rem;">Sofisticação servida em pratos de porcelana.</p>
+                    <h3 class="service-title" style="font-size: 2rem; color: var(--primary-gold);">Buffet de Massas
+                        (Jantar)</h3>
+                    <p class="service-description" style="font-size: 1.1rem;">Sofisticação servida em pratos de
+                        porcelana.</p>
                     <ul class="service-checklist" style="margin-top: 25px; list-style: none; padding: 0;">
-                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Massas:</strong> Espaguete, Parafuso e Penne.</span></li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Molhos:</strong> Bolonhesa, Ao Sugo e Branco.</span></li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Ingredientes:</strong> +20 opções frescas (Bacon, Queijos, etc).</span></li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Diferencial:</strong> Pratos de Porcelana inclusos.</span></li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Massas:</strong> Espaguete, Parafuso e Penne.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Molhos:</strong> Bolonhesa, Ao Sugo e Branco.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Ingredientes:</strong> +20 opções frescas (Bacon, Queijos, etc).</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Diferencial:</strong> Pratos de Porcelana inclusos.</span>
+                        </li>
                     </ul>
+                    <div style="margin-top: 25px;">
+                        <a href="index.html#calculator" class="btn-gold"
+                            style="font-size: 0.9rem; padding: 12px 25px; display: inline-block;">Solicitar
+                            Orçamento</a>
+                    </div>
                 </div>
 
-                <div class="service-image" style="background-image: url('image/kit_prataria.png'); min-height: 400px; flex: 1; background-size: cover; background-position: center;"></div>
+                <div class="service-image"
+                    style="background-image: url('image/kit_prataria.png'); min-height: 400px; flex: 1; background-size: cover; background-position: center;">
+                </div>
 
             </div>
 
-            <div class="service-card-wide" style="display: flex; flex-direction: row; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
+            <div class="service-card-wide"
+                style="display: flex; flex-direction: row; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
                 <div class="service-content" style="padding: 40px; flex: 1;">
-                    <h3 class="service-title" style="font-size: 2rem; color: var(--primary-gold);">Estação de Crepe Francês</h3>
+                    <h3 class="service-title" style="font-size: 2rem; color: var(--primary-gold);">Estação de Crepe
+                        Francês</h3>
                     <p class="service-description" style="font-size: 1.1rem;">Charme francês feito na hora no cone.</p>
                     <ul class="service-checklist" style="margin-top: 25px; list-style: none; padding: 0;">
-                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Massa:</strong> Fina e crocante (Receita Exclusiva).</span></li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Salgados:</strong> +10 recheios deliciosos.</span></li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Doces:</strong> Chocolate, Banana, Nutella e mais.</span></li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Serviço:</strong> Servido no cone descartável.</span></li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Massa:</strong> Fina e crocante (Receita Exclusiva).</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Salgados:</strong> +10 recheios deliciosos.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Doces:</strong> Chocolate, Banana, Nutella e mais.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Serviço:</strong> Servido no cone descartável.</span>
+                        </li>
                     </ul>
+                    <div style="margin-top: 25px;">
+                        <a href="index.html#calculator" class="btn-gold"
+                            style="font-size: 0.9rem; padding: 12px 25px; display: inline-block;">Solicitar
+                            Orçamento</a>
+                    </div>
                 </div>
 
-                <div class="service-image" style="background-image: url('image/ingredientes_selecionados.png'); min-height: 400px; flex: 1; background-size: cover; background-position: center;"></div>
+                <div class="service-image"
+                    style="background-image: url('image/ingredientes_selecionados.png'); min-height: 400px; flex: 1; background-size: cover; background-position: center;">
+                </div>
 
             </div>
 
-            <div class="service-card-wide" style="display: flex; flex-direction: row-reverse; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
+            <div class="service-card-wide"
+                style="display: flex; flex-direction: row-reverse; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
                 <div class="service-content" style="padding: 40px; flex: 1;">
                     <h3 class="service-title" style="font-size: 2rem; color: var(--primary-gold);">Comida de Boteco</h3>
                     <p class="service-description" style="font-size: 1.1rem;">O melhor do barzinho na sua festa.</p>
                     <ul class="service-checklist" style="margin-top: 25px; list-style: none; padding: 0;">
-                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Pratos:</strong> Galinhada, Tropeiro ou Carreteiro.</span></li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Petiscos:</strong> Carne de sol, Torresmo, Mandioca.</span></li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span> <span><strong>Salgados:</strong> Fritos na hora inclusos.</span></li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Pratos:</strong> Galinhada, Tropeiro ou Carreteiro.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Petiscos:</strong> Carne de sol, Torresmo, Mandioca.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><span
+                                style="color: var(--primary-gold); margin-right: 10px; font-weight: bold;">✔</span>
+                            <span><strong>Salgados:</strong> Fritos na hora inclusos.</span>
+                        </li>
                     </ul>
+                    <div style="margin-top: 25px;">
+                        <a href="index.html#calculator" class="btn-gold"
+                            style="font-size: 0.9rem; padding: 12px 25px; display: inline-block;">Solicitar
+                            Orçamento</a>
+                    </div>
                 </div>
 
-                <div class="service-image" style="background-image: url('image/memorias_construidas.png'); min-height: 400px; flex: 1; background-size: cover; background-position: center;"></div>
+                <div class="service-image"
+                    style="background-image: url('image/memorias_construidas.png'); min-height: 400px; flex: 1; background-size: cover; background-position: center;">
+                </div>
 
             </div>
 
