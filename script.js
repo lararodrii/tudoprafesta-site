@@ -72,11 +72,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         addons.forEach(addon => {
             if (addon) {
-                // ITEM 6: Só habilita se tiver algo selecionado
-                addon.disabled = !isMainOrRentalSelected;
+                // ITEM 6: Só verifica e desmarca, validação de clique é feita no eventListener
+                // addon.disabled = !isMainOrRentalSelected; // REMOVIDO PARA PERMITIR CLIQUE E ALERTA
+                addon.disabled = false; // Garante que esteja habilitado
                 if (!isMainOrRentalSelected) addon.checked = false;
             }
         });
+
 
         // ITEM 7: Se Massas for selecionado, desabilita e desmarca Pratos/Talheres
         if (inputs.massas && inputs.massas.checked) {
@@ -171,6 +173,75 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Validar exclusividade dos Buffets (Essencial, Especial, Premium)
+    const buffetInputs = [inputs.buffetEssencial, inputs.buffetEspecial, inputs.buffetPremium];
+    buffetInputs.forEach(buffet => {
+        if (buffet) {
+            buffet.addEventListener('click', function (e) {
+                // Se o usuário está tentando marcar este buffet
+                if (this.checked) {
+                    // Verifica se já existe outro marcado
+                    const otherSelected = buffetInputs.find(b => b !== this && b.checked);
+                    if (otherSelected) {
+                        e.preventDefault(); // Impede a marcação visual
+                        this.checked = false; // Garante o estado lógico
+                        alert("⚠️ Atenção: Você só pode selecionar um tipo de Buffet por vez. Caso queira personalizar ou adicionar itens extras, selecione o pacote principal agora e combine os detalhes em nosso WhatsApp após gerar o orçamento!");
+                    }
+                }
+            });
+        }
+    });
+
+
+
+    // ==========================================
+    // 🛑 VALIDAÇÃO DE DEPENDÊNCIA (ITEM 4)
+    // ==========================================
+    function checkDependencyAndAlert(e, contextInputs) {
+        // Serviços que contam como "Principal"
+        const mainServicesKeys = ['buffetEssencial', 'buffetEspecial', 'buffetPremium', 'massas', 'crepe', 'hotdog', 'carts', 'popcornPremium', 'camaElastica'];
+        const isMainSelected = mainServicesKeys.some(k => contextInputs[k] && contextInputs[k].checked);
+
+        // Se clicar e não tiver principal, bloqueia e avisa
+        if (!isMainSelected) {
+            e.preventDefault();
+            e.stopPropagation(); // Garante que não marque visualmente
+            alert("🛑 Selecione um Principal: Para contratar este item adicional, você precisa selecionar primeiro um serviço principal (Buffet, Massas, Crepe ou Barraquinhas).");
+            return; // Impede validações subsequentes
+        }
+
+        // Se passou, verifica a restrição específica de Salgados (apenas se for o addon de salgados)
+        if (e.target.id === 'addon-savory' || e.target.id === 'modal-addon-savory') {
+            checkSavoryRestriction(e, contextInputs);
+        }
+    }
+
+    // NOVA VALIDAÇÃO ESTRITA PARA SALGADOS
+    function checkSavoryRestriction(e, contextInputs) {
+        // Serviços que JÁ INCLUEM salgados
+        const servicesWithSavory = ['buffetEssencial', 'buffetEspecial', 'buffetPremium', 'crepe'];
+        // Nota: Boteco não está nos inputs principais e Massas foi removido da restrição.
+
+        const hasSavoryService = servicesWithSavory.some(k => contextInputs[k] && contextInputs[k].checked);
+
+        if (hasSavoryService) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.target.checked = false;
+            alert("🚫 Item Já Incluso: O pacote principal selecionado já inclui salgados à vontade! Por isso, o sistema não permite marcar este item para evitar duplicidade.\n\nCaso você queira contratar uma quantidade extra (ex: para viagem ou separar), feche o orçamento normalmente e combine esse detalhe extra diretamente com nosso consultor no WhatsApp.");
+        }
+    }
+
+    // Adiciona Listeners no PRINCIPAL
+    ['addonDrinks', 'addonSavory', 'addonGlass', 'addonCutlery', 'addonNutella'].forEach(key => {
+        if (inputs[key]) {
+            inputs[key].addEventListener('click', (e) => checkDependencyAndAlert(e, inputs));
+        }
+    });
+
+    // Adiciona Listeners no MODAL
+
+
     // ==========================================
     // 📅 3. CALENDÁRIO COM VERMELHO E BLOQUEIO (ITENS 1 e 2)
     // ==========================================
@@ -231,6 +302,18 @@ document.addEventListener('DOMContentLoaded', function () {
             else {
                 // Clique só funciona se não for passado nem cheio
                 dayDiv.addEventListener('click', () => {
+                    // Validação de 3 dias de antecedência
+                    const todayForCheck = new Date();
+                    todayForCheck.setHours(0, 0, 0, 0);
+
+                    const minDate = new Date(todayForCheck);
+                    minDate.setDate(todayForCheck.getDate() + 3);
+
+                    if (thisDate < minDate) {
+                        alert("📅 Antecedência Mínima: Aceitamos reservas apenas com no mínimo 3 dias de antecedência para garantir a qualidade do serviço.");
+                        return; // Impede abrir o modal
+                    }
+
                     openBookingModal(thisDate);
                 });
             }
@@ -407,6 +490,13 @@ document.addEventListener('DOMContentLoaded', function () {
         containerNutella: getEl('modal-container-addon-nutella')
     };
 
+    // Adiciona Listeners no MODAL (Movidode cima para evitar ReferenceError)
+    ['addonDrinks', 'addonSavory', 'addonGlass', 'addonCutlery', 'addonNutella'].forEach(key => {
+        if (modalInputs[key]) {
+            modalInputs[key].addEventListener('click', (e) => checkDependencyAndAlert(e, modalInputs));
+        }
+    });
+
     function updateModalState() {
         const guests = parseInt(modalGuestsInput.value) || 0;
         const warning = getEl('modal-guest-warning');
@@ -435,7 +525,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         ['addonDrinks', 'addonSavory', 'addonGlass', 'addonCutlery', 'addonNutella'].forEach(k => {
             if (modalInputs[k]) {
-                modalInputs[k].disabled = !isMainOrRentalSelected;
+                // Lógica de alerta ao clicar agora
+                // modalInputs[k].disabled = !isMainOrRentalSelected; // REMOVIDO
                 if (!isMainOrRentalSelected) modalInputs[k].checked = false;
             }
         });
