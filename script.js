@@ -255,70 +255,80 @@ document.addEventListener('DOMContentLoaded', function () {
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
 
-        // Pega dias cheios do backend - CORRIGIDO PARA RENDER
-        let fullDays = [];
+        const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+        monthYear.textContent = `${monthNames[month]} ${year}`;
+
+        // Função interna para desenhar os dias
+        const drawDays = (fullDays = []) => {
+            calendarDays.innerHTML = "";
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const daysInMonth = lastDay.getDate();
+            const startingDay = firstDay.getDay();
+            const today = new Date();
+
+            // Dias vazios do inicio
+            for (let i = 0; i < startingDay; i++) {
+                const emptyDiv = document.createElement('div');
+                emptyDiv.classList.add('calendar-day', 'empty');
+                calendarDays.appendChild(emptyDiv);
+            }
+
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dayDiv = document.createElement('div');
+                dayDiv.classList.add('calendar-day');
+                dayDiv.textContent = i;
+
+                const thisDate = new Date(year, month, i);
+                const isPast = thisDate.setHours(0, 0, 0, 0) < today.setHours(0, 0, 0, 0);
+
+                // ITEM 2: Bloqueia passado
+                if (isPast) {
+                    dayDiv.classList.add('past');
+                }
+                // ITEM 1: Bloqueia dias cheios (Vermelho)
+                else if (fullDays.includes(i)) {
+                    dayDiv.classList.add('full');
+                    dayDiv.title = "Dia Lotado";
+                }
+                else {
+                    // Clique só funciona se não for passado nem cheio
+                    dayDiv.addEventListener('click', () => {
+                        // Validação de 3 dias de antecedência
+                        const todayForCheck = new Date();
+                        todayForCheck.setHours(0, 0, 0, 0);
+
+                        const minDate = new Date(todayForCheck);
+                        minDate.setDate(todayForCheck.getDate() + 3);
+
+                        if (thisDate < minDate) {
+                            alert("📅 Antecedência Mínima: Aceitamos reservas apenas com no mínimo 3 dias de antecedência para garantir a qualidade do serviço.");
+                            return; // Impede abrir o modal
+                        }
+
+                        openBookingModal(thisDate);
+                    });
+                }
+
+                calendarDays.appendChild(dayDiv);
+            }
+        };
+
+        // 1. Renderiza IMEDIATAMENTE (sem esperar backend)
+        drawDays([]);
+
+        // 2. Busca disponibilidade em segundo plano
         try {
             const res = await fetch(`https://claras-buffet-backend.onrender.com/api/month-availability?month=${month}&year=${year}`);
             const data = await res.json();
-            fullDays = data.fullDays || [];
+            const fullDays = data.fullDays || [];
+
+            // Só atualiza se o usuário ainda estiver no mesmo mês/ano
+            if (currentDate.getFullYear() === year && currentDate.getMonth() === month) {
+                drawDays(fullDays);
+            }
         } catch (e) {
             console.error("Erro ao buscar disponibilidade", e);
-        }
-
-        const firstDay = new Date(year, month, 1);
-        const lastDay = new Date(year, month + 1, 0);
-        const daysInMonth = lastDay.getDate();
-        const startingDay = firstDay.getDay();
-        const today = new Date(); // Data de hoje para comparação
-
-        const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-        monthYear.textContent = `${monthNames[month]} ${year}`;
-        calendarDays.innerHTML = "";
-
-        // Dias vazios do inicio
-        for (let i = 0; i < startingDay; i++) {
-            const emptyDiv = document.createElement('div');
-            emptyDiv.classList.add('calendar-day', 'empty');
-            calendarDays.appendChild(emptyDiv);
-        }
-
-        for (let i = 1; i <= daysInMonth; i++) {
-            const dayDiv = document.createElement('div');
-            dayDiv.classList.add('calendar-day');
-            dayDiv.textContent = i;
-
-            const thisDate = new Date(year, month, i);
-            const isPast = thisDate.setHours(0, 0, 0, 0) < today.setHours(0, 0, 0, 0);
-
-            // ITEM 2: Bloqueia passado
-            if (isPast) {
-                dayDiv.classList.add('past');
-            }
-            // ITEM 1: Bloqueia dias cheios (Vermelho)
-            else if (fullDays.includes(i)) {
-                dayDiv.classList.add('full');
-                dayDiv.title = "Dia Lotado";
-            }
-            else {
-                // Clique só funciona se não for passado nem cheio
-                dayDiv.addEventListener('click', () => {
-                    // Validação de 3 dias de antecedência
-                    const todayForCheck = new Date();
-                    todayForCheck.setHours(0, 0, 0, 0);
-
-                    const minDate = new Date(todayForCheck);
-                    minDate.setDate(todayForCheck.getDate() + 3);
-
-                    if (thisDate < minDate) {
-                        alert("📅 Antecedência Mínima: Aceitamos reservas apenas com no mínimo 3 dias de antecedência para garantir a qualidade do serviço.");
-                        return; // Impede abrir o modal
-                    }
-
-                    openBookingModal(thisDate);
-                });
-            }
-
-            calendarDays.appendChild(dayDiv);
         }
     }
 
