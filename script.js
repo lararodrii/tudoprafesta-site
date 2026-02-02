@@ -459,16 +459,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function calculateModalTotal() {
-        // ... (Implementar cálculo igual ao principal para exibir total no modal se quiser)
-        // Por brevidade, vou apenas atualizar o total visual no topo se a lógica de cálculo for duplicada ou centralizada.
-        // Se for vital, copie a lógica de calculateTotal aqui usando modalInputs.
-        // Vou fazer um calculo simplificado apenas para feedback visual
-
         let total = 0;
         let guests = parseInt(modalGuestsInput?.value) || 0;
+        let isOverflow = false;
 
-        // ... (Lógica de preços duplicada do calculateTotal principal, mas apontando para modalInputs) ...
-        // É recomendável refatorar para uma função única que aceita inputs como parametro, mas para manter script.js simples (arquivo único):
         const getTierPrice = (serviceKey) => {
             const config = PRICES.buffet[serviceKey];
             return (guests <= config.threshold) ? config.tier1 : config.tier2;
@@ -483,8 +477,14 @@ document.addEventListener('DOMContentLoaded', function () {
         if (modalInputs.popcornPremium?.checked) total += PRICES.services.popcorn_premium;
         if (modalInputs.camaElastica?.checked) total += PRICES.cama_elastica;
 
-        if (modalInputs.hotdog?.checked) total += PRICES.services.hotdog; // Sem checagem overflow visual aqui
-        if (modalInputs.carts?.checked) total += PRICES.services.carts;
+        if (modalInputs.hotdog?.checked) {
+            if (guests > 80) isOverflow = true;
+            else total += PRICES.services.hotdog;
+        }
+        if (modalInputs.carts?.checked) {
+            if (guests > 100) isOverflow = true;
+            else total += PRICES.services.carts;
+        }
 
         if (modalInputs.addonDrinks?.checked) total += guests * PRICES.addons.drinks;
         if (modalInputs.addonSavory?.checked) total += guests * PRICES.addons.savory;
@@ -493,7 +493,22 @@ document.addEventListener('DOMContentLoaded', function () {
         if (modalInputs.popcornPremium?.checked && modalInputs.addonNutella?.checked) total += PRICES.addons.nutella;
 
         const display = getEl('modal-total-display');
-        if (display) display.textContent = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        const btnReview = getEl('review-booking-btn');
+        const btnWhats = getEl('modal-btn-whatsapp-fallback');
+
+        if (display) {
+            if (isOverflow) {
+                display.textContent = "Sob Consulta";
+                display.style.fontSize = "1.5em"; // Ajuste visual opcional
+                if (btnReview) btnReview.style.display = 'none';
+                if (btnWhats) btnWhats.style.display = 'block';
+            } else {
+                display.textContent = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                display.style.fontSize = "1.8em";
+                if (btnReview) btnReview.style.display = 'block';
+                if (btnWhats) btnWhats.style.display = 'none';
+            }
+        }
     }
 
     if (modalGuestsInput) modalGuestsInput.addEventListener('input', updateModalState);
