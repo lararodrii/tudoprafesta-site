@@ -507,23 +507,41 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Validar exclusividade dos Buffets no MODAL
+    const modalBuffetInputs = [modalInputs.buffetEssencial, modalInputs.buffetEspecial, modalInputs.buffetPremium];
+    modalBuffetInputs.forEach(buffet => {
+        if (buffet) {
+            buffet.addEventListener('click', function (e) {
+                if (this.checked) {
+                    const otherSelected = modalBuffetInputs.find(b => b !== this && b.checked);
+                    if (otherSelected) {
+                        e.preventDefault();
+                        this.checked = false;
+                        alert("⚠️ Atenção: Você só pode selecionar um tipo de Buffet por vez. Caso queira personalizar ou adicionar itens extras, selecione o pacote principal agora e combine os detalhes em nosso WhatsApp após gerar o orçamento!");
+                    }
+                }
+            });
+        }
+    });
+
     function updateModalState() {
         const guests = parseInt(modalGuestsInput.value) || 0;
         const warning = getEl('modal-guest-warning');
 
-        if (guests < 10) {
-            if (warning) warning.style.display = 'block';
-            Object.values(modalInputs).forEach(el => {
-                if (el) el.disabled = true;
-            });
-            return;
-        } else {
-            if (warning) warning.style.display = 'none';
-            // Libera principais e alugueis
-            ['buffetEssencial', 'buffetEspecial', 'buffetPremium', 'massas', 'crepe', 'hotdog', 'carts', 'popcornPremium', 'camaElastica'].forEach(k => {
-                if (modalInputs[k]) modalInputs[k].disabled = false;
-            });
-        }
+        if (warning) warning.style.display = 'none';
+
+        // Garante que todos estejam habilitados (sem restrição de < 10)
+        Object.values(modalInputs).forEach(el => {
+            if (el) el.disabled = false;
+        });
+
+        // Lógica de Exclusividade de Buffet no Modal
+        const modalBuffetInputs = [modalInputs.buffetEssencial, modalInputs.buffetEspecial, modalInputs.buffetPremium];
+        modalBuffetInputs.forEach(buffet => {
+            // Remove listener anterior para não acumular (se houver, mas aqui é função chamada no evento, a lógica de attach deve ser fora)
+            // A lógica de attach deve ser feita apenas uma vez, fora desta função. 
+            // Vou mover a lógica de attach para o bloco de inicialização, mas aqui apenas garanto que não bloqueie.
+        });
 
         // Lógica de Adicionais no Modal (Item 6)
         const mainServices = [
