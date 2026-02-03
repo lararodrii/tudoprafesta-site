@@ -819,6 +819,9 @@ footer {
 .container-narrow {
     max-width: 900px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
 
@@ -1293,6 +1296,8 @@ footer {
     margin-top: 80px;
     align-items: start;
     /* Prevent vertical stretching */
+    justify-content: center;
+    width: 100%;
 }
 
 .service-item-clean {
