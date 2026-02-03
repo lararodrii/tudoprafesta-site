@@ -714,9 +714,13 @@ document.addEventListener('DOMContentLoaded', function () {
         if (getEl('modal-service-popcorn-premium')?.checked) countRentals++;
         if (getEl('modal-service-cama-elastica')?.checked) countRentals++;
 
-        // Regra: Máx 2 Principais OU Máx 2 Aluguéis
-        if (countPrincipals > 2 || countRentals > 2) {
-            alert("🛑 Limite Excedido: Para mantermos a qualidade do nosso atendimento, aceitamos no máximo 2 serviços principais e 2 itens de aluguel por evento. Por favor, desmarque algumas opções.");
+        // Regra: Máx 2 Principais E Máx 2 Aluguéis
+        if (countPrincipals > 2) {
+            alert("🛑 Limite Excedido: Aceitamos no máximo 2 serviços principais por evento. Por favor, desmarque algumas opções.");
+            return;
+        }
+        if (countRentals > 2) {
+            alert("🛑 Limite Excedido: Aceitamos no máximo 2 itens de aluguel por evento. Por favor, desmarque algumas opções.");
             return;
         }
 
