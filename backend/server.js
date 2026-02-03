@@ -142,36 +142,73 @@ app.post('/api/schedule', upload.none(), async (req, res) => {
         // Se precisar do código completo dessa parte novamente, me avise, mas é o mesmo do passo anterior.
 
         // RESUMO DA LÓGICA DE LOOP PARA INSERIR AQUI:
-        let countPrincipais = 0;
-        let countAlugueis = 0;
-        let conflitoHorarioAluguel = false;
+        // Helper para contar aluguéis no texto
+        const countRentals = (text) => {
+            let c = 0;
+            const t = text.toLowerCase();
+            if (/hot dog|barraquinha/.test(t)) c++;
+            if (/carrinho|algodão/.test(t)) c++;
+            if (/pipoca gourmet/.test(t)) c++;
+            if (/cama elástica|cama elastica/.test(t)) c++;
+            return c;
+        };
 
         const dayEvents = response.data.items || [];
+
+        let dbRentalsCount = 0;
+        let countPrincipais = 0;
+        let conflitoHorarioAluguel = false;
+
+        // 1. Analisa o que já existe no banco (SOMA)
         for (const evt of dayEvents) {
             const txt = ((evt.summary || "") + " " + (evt.description || "")).toLowerCase();
             const evtStart = new Date(evt.start.dateTime || evt.start.date);
             const evtEnd = new Date(evt.end.dateTime || evt.end.date);
-            const isEvtPrincipal = /buffet|essencial|especial|premium|massa|crepe/.test(txt);
 
-            if (isEvtPrincipal) countPrincipais++;
-            else {
-                const isEvtAluguel = /hot dog|barraquinha|carrinho|algodão|pipoca|cama elástica/.test(txt);
-                if (isEvtAluguel) {
-                    countAlugueis++;
-                    const overlap = (start < evtEnd && end > evtStart);
-                    if (overlap) {
-                        if (reqHotDog && /hot dog|barraquinha/.test(txt)) conflitoHorarioAluguel = true;
-                        if (reqCarts && /carrinho|algodão|pipoca/.test(txt)) conflitoHorarioAluguel = true;
-                        if (reqTrampo && /cama elástica/.test(txt)) conflitoHorarioAluguel = true;
+            // Conta principais (por evento)
+            if (/buffet|essencial|especial|premium|massa|crepe/.test(txt)) {
+                countPrincipais++;
+            }
+
+            // Conta ITENS de aluguel já agendados
+            dbRentalsCount += countRentals(txt);
+
+            // Verifica conflito de horário específico (para itens repetidos)
+            if (reqAluguel) {
+                const overlap = (start < evtEnd && end > evtStart);
+                if (overlap) {
+                    // CONFLITO DE PIPOCA (Carrinho Simples ou Gourmet usam a mesma máquina)
+                    const reqPopcorn = /carrinho|algodão|pipoca/.test(servicesStr);
+                    const dbPopcorn = /carrinho|algodão|pipoca/.test(txt);
+
+                    if (reqPopcorn && dbPopcorn) {
+                        return res.json({ status: 'error', message: 'popcorn time conflict' });
                     }
+
+                    if (reqHotDog && /hot dog|barraquinha/.test(txt)) conflitoHorarioAluguel = true;
+                    // Verifica outros aluguéis genéricos que não sejam pipoca (já tratado acima)
+                    if (reqCarts && !reqPopcorn && /carrinho|algodão|pipoca/.test(txt)) conflitoHorarioAluguel = true;
+                    if (reqTrampo && /cama elástica/.test(txt)) conflitoHorarioAluguel = true;
                 }
             }
         }
 
-        if (reqPrincipal && countPrincipais >= 2) return res.json({ status: 'error', message: 'Dia lotado para Festas Principais.' });
-        if (reqAluguel && !reqPrincipal) {
-            if (countAlugueis >= 2) return res.json({ status: 'error', message: 'Dia lotado para Alugueis.' });
-            if (conflitoHorarioAluguel) return res.json({ status: 'error', message: 'Item já reservado neste horário.' });
+        // 2. Conta o que o cliente quer AGORA
+        const currentRentalsCount = countRentals(servicesStr);
+
+        // 3. Validações
+        if (reqPrincipal && countPrincipais >= 2) {
+            return res.json({ status: 'error', message: 'Dia lotado para Festas Principais.' });
+        }
+
+        // Regra de Ouro: (Existe + Novo) > 2
+        if (currentRentalsCount > 0) {
+            if ((dbRentalsCount + currentRentalsCount) > 2) {
+                return res.json({ status: 'error', message: 'lotado para alugueis' });
+            }
+            if (conflitoHorarioAluguel) {
+                return res.json({ status: 'error', message: 'Item já reservado neste horário.' });
+            }
         }
 
         // Criar Evento

@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
         services: {
             massas: 39.99,
             crepe: 37.90,
+            festbar: 40.00,
             hotdog: 750.00,
             carts: 300.00,
             popcorn_premium: 600.00
@@ -37,9 +38,11 @@ document.addEventListener('DOMContentLoaded', function () {
         buffetEspecial: getEl('service-buffet-especial'),
         buffetPremium: getEl('service-buffet-premium'),
         massas: getEl('service-massas'),
+        massas: getEl('service-massas'),
         crepe: getEl('service-crepe'),
-        // Alugueis
         hotdog: getEl('service-hotdog'),
+        festbar: getEl('service-festbar'),
+        // Alugueis
         carts: getEl('service-carts'),
         popcornPremium: getEl('service-popcorn-premium'),
         camaElastica: getEl('service-cama-elastica'),
@@ -62,9 +65,9 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateAddonsState() {
         const mainServices = [
             inputs.buffetEssencial, inputs.buffetEspecial, inputs.buffetPremium,
-            inputs.massas, inputs.crepe,
+            inputs.massas, inputs.crepe, inputs.hotdog, inputs.festbar,
             // ITEM 6: Alugueis também liberam adicionais agora
-            inputs.hotdog, inputs.carts, inputs.popcornPremium, inputs.camaElastica
+            inputs.carts, inputs.popcornPremium, inputs.camaElastica
         ];
 
         const isMainOrRentalSelected = mainServices.some(input => input && input.checked);
@@ -117,7 +120,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (inputs.buffetEspecial?.checked) total += guests * getTierPrice('especial');
         if (inputs.buffetPremium?.checked) total += guests * getTierPrice('premium');
         if (inputs.massas?.checked) total += guests * PRICES.services.massas;
+        if (inputs.massas?.checked) total += guests * PRICES.services.massas;
         if (inputs.crepe?.checked) total += guests * PRICES.services.crepe;
+        if (inputs.festbar?.checked) total += guests * PRICES.services.festbar;
 
         // Alugueis (Fixos)
         if (inputs.popcornPremium?.checked) total += PRICES.services.popcorn_premium;
@@ -194,12 +199,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+
+    // ==========================================
+    // 🍿 VALIDAÇÃO DE PIPOCA (EXCLUSIVIDADE)
+    // ==========================================
+    const popcornAlert = "⚠️ Atenção: Estas duas opções utilizam a mesma máquina física. O sistema selecionou apenas o último tipo de pipoca escolhido.";
+
+    if (inputs.carts && inputs.popcornPremium) {
+        inputs.carts.addEventListener('click', function () {
+            if (this.checked && inputs.popcornPremium.checked) {
+                inputs.popcornPremium.checked = false;
+                alert(popcornAlert);
+            }
+            calculateTotal();
+        });
+        inputs.popcornPremium.addEventListener('click', function () {
+            if (this.checked && inputs.carts.checked) {
+                inputs.carts.checked = false;
+                alert(popcornAlert);
+            }
+            calculateTotal();
+        });
+    }
+
     // ==========================================
     // 🛑 VALIDAÇÃO DE DEPENDÊNCIA (ITEM 4)
     // ==========================================
     function checkDependencyAndAlert(e, contextInputs) {
         // Serviços que contam como "Principal"
-        const mainServicesKeys = ['buffetEssencial', 'buffetEspecial', 'buffetPremium', 'massas', 'crepe', 'hotdog', 'carts', 'popcornPremium', 'camaElastica'];
+        const mainServicesKeys = ['buffetEssencial', 'buffetEspecial', 'buffetPremium', 'massas', 'crepe', 'hotdog', 'festbar', 'carts', 'popcornPremium', 'camaElastica'];
         const isMainSelected = mainServicesKeys.some(k => contextInputs[k] && contextInputs[k].checked);
 
         // Se clicar e não tiver principal, bloqueia e avisa
@@ -230,6 +258,20 @@ document.addEventListener('DOMContentLoaded', function () {
             e.target.checked = false;
             alert("🚫 Item Já Incluso: O pacote principal selecionado já inclui salgados à vontade! Por isso, o sistema não permite marcar este item para evitar duplicidade.\n\nCaso você queira contratar uma quantidade extra (ex: para viagem ou separar), feche o orçamento normalmente e combine esse detalhe extra diretamente com nosso consultor no WhatsApp.");
         }
+    }
+
+    // Validação FestBar (Min 25 convidados)
+    function checkFestBarLimit(e, guestInputId) {
+        const guests = parseInt(getEl(guestInputId)?.value) || 0;
+        if (guests < 25) {
+            e.preventDefault();
+            e.target.checked = false;
+            alert("⚠️ O serviço de FestBar exige um mínimo de 25 convidados. Ajuste a quantidade de pessoas para contratar este serviço.");
+        }
+    }
+
+    if (inputs.festbar) {
+        inputs.festbar.addEventListener('click', (e) => checkFestBarLimit(e, 'guests'));
     }
 
     // Adiciona Listeners no PRINCIPAL
@@ -430,6 +472,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'service-massas': 'modal-service-massas',
             'service-crepe': 'modal-service-crepe',
             'service-hotdog': 'modal-service-hotdog',
+            'service-festbar': 'modal-service-festbar',
             'service-carts': 'modal-service-carts',
             'service-popcorn-premium': 'modal-service-popcorn-premium',
             'service-cama-elastica': 'modal-service-cama-elastica',
@@ -489,6 +532,7 @@ document.addEventListener('DOMContentLoaded', function () {
         massas: getEl('modal-service-massas'),
         crepe: getEl('modal-service-crepe'),
         hotdog: getEl('modal-service-hotdog'),
+        festbar: getEl('modal-service-festbar'),
         carts: getEl('modal-service-carts'),
         popcornPremium: getEl('modal-service-popcorn-premium'),
         camaElastica: getEl('modal-service-cama-elastica'),
@@ -506,6 +550,10 @@ document.addEventListener('DOMContentLoaded', function () {
             modalInputs[key].addEventListener('click', (e) => checkDependencyAndAlert(e, modalInputs));
         }
     });
+
+    if (modalInputs.festbar) {
+        modalInputs.festbar.addEventListener('click', (e) => checkFestBarLimit(e, 'modal-guests'));
+    }
 
     // Validar exclusividade dos Buffets no MODAL
     const modalBuffetInputs = [modalInputs.buffetEssencial, modalInputs.buffetEspecial, modalInputs.buffetPremium];
@@ -543,11 +591,31 @@ document.addEventListener('DOMContentLoaded', function () {
             // Vou mover a lógica de attach para o bloco de inicialização, mas aqui apenas garanto que não bloqueie.
         });
 
+
+
+        // Mutually Exclusive Popcorn Logic
+        if (modalInputs.carts && modalInputs.popcornPremium) {
+            modalInputs.carts.addEventListener('click', function () {
+                if (this.checked && modalInputs.popcornPremium.checked) {
+                    modalInputs.popcornPremium.checked = false;
+                    alert("⚠️ Atenção: Estas duas opções utilizam a mesma máquina física. O sistema selecionou apenas o último tipo de pipoca escolhido.");
+                }
+                updateModalState();
+            });
+            modalInputs.popcornPremium.addEventListener('click', function () {
+                if (this.checked && modalInputs.carts.checked) {
+                    modalInputs.carts.checked = false;
+                    alert("⚠️ Atenção: Estas duas opções utilizam a mesma máquina física. O sistema selecionou apenas o último tipo de pipoca escolhido.");
+                }
+                updateModalState();
+            });
+        }
+
         // Lógica de Adicionais no Modal (Item 6)
         const mainServices = [
             modalInputs.buffetEssencial, modalInputs.buffetEspecial, modalInputs.buffetPremium,
-            modalInputs.massas, modalInputs.crepe,
-            modalInputs.hotdog, modalInputs.carts, modalInputs.popcornPremium, modalInputs.camaElastica
+            modalInputs.massas, modalInputs.crepe, modalInputs.hotdog, modalInputs.festbar,
+            modalInputs.carts, modalInputs.popcornPremium, modalInputs.camaElastica
         ];
         const isMainOrRentalSelected = mainServices.some(input => input && input.checked);
 
@@ -592,6 +660,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (modalInputs.buffetPremium?.checked) total += guests * getTierPrice('premium');
         if (modalInputs.massas?.checked) total += guests * PRICES.services.massas;
         if (modalInputs.crepe?.checked) total += guests * PRICES.services.crepe;
+        if (modalInputs.festbar?.checked) total += guests * PRICES.services.festbar;
 
         if (modalInputs.popcornPremium?.checked) total += PRICES.services.popcorn_premium;
         if (modalInputs.camaElastica?.checked) total += PRICES.cama_elastica;
@@ -646,6 +715,32 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        // ==========================================
+        // 🛑 VALIDAÇÃO DE LIMITE DE SERVIÇOS
+        // ==========================================
+        let countPrincipals = 0;
+        let countRentals = 0;
+
+        // Principais: Buffets + Massas + Crepe + Hot Dog
+        if (getEl('modal-service-buffet-essencial')?.checked) countPrincipals++;
+        if (getEl('modal-service-buffet-especial')?.checked) countPrincipals++;
+        if (getEl('modal-service-buffet-premium')?.checked) countPrincipals++;
+        if (getEl('modal-service-massas')?.checked) countPrincipals++;
+        if (getEl('modal-service-crepe')?.checked) countPrincipals++;
+        if (getEl('modal-service-hotdog')?.checked) countPrincipals++;
+        if (getEl('modal-service-festbar')?.checked) countPrincipals++;
+
+        // Aluguéis: Carrinhos + Pipoca Premium + Cama Elástica
+        if (getEl('modal-service-carts')?.checked) countRentals++;
+        if (getEl('modal-service-popcorn-premium')?.checked) countRentals++;
+        if (getEl('modal-service-cama-elastica')?.checked) countRentals++;
+
+        // Regra: Máx 2 Principais OU Máx 2 Aluguéis
+        if (countPrincipals > 2 || countRentals > 2) {
+            alert("🛑 Limite Excedido: Para mantermos a qualidade do nosso atendimento, aceitamos no máximo 2 serviços principais e 2 itens de aluguel por evento. Por favor, desmarque algumas opções.");
+            return;
+        }
+
         const selectedServices = [];
         // Helper para checar checkbox do modal
         const check = (id, label) => {
@@ -658,12 +753,13 @@ document.addEventListener('DOMContentLoaded', function () {
         check('modal-service-buffet-premium', 'Buffet Premium');
         check('modal-service-massas', 'Buffet de Massas');
         check('modal-service-crepe', 'Estação de Crepe');
-        check('modal-service-hotdog', 'Barraquinha Hot Dog');
+        check('modal-service-hotdog', 'Hot Dog Gourmet');
+        check('modal-service-festbar', 'FestBar Drinks');
         check('modal-service-carts', 'Carrinho Pipoca/Algodão');
         check('modal-service-popcorn-premium', 'Pipoca Gourmet');
         check('modal-service-cama-elastica', 'Cama Elástica');
 
-        check('modal-addon-drinks', 'Bebidas');
+        check('modal-addon-drinks', 'Bebidas (Clara\'s Buffet)');
         check('modal-addon-savory', 'Salgados + Churros');
         check('modal-addon-glass', 'Copos de Vidro');
         check('modal-addon-cutlery', 'Pratos/Talheres');
@@ -722,7 +818,8 @@ document.addEventListener('DOMContentLoaded', function () {
             check('modal-service-buffet-premium', 'Buffet Premium');
             check('modal-service-massas', 'Buffet de Massas');
             check('modal-service-crepe', 'Estação de Crepe');
-            check('modal-service-hotdog', 'Barraquinha Hot Dog');
+            check('modal-service-hotdog', 'Hot Dog Gourmet');
+            check('modal-service-festbar', 'FestBar Drinks');
             check('modal-service-carts', 'Carrinho Pipoca/Algodão');
             check('modal-service-popcorn-premium', 'Pipoca Gourmet');
             check('modal-service-cama-elastica', 'Cama Elástica');
@@ -756,7 +853,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     if (errorMsg.includes('lotado para festas principais') || errorMsg.includes('principais')) {
                         // Desmarca serviços principais
-                        ['modal-service-buffet-essencial', 'modal-service-buffet-especial', 'modal-service-buffet-premium', 'modal-service-massas', 'modal-service-crepe'].forEach(id => {
+                        ['modal-service-buffet-essencial', 'modal-service-buffet-especial', 'modal-service-buffet-premium', 'modal-service-massas', 'modal-service-crepe', 'modal-service-hotdog', 'modal-service-festbar'].forEach(id => {
                             const el = getEl(id);
                             if (el && el.checked) {
                                 el.checked = false;
@@ -765,7 +862,16 @@ document.addEventListener('DOMContentLoaded', function () {
                         });
                         warningText += "\n\nRemovemos os serviços principais conflitantes. Você pode selecionar serviços de aluguel ou tentar outra data.";
                     }
-                    else if (errorMsg.includes('lotado para alugueis') || errorMsg.includes('reservado')) {
+                    else if (errorMsg.includes('lotado para alugueis')) {
+                        // Desmarca alugueis
+                        ['modal-service-hotdog', 'modal-service-carts', 'modal-service-popcorn-premium', 'modal-service-cama-elastica'].forEach(id => {
+                            const el = getEl(id);
+                            if (el && el.checked) el.checked = false;
+                        });
+                        // Substitui mensagem de erro completamente
+                        warningText = "🛑 Data Indisponível: O limite diário de 2 aluguéis/carrocinhas já foi atingido para esta data em outros eventos. Por favor, escolha outra data ou remova os itens de aluguel.";
+                    }
+                    else if (errorMsg.includes('reservado')) {
                         // Desmarca alugueis
                         ['modal-service-hotdog', 'modal-service-carts', 'modal-service-popcorn-premium', 'modal-service-cama-elastica'].forEach(id => {
                             const el = getEl(id);
@@ -775,6 +881,17 @@ document.addEventListener('DOMContentLoaded', function () {
                             }
                         });
                         warningText += "\n\nRemovemos os itens de aluguel conflitantes para esse horário.";
+                    }
+                    else if (errorMsg.includes('popcorn time conflict')) {
+                        // Desmarca pipocas
+                        ['modal-service-carts', 'modal-service-popcorn-premium'].forEach(id => {
+                            const el = getEl(id);
+                            if (el && el.checked) {
+                                el.checked = false;
+                                removedItems.push('Máquina de Pipoca');
+                            }
+                        });
+                        warningText = "⏱️ Conflito de Horário: Nossa máquina de pipoca já está reservada para outro evento neste horário. Por favor, escolha um horário antes ou depois da reserva existente, ou remova o item do seu pacote.";
                     }
 
                     alert(warningText);
