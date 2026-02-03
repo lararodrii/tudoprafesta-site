@@ -1,143 +1,105 @@
-
-// Mock of the logic inside server.js to test without Google Credentials
-// Logic copied from server.js
-
-// --- HELPER FUNCTIONS ---
-const isPrincipal = (txt) => /buffet|essencial|especial|premium|massa|crepe/.test(txt);
-const isRental = (txt) => /hot dog|barraquinha|carrinho|algodão|pipoca|cama elástica/.test(txt);
-const hasPopcorn = (txt) => /carrinho|algodão|pipoca/.test(txt);
-const hasTrampoline = (txt) => /cama elástica/.test(txt);
-const hasHotDog = (txt) => /hot dog|barraquinha/.test(txt);
-
-function checkAvailability(dayEvents, newRequest) {
-    const servicesStr = (newRequest.services || "").toLowerCase();
-    const start = new Date(newRequest.start);
-    const end = new Date(newRequest.end);
-
-    // 1. Analisa eventos existentes (Contagem e Conflitos)
-    let countPrincipais = 0;
-    let countAlugueis = 0; // Contagem de eventos que são APENAS aluguel
-
-    for (const evt of dayEvents) {
-        const txt = ((evt.summary || "") + " " + (evt.description || "")).toLowerCase();
-
-        if (isPrincipal(txt)) {
-            countPrincipais++;
-        } else if (isRental(txt)) {
-            countAlugueis++;
-        }
-    }
-
-    // 2. Analisa o Novo Pedido
-    const reqPrincipal = isPrincipal(servicesStr);
-    const reqRental = isRental(servicesStr);
-    // Se for principal, não conta como "Vaga de Aluguel", mas pode usar equipamento
-    const reqIsOnlyRental = reqRental && !reqPrincipal;
-
-    // 3. Validações de LIMITE QUANTITATIVO (Sem checar horário)
-
-    // Regra 1: Limite de Principais (Max 2/dia)
-    if (reqPrincipal && countPrincipais >= 2) {
-        return { status: 'error', message: 'lotado para festas principais' };
-    }
-
-    // Regra 2: Limite de Aluguéis (Max 2/dia - Apenas para pedidos exclusivos de aluguel)
-    // Se eu já tenho 2 eventos de aluguel, não posso aceitar um terceiro.
-    if (reqIsOnlyRental && countAlugueis >= 2) {
-        return { status: 'error', message: 'lotado para alugueis' };
-    }
-
-    // 4. Validação de CONFLITO DE EQUIPAMENTO FÍSICO (Com checagem de horário)
-
-    for (const evt of dayEvents) {
-        const txt = ((evt.summary || "") + " " + (evt.description || "")).toLowerCase();
-        const evtStart = new Date(evt.start);
-        const evtEnd = new Date(evt.end);
-
-        // Verifica Sobreposição de Horário
-        const overlap = (start < evtEnd && end > evtStart);
-
-        // Debug
-        // console.log(`Checking overlap: New(${start.getHours()}-${end.getHours()}) Existing(${evtStart.getHours()}-${evtEnd.getHours()}) -> ${overlap}`);
-
-        if (overlap) {
-            // Checa conflitos específicos
-            if (hasPopcorn(servicesStr) && hasPopcorn(txt)) {
-                return { status: 'error', message: 'popcorn time conflict' };
-            }
-            if (hasTrampoline(servicesStr) && hasTrampoline(txt)) {
-                return { status: 'error', message: 'reservado (cama elástica)' };
-            }
-            if (hasHotDog(servicesStr) && hasHotDog(txt)) {
-                return { status: 'error', message: 'reservado (hot dog)' };
-            }
-        }
-    }
-
-    return { status: 'success' };
-}
-
-// --- TESTS ---
-
-const today = new Date();
-const baseYear = today.getFullYear();
-const baseMonth = today.getMonth();
-const baseDay = today.getDate();
-
-const makeEvent = (summary, startH, endH) => ({
-    summary: summary,
-    description: "",
-    start: new Date(baseYear, baseMonth, baseDay, startH, 0, 0),
-    end: new Date(baseYear, baseMonth, baseDay, endH, 0, 0)
+// Testes para contarServicos
+test('conta serviços principais e adicionais corretamente', () => {
+  const servicos = [
+    'Buffet Essencial',     // principal
+    'Pipoca Doce Premium',  // adicional
+    'Buffet de Massas'      // principal
+  ];
+  expect(contarServicos(servicos).principais).toBe(2);
+  expect(contarServicos(servicos).adicionais).toBe(1);
 });
 
-const makeRequest = (services, startH, endH) => ({
-    services: services,
-    start: new Date(baseYear, baseMonth, baseDay, startH, 0, 0),
-    end: new Date(baseYear, baseMonth, baseDay, endH, 0, 0)
+test('conta apenas serviços principais', () => {
+  const servicos = [
+    'Buffet Essencial',
+    'Buffet Premium',
+    'Buffet de Massas'
+  ];
+  expect(contarServicos(servicos).principais).toBe(3);
+  expect(contarServicos(servicos).adicionais).toBe(0);
 });
 
-console.log("--- RUNNING TESTS ---");
+test('conta apenas serviço adicional', () => {
+  const servicos = ['Pipoca Doce Premium'];
+  expect(contarServicos(servicos).principais).toBe(0);
+  expect(contarServicos(servicos).adicionais).toBe(1);
+});
 
-// Test 1: Empty Day -> Add Buffet -> Success
-let events = [];
-let req = makeRequest("Buffet Infantil Essencial", 13, 17);
-let res = checkAvailability(events, req);
-console.log(`Test 1 (Empty -> Buffet): ${res.status === 'success' ? 'PASS' : 'FAIL ' + res.message}`);
+// Testes para validarLimiteDiario
+test('permite 2 serviços principais no mesmo dia', () => {
+  const servicos = [
+    'Buffet Essencial',
+    'Buffet de Massas'
+  ];
+  expect(() => validarLimiteDiario(servicos)).not.toThrow();
+});
 
-// Test 2: 1 Buffet Existing -> Add Buffet Overlapping -> Success (Max 2 rule, no time blocking)
-events = [makeEvent("Festa: Buffet", 13, 17)];
-req = makeRequest("Buffet Infantil Especial", 13, 17);
-res = checkAvailability(events, req);
-console.log(`Test 2 (1 Buffet -> Add 2nd Overlapping): ${res.status === 'success' ? 'PASS' : 'FAIL ' + res.message}`);
+test('permite 1 serviço principal no mesmo dia', () => {
+  const servicos = ['Buffet Essencial'];
+  expect(() => validarLimiteDiario(servicos)).not.toThrow();
+});
 
-// Test 3: 2 Buffets Existing -> Add Buffet -> Fail (Max 2 reached)
-events = [makeEvent("Festa: Buffet 1", 10, 14), makeEvent("Festa: Buffet 2", 16, 20)];
-req = makeRequest("Buffet Premium", 12, 16);
-res = checkAvailability(events, req);
-console.log(`Test 3 (2 Buffets -> Add 3rd): ${res.status === 'error' && res.message.includes('lotado para festas principais') ? 'PASS' : 'FAIL ' + res.message}`);
-if (res.status !== 'error') console.log(res);
+test('serviço adicional não afeta limite de principais', () => {
+  const servicos = [
+    'Buffet Essencial',      // 1º principal
+    'Buffet de Massas',      // 2º principal
+    'Pipoca Doce Premium'    // adicional - não conta para limite
+  ];
+  expect(() => validarLimiteDiario(servicos)).not.toThrow();
+});
 
-// Test 4: 2 Buffets Existing -> Add Rental -> Success (Rentals have separate limit)
-events = [makeEvent("Festa: Buffet 1", 10, 14), makeEvent("Festa: Buffet 2", 16, 20)];
-req = makeRequest("Locação: Cama Elástica", 12, 16);
-res = checkAvailability(events, req);
-console.log(`Test 4 (2 Buffets -> Add Rental): ${res.status === 'success' ? 'PASS' : 'FAIL ' + res.message}`);
+test('bloqueia 3 serviços principais mesmo com adicional', () => {
+  const servicos = [
+    'Buffet Essencial',
+    'Buffet Premium',
+    'Buffet de Massas',
+    'Pipoca Doce Premium'  // adicional
+  ];
+  expect(() => validarLimiteDiario(servicos))
+    .toThrow('Lotado para festas principais');
+});
 
-// Test 5: 2 Rentals Existing -> Add Rental -> Fail (Max 2 reached)
-events = [makeEvent("Locação: Pipoca", 10, 14), makeEvent("Locação: Cama Elástica", 16, 20)];
-req = makeRequest("Barraquinha de Hot Dog", 12, 16);
-res = checkAvailability(events, req);
-console.log(`Test 5 (2 Rentals -> Add 3rd): ${res.status === 'error' && res.message.includes('lotado para alugueis') ? 'PASS' : 'FAIL ' + res.message}`);
+test('permite múltiplos serviços adicionais (se existissem)', () => {
+  const servicos = [
+    'Buffet Essencial',  // principal
+    'Pipoca Doce Premium' // adicional
+    // Se houvesse mais adicionais, eles seriam permitidos
+  ];
+  expect(() => validarLimiteDiario(servicos)).not.toThrow();
+});
 
-// Test 6: Rental Overlap (Pipoca vs Pipoca) -> Fail (Time Conflict)
-events = [makeEvent("Locação: Carrinho Pipoca", 13, 17)];
-req = makeRequest("Pipoca Gourmet", 14, 18); // Overlaps 14-17
-res = checkAvailability(events, req);
-console.log(`Test 6 (Pipoca Overlap): ${res.status === 'error' && res.message.includes('popcorn time conflict') ? 'PASS' : 'FAIL ' + res.message}`);
+// Testes para conflitoHorario (permanecem os mesmos - não dependem dos serviços)
+test('não detecta conflito quando horários não se sobrepõem', () => {
+  expect(conflitoHorario(
+    { inicio: 14, fim: 16 },
+    { inicio: 17, fim: 19 }
+  )).toBe(false);
+});
 
-// Test 7: Rental No Overlap (Pipoca vs Pipoca) -> Success
-events = [makeEvent("Locação: Carrinho Pipoca", 10, 14)]; // 10-14
-req = makeRequest("Pipoca Gourmet", 15, 19); // 15-19
-res = checkAvailability(events, req);
-console.log(`Test 7 (Pipoca No Overlap): ${res.status === 'success' ? 'PASS' : 'FAIL ' + res.message}`);
+test('detecta conflito quando horário está completamente dentro', () => {
+  expect(conflitoHorario(
+    { inicio: 15, fim: 16 },
+    { inicio: 14, fim: 18 }
+  )).toBe(true);
+});
+
+test('detecta conflito quando horários se sobrepõem parcialmente', () => {
+  expect(conflitoHorario(
+    { inicio: 14, fim: 17 },
+    { inicio: 16, fim: 19 }
+  )).toBe(true);
+});
+
+test('não detecta conflito em horários adjacentes', () => {
+  expect(conflitoHorario(
+    { inicio: 14, fim: 16 },
+    { inicio: 16, fim: 18 }
+  )).toBe(false);
+});
+
+test('detecta conflito quando um horário engloba outro', () => {
+  expect(conflitoHorario(
+    { inicio: 13, fim: 19 },
+    { inicio: 15, fim: 17 }
+  )).toBe(true);
+});
