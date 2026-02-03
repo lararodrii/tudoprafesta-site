@@ -38,11 +38,10 @@ document.addEventListener('DOMContentLoaded', function () {
         buffetEspecial: getEl('service-buffet-especial'),
         buffetPremium: getEl('service-buffet-premium'),
         massas: getEl('service-massas'),
-        massas: getEl('service-massas'),
         crepe: getEl('service-crepe'),
         hotdog: getEl('service-hotdog'),
-        festbar: getEl('service-festbar'),
         // Alugueis
+        festbar: getEl('service-festbar'),
         carts: getEl('service-carts'),
         popcornPremium: getEl('service-popcorn-premium'),
         camaElastica: getEl('service-cama-elastica'),
@@ -75,8 +74,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         addons.forEach(addon => {
             if (addon) {
-                // ITEM 6: Só verifica e desmarca, validação de clique é feita no eventListener
-                // addon.disabled = !isMainOrRentalSelected; // REMOVIDO PARA PERMITIR CLIQUE E ALERTA
                 addon.disabled = false; // Garante que esteja habilitado
                 if (!isMainOrRentalSelected) addon.checked = false;
             }
@@ -120,11 +117,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (inputs.buffetEspecial?.checked) total += guests * getTierPrice('especial');
         if (inputs.buffetPremium?.checked) total += guests * getTierPrice('premium');
         if (inputs.massas?.checked) total += guests * PRICES.services.massas;
-        if (inputs.massas?.checked) total += guests * PRICES.services.massas;
         if (inputs.crepe?.checked) total += guests * PRICES.services.crepe;
-        if (inputs.festbar?.checked) total += guests * PRICES.services.festbar;
 
-        // Alugueis (Fixos)
+        // Alugueis (Fixos e Por Pessoa)
+        if (inputs.festbar?.checked) total += guests * PRICES.services.festbar;
         if (inputs.popcornPremium?.checked) total += PRICES.services.popcorn_premium;
         if (inputs.camaElastica?.checked) total += PRICES.cama_elastica;
 
@@ -226,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 🛑 VALIDAÇÃO DE DEPENDÊNCIA (ITEM 4)
     // ==========================================
     function checkDependencyAndAlert(e, contextInputs) {
-        // Serviços que contam como "Principal"
+        // Serviços que contam como "Principal" ou Aluguel liberam os adicionais
         const mainServicesKeys = ['buffetEssencial', 'buffetEspecial', 'buffetPremium', 'massas', 'crepe', 'hotdog', 'festbar', 'carts', 'popcornPremium', 'camaElastica'];
         const isMainSelected = mainServicesKeys.some(k => contextInputs[k] && contextInputs[k].checked);
 
@@ -234,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!isMainSelected) {
             e.preventDefault();
             e.stopPropagation(); // Garante que não marque visualmente
-            alert("🛑 Selecione um Principal: Para contratar este item adicional, você precisa selecionar primeiro um serviço principal (Buffet, Massas, Crepe ou Barraquinhas).");
+            alert("🛑 Selecione um Principal: Para contratar este item adicional, você precisa selecionar primeiro um serviço principal (Buffet, Massas, Crepe ou Barraquinhas) ou de Aluguel.");
             return; // Impede validações subsequentes
         }
 
@@ -248,7 +244,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function checkSavoryRestriction(e, contextInputs) {
         // Serviços que JÁ INCLUEM salgados
         const servicesWithSavory = ['buffetEssencial', 'buffetEspecial', 'buffetPremium', 'crepe'];
-        // Nota: Boteco não está nos inputs principais e Massas foi removido da restrição.
 
         const hasSavoryService = servicesWithSavory.some(k => contextInputs[k] && contextInputs[k].checked);
 
@@ -280,9 +275,6 @@ document.addEventListener('DOMContentLoaded', function () {
             inputs[key].addEventListener('click', (e) => checkDependencyAndAlert(e, inputs));
         }
     });
-
-    // Adiciona Listeners no MODAL
-
 
     // ==========================================
     // 📅 3. CALENDÁRIO COM VERMELHO E BLOQUEIO (ITENS 1 e 2)
@@ -521,11 +513,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    // Lógica do Modal (Cópia simplificada da lógica principal para reatividade dentro do modal)
-    // Para simplificar, vamos assumir que o usuário deve preencher convidados no modal para liberar checkboxes
+    // Lógica do Modal
     const modalGuestsInput = getEl('modal-guests');
     const modalInputs = {
-        // Mapeie os IDs do modal aqui
         buffetEssencial: getEl('modal-service-buffet-essencial'),
         buffetEspecial: getEl('modal-service-buffet-especial'),
         buffetPremium: getEl('modal-service-buffet-premium'),
@@ -544,7 +534,7 @@ document.addEventListener('DOMContentLoaded', function () {
         containerNutella: getEl('modal-container-addon-nutella')
     };
 
-    // Adiciona Listeners no MODAL (Movidode cima para evitar ReferenceError)
+    // Adiciona Listeners no MODAL
     ['addonDrinks', 'addonSavory', 'addonGlass', 'addonCutlery', 'addonNutella'].forEach(key => {
         if (modalInputs[key]) {
             modalInputs[key].addEventListener('click', (e) => checkDependencyAndAlert(e, modalInputs));
@@ -583,16 +573,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (el) el.disabled = false;
         });
 
-        // Lógica de Exclusividade de Buffet no Modal
-        const modalBuffetInputs = [modalInputs.buffetEssencial, modalInputs.buffetEspecial, modalInputs.buffetPremium];
-        modalBuffetInputs.forEach(buffet => {
-            // Remove listener anterior para não acumular (se houver, mas aqui é função chamada no evento, a lógica de attach deve ser fora)
-            // A lógica de attach deve ser feita apenas uma vez, fora desta função. 
-            // Vou mover a lógica de attach para o bloco de inicialização, mas aqui apenas garanto que não bloqueie.
-        });
-
-
-
         // Mutually Exclusive Popcorn Logic
         if (modalInputs.carts && modalInputs.popcornPremium) {
             modalInputs.carts.addEventListener('click', function () {
@@ -621,8 +601,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         ['addonDrinks', 'addonSavory', 'addonGlass', 'addonCutlery', 'addonNutella'].forEach(k => {
             if (modalInputs[k]) {
-                // Lógica de alerta ao clicar agora
-                // modalInputs[k].disabled = !isMainOrRentalSelected; // REMOVIDO
                 if (!isMainOrRentalSelected) modalInputs[k].checked = false;
             }
         });
@@ -660,8 +638,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (modalInputs.buffetPremium?.checked) total += guests * getTierPrice('premium');
         if (modalInputs.massas?.checked) total += guests * PRICES.services.massas;
         if (modalInputs.crepe?.checked) total += guests * PRICES.services.crepe;
-        if (modalInputs.festbar?.checked) total += guests * PRICES.services.festbar;
 
+        // Alugueis agora incluem Festbar
+        if (modalInputs.festbar?.checked) total += guests * PRICES.services.festbar;
         if (modalInputs.popcornPremium?.checked) total += PRICES.services.popcorn_premium;
         if (modalInputs.camaElastica?.checked) total += PRICES.cama_elastica;
 
@@ -716,7 +695,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // ==========================================
-        // 🛑 VALIDAÇÃO DE LIMITE DE SERVIÇOS
+        // 🛑 VALIDAÇÃO DE LIMITE DE SERVIÇOS (ATUALIZADA)
         // ==========================================
         let countPrincipals = 0;
         let countRentals = 0;
@@ -728,9 +707,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (getEl('modal-service-massas')?.checked) countPrincipals++;
         if (getEl('modal-service-crepe')?.checked) countPrincipals++;
         if (getEl('modal-service-hotdog')?.checked) countPrincipals++;
-        if (getEl('modal-service-festbar')?.checked) countPrincipals++;
 
-        // Aluguéis: Carrinhos + Pipoca Premium + Cama Elástica
+        // Aluguéis: Carrinhos + Pipoca Premium + Cama Elástica + Festbar Drinks
+        if (getEl('modal-service-festbar')?.checked) countRentals++;
         if (getEl('modal-service-carts')?.checked) countRentals++;
         if (getEl('modal-service-popcorn-premium')?.checked) countRentals++;
         if (getEl('modal-service-cama-elastica')?.checked) countRentals++;
@@ -833,7 +812,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             try {
                 // Tenta agendar no backend (que vai verificar se pode)
-                // CORRIGIDO: Link do Render e removido o "});" extra
                 const res = await fetch("https://claras-buffet-backend.onrender.com/api/schedule", {
                     method: 'POST',
                     body: formData
@@ -852,8 +830,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     getEl('booking-step-2').style.display = 'none';
 
                     if (errorMsg.includes('lotado para festas principais') || errorMsg.includes('principais')) {
-                        // Desmarca serviços principais
-                        ['modal-service-buffet-essencial', 'modal-service-buffet-especial', 'modal-service-buffet-premium', 'modal-service-massas', 'modal-service-crepe', 'modal-service-hotdog', 'modal-service-festbar'].forEach(id => {
+                        // Desmarca serviços principais (Agora Festbar não está mais aqui)
+                        ['modal-service-buffet-essencial', 'modal-service-buffet-especial', 'modal-service-buffet-premium', 'modal-service-massas', 'modal-service-crepe', 'modal-service-hotdog'].forEach(id => {
                             const el = getEl(id);
                             if (el && el.checked) {
                                 el.checked = false;
@@ -863,17 +841,17 @@ document.addEventListener('DOMContentLoaded', function () {
                         warningText += "\n\nRemovemos os serviços principais conflitantes. Você pode selecionar serviços de aluguel ou tentar outra data.";
                     }
                     else if (errorMsg.includes('lotado para alugueis')) {
-                        // Desmarca alugueis
-                        ['modal-service-hotdog', 'modal-service-carts', 'modal-service-popcorn-premium', 'modal-service-cama-elastica'].forEach(id => {
+                        // Desmarca alugueis (Agora inclui Festbar)
+                        ['modal-service-festbar', 'modal-service-carts', 'modal-service-popcorn-premium', 'modal-service-cama-elastica'].forEach(id => {
                             const el = getEl(id);
                             if (el && el.checked) el.checked = false;
                         });
                         // Substitui mensagem de erro completamente
-                        warningText = "🛑 Data Indisponível: O limite diário de 2 aluguéis/carrocinhas já foi atingido para esta data em outros eventos. Por favor, escolha outra data ou remova os itens de aluguel.";
+                        warningText = "🛑 Data Indisponível: O limite diário de 2 aluguéis/estrutura já foi atingido para esta data. Por favor, escolha outra data ou remova os itens de aluguel.";
                     }
                     else if (errorMsg.includes('reservado')) {
                         // Desmarca alugueis
-                        ['modal-service-hotdog', 'modal-service-carts', 'modal-service-popcorn-premium', 'modal-service-cama-elastica'].forEach(id => {
+                        ['modal-service-festbar', 'modal-service-carts', 'modal-service-popcorn-premium', 'modal-service-cama-elastica'].forEach(id => {
                             const el = getEl(id);
                             if (el && el.checked) {
                                 el.checked = false;
@@ -968,9 +946,7 @@ document.addEventListener('DOMContentLoaded', function () {
             dots[currentSlideIndex].classList.remove('active');
             dots[targetIndex].classList.add('active');
 
-            // Move Track (Assumindo CSS de transform se necessário, mas o CSS original usa display: none/flex com active. 
-            // O código CSS mostra .carousel-track com display: flex e transition transform, e slide min-width 100%.
-            // Vamos usar translateX para corresponder ao CSS .carousel-track)
+            // Move Track
             const slideWidth = slides[0].getBoundingClientRect().width;
             track.style.transform = 'translateX(-' + (slideWidth * targetIndex) + 'px)';
 
@@ -1043,14 +1019,12 @@ document.addEventListener('DOMContentLoaded', function () {
             const btn = drop.querySelector('.dropbtn');
             if (btn) {
                 btn.addEventListener('click', (e) => {
-                    // Se for mobile (checar largura ou se nav tem active/estilo mobile)
                     if (window.innerWidth <= 768) {
                         e.preventDefault();
-                        drop.classList.toggle('active'); // O CSS deve ter .dropdown.active .dropdown-content {display:block}
-                        // Se não tiver, precisamos adicionar inline ou garantir CSS
+                        drop.classList.toggle('active');
                         const content = drop.querySelector('.dropdown-content');
                         if (content) {
-                            content.style.position = (content.style.position === 'static') ? 'absolute' : 'static'; // Truque comum
+                            content.style.position = (content.style.position === 'static') ? 'absolute' : 'static';
                             content.style.display = (content.style.display === 'block') ? 'none' : 'block';
                         }
                     }

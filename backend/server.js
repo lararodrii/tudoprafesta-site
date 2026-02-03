@@ -22,114 +22,114 @@ async function getCalendarService() {
     return google.calendar({ version: 'v3', auth });
 }
 
-// --- FUNÇÃO AUXILIAR DE CONTAGEM ---
-function analyzeEvents(dayEvents) {
-    let countPrincipais = 0;
-    let countAlugueis = 0;
+// --- HELPER FUNCTIONS & LOGIC ---
+
+// Hot Dog = Principal. Festbar = Aluguel.
+const isPrincipal = (txt) => /buffet|essencial|especial|premium|massa|crepe|hot dog|barraquinha/.test(txt);
+const isRental = (txt) => /carrinho|algodão|pipoca|cama elástica|festbar|drinks|bar/.test(txt);
+
+// Travas de equipamento único (O Hot Dog não tem mais trava de horário)
+const hasPopcorn = (txt) => /carrinho|algodão|pipoca/.test(txt);
+const hasTrampoline = (txt) => /cama elástica/.test(txt);
+
+// Core validation logic isolated for testing
+function validateAppointment(dayEvents, newRequest) {
+    const reqServicesStr = (newRequest.services || "").toLowerCase();
+    const start = new Date(newRequest.start);
+    const end = new Date(newRequest.end);
+
+    // 1. Analyze Existing Events on this Day (Contagem Desmembrada)
+    let existingMains = 0;
+    let existingRentals = 0;
 
     for (const evt of dayEvents) {
-        const txt = ((evt.summary || "") + " " + (evt.description || "")).toLowerCase();
-        const isPrincipal = /buffet|essencial|especial|premium|massa|crepe/.test(txt);
+        // Pega apenas a linha de "Serviços:" da descrição do calendário
+        const desc = evt.description || "";
+        const servicesMatch = desc.match(/Serviços:\s*(.*)/i);
+        const evtServicesStr = servicesMatch ? servicesMatch[1].toLowerCase() : (evt.summary || "").toLowerCase();
 
-        if (isPrincipal) {
-            countPrincipais++;
-        } else {
-            // Só conta aluguel se não for principal
-            if (/hot dog|barraquinha|carrinho|algodão|pipoca|cama elástica/.test(txt)) {
-                countAlugueis++;
+        // Quebra a string (ex: "Buffet, Crepe, Pipoca") em itens individuais
+        const items = evtServicesStr.split(',').map(s => s.trim());
+        
+        for (const item of items) {
+            if (isPrincipal(item)) existingMains++;
+            else if (isRental(item)) existingRentals++;
+        }
+    }
+
+    // 2. Analyze New Request (Contagem Desmembrada)
+    let newMains = 0;
+    let newRentals = 0;
+    const reqItems = reqServicesStr.split(',').map(s => s.trim());
+
+    for (const item of reqItems) {
+        if (isPrincipal(item)) newMains++;
+        else if (isRental(item)) newRentals++;
+    }
+
+    // 3. Validation: Main Services Limit (Max 2/day)
+    // Soma o que já tem no dia + o que o cliente está pedindo agora
+    if ((existingMains + newMains) > 2) {
+        return { status: 'error', message: 'lotado para festas principais' };
+    }
+
+    // 4. Validation: Rentals Limit (Max 2/day)
+    // Soma o que já tem no dia + o que o cliente está pedindo agora
+    if ((existingRentals + newRentals) > 2) {
+        return { status: 'error', message: 'lotado para alugueis' };
+    }
+
+    // 5. Validation: Equipment Conflict (Time Overlap)
+    // ONLY check if the specific equipment matches AND time overlaps
+    for (const evt of dayEvents) {
+        const desc = evt.description || "";
+        const servicesMatch = desc.match(/Serviços:\s*(.*)/i);
+        const txt = servicesMatch ? servicesMatch[1].toLowerCase() : (evt.summary || "").toLowerCase();
+
+        // Parse event times correctly whether they are ISO strings or Date objects
+        const evtStartRaw = evt.start.dateTime || evt.start.date || evt.start;
+        const evtEndRaw = evt.end.dateTime || evt.end.date || evt.end;
+        const evtStart = new Date(evtStartRaw);
+        const evtEnd = new Date(evtEndRaw);
+
+        // Check Time Overlap
+        const overlap = (start < evtEnd && end > evtStart);
+
+        if (overlap) {
+            if (hasPopcorn(reqServicesStr) && hasPopcorn(txt)) {
+                return { status: 'error', message: 'popcorn time conflict' };
+            }
+            if (hasTrampoline(reqServicesStr) && hasTrampoline(txt)) {
+                return { status: 'error', message: 'reservado (cama elástica)' };
             }
         }
     }
-    // Retorna se o dia está "Cheio" (Regra: 2 principais E 2 alugueis)
-    // Se quiser bloquear o dia apenas se TUDO estiver cheio, use a lógica abaixo.
-    // Se quiser pintar de vermelho se NÃO COUBER MAIS PRINCIPAIS, ajuste conforme preferência.
-    // Aqui vou considerar dia "Cheio" se não couber mais NADA (2 princ + 2 alugueis).
-    // Mas para facilitar visualização, vamos retornar o status detalhado.
-    return { countPrincipais, countAlugueis };
+
+    return { status: 'success' };
 }
-
-// --- ROTA NOVA: VERIFICAR DISPONIBILIDADE DO MÊS ---
-app.get('/api/month-availability', async (req, res) => {
-    try {
-        const { month, year } = req.query;
-        const calendar = await getCalendarService();
-
-        // Pega do dia 1 até o último dia do mês
-        const startDate = new Date(year, month, 1);
-        const endDate = new Date(year, parseInt(month) + 1, 0, 23, 59, 59);
-
-        const response = await calendar.events.list({
-            calendarId: CALENDAR_ID,
-            timeMin: startDate.toISOString(),
-            timeMax: endDate.toISOString(),
-            singleEvents: true,
-            orderBy: 'startTime',
-        });
-
-        const events = response.data.items || [];
-        const fullDays = [];
-
-        // Agrupa eventos por dia
-        const eventsByDay = {};
-        events.forEach(evt => {
-            const start = evt.start.dateTime || evt.start.date;
-            const dayKey = new Date(start).getDate(); // Pega o dia (1, 2, 3...)
-
-            if (!eventsByDay[dayKey]) eventsByDay[dayKey] = [];
-            eventsByDay[dayKey].push(evt);
-        });
-
-        // Analisa cada dia
-        for (const [day, dayEvents] of Object.entries(eventsByDay)) {
-            const { countPrincipais, countAlugueis } = analyzeEvents(dayEvents);
-
-            // Lógica: Se tem 2 principais E 2 alugueis, o dia está TOTALMENTE lotado.
-            // Se você quiser pintar de vermelho quando não cabe mais FESTA (Principal), mude para: countPrincipais >= 2
-            if (countPrincipais >= 2 && countAlugueis >= 2) {
-                fullDays.push(parseInt(day));
-            }
-        }
-
-        res.json({ fullDays });
-
-    } catch (error) {
-        console.error(error);
-        res.json({ fullDays: [] }); // Em caso de erro, não bloqueia nada visualmente
-    }
-});
 
 // --- ROTA DE AGENDAMENTO (POST) ---
 app.post('/api/schedule', upload.none(), async (req, res) => {
-    // ... (Mantenha o código do post anterior ou copie abaixo se quiser garantir)
-    // Vou resumir a parte crucial de validação aqui:
-
     try {
         const p = req.body;
-        const calendar = await getCalendarService();
 
-        // ... (Parsing de datas igual ao anterior) ...
+        // Parse inputs
         const dateParts = p.selectedDateISO.split('-');
         const timeParts = p.eventTime.split(':');
         const start = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], timeParts[0], timeParts[1]);
         const duration = parseInt(p.eventDuration) || 4;
         const end = new Date(start.getTime() + (duration * 60 * 60 * 1000));
 
-        // Validação de Passado (Item 2 - Segurança Backend)
+        // Basic Validation
         if (start < new Date()) {
             return res.json({ status: 'error', message: 'Não é possível agendar em datas ou horários passados.' });
         }
 
+        const calendar = await getCalendarService();
         const dayStart = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], 0, 0, 0);
         const dayEnd = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], 23, 59, 59);
 
-        // ... (Lógica de Regex Principal/Aluguel igual ao anterior) ...
-        const servicesStr = (p.services || "").toLowerCase();
-        const reqPrincipal = /buffet|essencial|especial|premium|massa|crepe/.test(servicesStr);
-        const reqHotDog = /hot dog|barraquinha/.test(servicesStr);
-        const reqCarts = /carrinho|algodão|pipoca/.test(servicesStr);
-        const reqTrampo = /cama elástica/.test(servicesStr);
-        const reqAluguel = reqHotDog || reqCarts || reqTrampo;
-
+        // Fetch existing events for the day
         const response = await calendar.events.list({
             calendarId: CALENDAR_ID,
             timeMin: dayStart.toISOString(),
@@ -137,83 +137,25 @@ app.post('/api/schedule', upload.none(), async (req, res) => {
             singleEvents: true,
         });
 
-        // ... (Lógica de Loop e Validação igual ao anterior) ...
-        // (Copie a lógica do loop do server.js anterior aqui para verificar conflitos)
-        // Se precisar do código completo dessa parte novamente, me avise, mas é o mesmo do passo anterior.
-
-        // RESUMO DA LÓGICA DE LOOP PARA INSERIR AQUI:
-        // Helper para contar aluguéis no texto
-        const countRentals = (text) => {
-            let c = 0;
-            const t = text.toLowerCase();
-            if (/hot dog|barraquinha/.test(t)) c++;
-            if (/carrinho|algodão/.test(t)) c++;
-            if (/pipoca gourmet/.test(t)) c++;
-            if (/cama elástica|cama elastica/.test(t)) c++;
-            return c;
-        };
-
         const dayEvents = response.data.items || [];
 
-        let dbRentalsCount = 0;
-        let countPrincipais = 0;
-        let conflitoHorarioAluguel = false;
+        // Prepare request object for validation function
+        const newRequest = {
+            services: p.services,
+            start: start,
+            end: end
+        };
 
-        // 1. Analisa o que já existe no banco (SOMA)
-        for (const evt of dayEvents) {
-            const txt = ((evt.summary || "") + " " + (evt.description || "")).toLowerCase();
-            const evtStart = new Date(evt.start.dateTime || evt.start.date);
-            const evtEnd = new Date(evt.end.dateTime || evt.end.date);
-
-            // Conta principais (por evento)
-            if (/buffet|essencial|especial|premium|massa|crepe/.test(txt)) {
-                countPrincipais++;
-            }
-
-            // Conta ITENS de aluguel já agendados
-            dbRentalsCount += countRentals(txt);
-
-            // Verifica conflito de horário específico (para itens repetidos)
-            if (reqAluguel) {
-                const overlap = (start < evtEnd && end > evtStart);
-                if (overlap) {
-                    // CONFLITO DE PIPOCA (Carrinho Simples ou Gourmet usam a mesma máquina)
-                    const reqPopcorn = /carrinho|algodão|pipoca/.test(servicesStr);
-                    const dbPopcorn = /carrinho|algodão|pipoca/.test(txt);
-
-                    if (reqPopcorn && dbPopcorn) {
-                        return res.json({ status: 'error', message: 'popcorn time conflict' });
-                    }
-
-                    if (reqHotDog && /hot dog|barraquinha/.test(txt)) conflitoHorarioAluguel = true;
-                    // Verifica outros aluguéis genéricos que não sejam pipoca (já tratado acima)
-                    if (reqCarts && !reqPopcorn && /carrinho|algodão|pipoca/.test(txt)) conflitoHorarioAluguel = true;
-                    if (reqTrampo && /cama elástica/.test(txt)) conflitoHorarioAluguel = true;
-                }
-            }
+        // RUN LOGIC
+        const validation = validateAppointment(dayEvents, newRequest);
+        if (validation.status === 'error') {
+            return res.json(validation);
         }
 
-        // 2. Conta o que o cliente quer AGORA
-        const currentRentalsCount = countRentals(servicesStr);
-
-        // 3. Validações
-        if (reqPrincipal && countPrincipais >= 2) {
-            return res.json({ status: 'error', message: 'Dia lotado para Festas Principais.' });
-        }
-
-        // Regra de Ouro: (Existe + Novo) > 2
-        if (currentRentalsCount > 0) {
-            if ((dbRentalsCount + currentRentalsCount) > 2) {
-                return res.json({ status: 'error', message: 'lotado para alugueis' });
-            }
-            if (conflitoHorarioAluguel) {
-                return res.json({ status: 'error', message: 'Item já reservado neste horário.' });
-            }
-        }
-
-        // Criar Evento
-        const finalTitle = reqPrincipal ? ('Festa: ' + p.clientName) : ('Locação: ' + p.clientName);
+        // Create Event if Success
+        const finalTitle = isPrincipal((p.services || "").toLowerCase()) ? ('Festa: ' + p.clientName) : ('Locação: ' + p.clientName);
         const finalDesc = `Serviços: ${p.services}\nConvidados: ${p.guests}\nTotal: ${p.total}\nLocal: ${p.eventLocation}`;
+
         await calendar.events.insert({
             calendarId: CALENDAR_ID,
             requestBody: {
@@ -232,6 +174,9 @@ app.post('/api/schedule', upload.none(), async (req, res) => {
         return res.json({ status: 'error', message: error.message });
     }
 });
+
+// Export logic for testing
+module.exports = { validateAppointment, app }; // Export app for usage if needed, but mainly validateAppointment
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Backend rodando em http://localhost:${PORT}`));
