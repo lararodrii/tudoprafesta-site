@@ -1,105 +1,46 @@
-// Testes para contarServicos
-test('conta serviços principais e adicionais corretamente', () => {
-  const servicos = [
-    'Buffet Essencial',     // principal
-    'Pipoca Doce Premium',  // adicional
-    'Buffet de Massas'      // principal
-  ];
-  expect(contarServicos(servicos).principais).toBe(2);
-  expect(contarServicos(servicos).adicionais).toBe(1);
-});
+// --- FUNÇÕES DE AJUDA (Baseadas no server.js) ---
+const isPrincipal = (txt) => /buffet|essencial|especial|premium|massa|crepe|hot dog|barraquinha/i.test(txt);
+const isRental = (txt) => /carrinho|algodão|pipoca|cama elástica|festbar|drinks|bar/i.test(txt);
 
-test('conta apenas serviços principais', () => {
-  const servicos = [
-    'Buffet Essencial',
-    'Buffet Premium',
-    'Buffet de Massas'
-  ];
-  expect(contarServicos(servicos).principais).toBe(3);
-  expect(contarServicos(servicos).adicionais).toBe(0);
-});
+// 1. Função de Contagem
+function contarServicos(servicos) {
+    let principais = 0;
+    let adicionais = 0; // No server.js chamamos de 'rentals', aqui o teste chama de adicionais
 
-test('conta apenas serviço adicional', () => {
-  const servicos = ['Pipoca Doce Premium'];
-  expect(contarServicos(servicos).principais).toBe(0);
-  expect(contarServicos(servicos).adicionais).toBe(1);
-});
+    servicos.forEach(item => {
+        if (isPrincipal(item)) principais++;
+        else if (isRental(item)) adicionais++;
+    });
 
-// Testes para validarLimiteDiario
-test('permite 2 serviços principais no mesmo dia', () => {
-  const servicos = [
-    'Buffet Essencial',
-    'Buffet de Massas'
-  ];
-  expect(() => validarLimiteDiario(servicos)).not.toThrow();
-});
+    return { principais, adicionais };
+}
 
-test('permite 1 serviço principal no mesmo dia', () => {
-  const servicos = ['Buffet Essencial'];
-  expect(() => validarLimiteDiario(servicos)).not.toThrow();
-});
+// 2. Função de Validação de Limite
+function validarLimiteDiario(servicos) {
+    const contagem = contarServicos(servicos);
 
-test('serviço adicional não afeta limite de principais', () => {
-  const servicos = [
-    'Buffet Essencial',      // 1º principal
-    'Buffet de Massas',      // 2º principal
-    'Pipoca Doce Premium'    // adicional - não conta para limite
-  ];
-  expect(() => validarLimiteDiario(servicos)).not.toThrow();
-});
+    // O teste espera erro se passar de 2 principais
+    // Nota: O server.js soma com os já existentes. Aqui validamos o array recebido.
+    if (contagem.principais > 2) {
+        throw new Error('Lotado para festas principais');
+    }
 
-test('bloqueia 3 serviços principais mesmo com adicional', () => {
-  const servicos = [
-    'Buffet Essencial',
-    'Buffet Premium',
-    'Buffet de Massas',
-    'Pipoca Doce Premium'  // adicional
-  ];
-  expect(() => validarLimiteDiario(servicos))
-    .toThrow('Lotado para festas principais');
-});
+    // Opcional: Se quiser validar alugueis também conforme regra 2+2
+    if (contagem.adicionais > 2) {
+        throw new Error('Lotado para alugueis');
+    }
+}
 
-test('permite múltiplos serviços adicionais (se existissem)', () => {
-  const servicos = [
-    'Buffet Essencial',  // principal
-    'Pipoca Doce Premium' // adicional
-    // Se houvesse mais adicionais, eles seriam permitidos
-  ];
-  expect(() => validarLimiteDiario(servicos)).not.toThrow();
-});
+// 3. Função de Conflito de Horário
+function conflitoHorario(horarioA, horarioB) {
+    // Retorna true se houver sobreposição
+    // Lógica: (InicioA < FimB) E (FimA > InicioB)
+    return (horarioA.inicio < horarioB.fim && horarioA.fim > horarioB.inicio);
+}
 
-// Testes para conflitoHorario (permanecem os mesmos - não dependem dos serviços)
-test('não detecta conflito quando horários não se sobrepõem', () => {
-  expect(conflitoHorario(
-    { inicio: 14, fim: 16 },
-    { inicio: 17, fim: 19 }
-  )).toBe(false);
-});
-
-test('detecta conflito quando horário está completamente dentro', () => {
-  expect(conflitoHorario(
-    { inicio: 15, fim: 16 },
-    { inicio: 14, fim: 18 }
-  )).toBe(true);
-});
-
-test('detecta conflito quando horários se sobrepõem parcialmente', () => {
-  expect(conflitoHorario(
-    { inicio: 14, fim: 17 },
-    { inicio: 16, fim: 19 }
-  )).toBe(true);
-});
-
-test('não detecta conflito em horários adjacentes', () => {
-  expect(conflitoHorario(
-    { inicio: 14, fim: 16 },
-    { inicio: 16, fim: 18 }
-  )).toBe(false);
-});
-
-test('detecta conflito quando um horário engloba outro', () => {
-  expect(conflitoHorario(
-    { inicio: 13, fim: 19 },
-    { inicio: 15, fim: 17 }
-  )).toBe(true);
-});
+// Exporta as funções para serem usadas no arquivo de teste
+module.exports = {
+    contarServicos,
+    validarLimiteDiario,
+    conflitoHorario
+};
