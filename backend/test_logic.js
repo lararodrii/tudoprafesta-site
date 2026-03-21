@@ -1,4 +1,4 @@
-const isPrincipal = (txt) => /^(buffet|estação de crepe)/i.test(txt);
+const isPrincipal = (txt) => /^(buffet|estação de crepe|rodízio de crepe)/i.test(txt);
 const isRental = (txt) => /^(carrinho|festbar|hot dog|pipoca gourmet)/i.test(txt);
 const isCamaElastica = (txt) => /^cama elástica/i.test(txt);
 const isBuffetInfantil = (txt) => /^buffet (essencial|especial|premium)/i.test(txt);
@@ -63,7 +63,7 @@ function validarFormulario(servicos, isChacara = false) {
 
     // Trava de venda casada (Adicionais repetidos)
     const hasSalgadoExtra = servicos.some(s => /salgado/i.test(s));
-    if (hasSalgadoExtra && servicos.some(s => /^(buffet|estação de crepe)/i.test(s))) {
+    if (hasSalgadoExtra && servicos.some(s => /^(buffet|estação de crepe|rodízio de crepe)/i.test(s))) {
         throw new Error('Salgados já inclusos no pacote principal');
     }
 

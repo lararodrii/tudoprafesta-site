@@ -117,6 +117,10 @@ describe('🔗 6. Regras de Venda Casada e Dependências', () => {
   test('Deve permitir Casquinha se o cliente escolher Crepe', () => {
     expect(() => validarFormulario(['Estação de Crepe', 'Crepe com casquinha de queijo'])).not.toThrow();
   });
+
+  test('Permite Casquinha de Queijo com Crepe Premium', () => {
+      expect(() => validarFormulario(['Rodízio de Crepe Premium', 'Casquinha de Queijo'])).not.toThrow();
+  });
 });
 
 describe('🧪 7. Novas Regras (Cama Elástica e Chácara)', () => {

@@ -128,6 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
         services: {
             massas: 39.99,
             crepe: 38.90,
+            crepe_premium: 46.90,
             festbar: 40.00,
             hotdog: 750.00,
             carts: 300.00,
@@ -158,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
         buffetPremium: getEl('service-buffet-premium'),
         massas: getEl('service-massas'),
         crepe: getEl('service-crepe'),
+        crepePremium: getEl('service-crepe-premium'),
         hotdog: getEl('service-hotdog'),
         festbar: getEl('service-festbar'),
         carts: getEl('service-carts'),
@@ -184,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateAddonsState() {
         const mainServices = [
             inputs.buffetEssencial, inputs.buffetEspecial, inputs.buffetPremium,
-            inputs.massas, inputs.crepe, inputs.hotdog, inputs.festbar,
+            inputs.massas, inputs.crepe, inputs.crepePremium, inputs.hotdog, inputs.festbar,
             inputs.carts, inputs.popcornPremium, inputs.camaElastica
         ];
 
@@ -199,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (inputs.addonCasquinha) {
-            inputs.addonCasquinha.disabled = !(inputs.crepe && inputs.crepe.checked);
+            inputs.addonCasquinha.disabled = !(inputs.crepe?.checked || inputs.crepePremium?.checked);
             if (inputs.addonCasquinha.disabled) {
                 inputs.addonCasquinha.checked = false;
             }
@@ -245,6 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (inputs.buffetPremium?.checked) total += guests * getTierPrice('premium');
         if (inputs.massas?.checked) total += guests * PRICES.services.massas;
         if (inputs.crepe?.checked) total += guests * PRICES.services.crepe;
+        if (inputs.crepePremium?.checked) total += guests * PRICES.services.crepe_premium;
         if (inputs.festbar?.checked) total += guests * PRICES.services.festbar;
         if (inputs.popcornPremium?.checked) total += PRICES.services.popcorn_premium;
         if (inputs.camaElastica?.checked) total += PRICES.cama_elastica;
@@ -278,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (inputs.addonCopeiro?.checked) total += qtdCopeiros * PRICES.addons.copeiro;
         
         const hasBuffetOuMassa = (inputs.buffetEssencial?.checked || inputs.buffetEspecial?.checked || inputs.buffetPremium?.checked || inputs.massas?.checked);
-        const hasCrepe = inputs.crepe?.checked;
+        const hasCrepe = inputs.crepe?.checked || inputs.crepePremium?.checked;
         const hasAnyMainService = hasBuffetOuMassa || hasCrepe;
 
         if (hasAnyMainService && !inputs.addonCopeiro?.checked) {
@@ -305,6 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (inputs.buffetPremium?.checked) selectedServices.push('Buffet Premium');
                     if (inputs.massas?.checked) selectedServices.push('Estação de Massas');
                     if (inputs.crepe?.checked) selectedServices.push('Estação de Crepe');
+                    if (inputs.crepePremium?.checked) selectedServices.push('Rodízio de Crepe Premium');
                     if (inputs.festbar?.checked) selectedServices.push('FestBar Drinks');
                     if (inputs.hotdog?.checked) selectedServices.push('Hot Dog Gourmet');
                     if (inputs.carts?.checked) selectedServices.push('Carrinho de Pipoca / Algodão');
@@ -473,7 +477,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Validar Limite de Serviços Principais (Máximo 2 por evento - Calculadora)
-    const mainServiceInputs = [inputs.buffetEssencial, inputs.buffetEspecial, inputs.buffetPremium, inputs.massas, inputs.crepe];
+    const mainServiceInputs = [inputs.buffetEssencial, inputs.buffetEspecial, inputs.buffetPremium, inputs.massas, inputs.crepe, inputs.crepePremium];
     mainServiceInputs.forEach(service => {
         if (service) {
             service.addEventListener('click', function (e) {
@@ -513,7 +517,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function checkDependencyAndAlert(e, contextInputs) {
-        const mainServicesKeys = ['buffetEssencial', 'buffetEspecial', 'buffetPremium', 'massas', 'crepe', 'hotdog', 'festbar', 'carts', 'popcornPremium', 'camaElastica'];
+        const mainServicesKeys = ['buffetEssencial', 'buffetEspecial', 'buffetPremium', 'massas', 'crepe', 'crepePremium', 'hotdog', 'festbar', 'carts', 'popcornPremium', 'camaElastica'];
         const isMainSelected = mainServicesKeys.some(k => contextInputs[k] && contextInputs[k].checked);
 
         if (!isMainSelected) {
@@ -529,7 +533,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function checkSavoryRestriction(e, contextInputs) {
-        const servicesWithSavory = ['buffetEssencial', 'buffetEspecial', 'buffetPremium', 'crepe'];
+        const servicesWithSavory = ['buffetEssencial', 'buffetEspecial', 'buffetPremium', 'crepe', 'crepePremium'];
         const hasSavoryService = servicesWithSavory.some(k => contextInputs[k] && contextInputs[k].checked);
 
         if (hasSavoryService) {
@@ -711,6 +715,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'service-buffet-premium': 'modal-service-buffet-premium',
             'service-massas': 'modal-service-massas',
             'service-crepe': 'modal-service-crepe',
+            'service-crepe-premium': 'modal-service-crepe-premium',
             'service-hotdog': 'modal-service-hotdog',
             'service-festbar': 'modal-service-festbar',
             'service-carts': 'modal-service-carts',
@@ -777,6 +782,7 @@ document.addEventListener('DOMContentLoaded', function () {
         buffetPremium: getEl('modal-service-buffet-premium'),
         massas: getEl('modal-service-massas'),
         crepe: getEl('modal-service-crepe'),
+        crepePremium: getEl('modal-service-crepe-premium'),
         hotdog: getEl('modal-service-hotdog'),
         festbar: getEl('modal-service-festbar'),
         carts: getEl('modal-service-carts'),
@@ -818,7 +824,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Validar Limite de Serviços Principais (Máximo 2 por evento - Modal)
-    const modalMainServiceInputs = [modalInputs.buffetEssencial, modalInputs.buffetEspecial, modalInputs.buffetPremium, modalInputs.massas, modalInputs.crepe];
+    const modalMainServiceInputs = [modalInputs.buffetEssencial, modalInputs.buffetEspecial, modalInputs.buffetPremium, modalInputs.massas, modalInputs.crepe, modalInputs.crepePremium];
     modalMainServiceInputs.forEach(service => {
         if (service) {
             service.addEventListener('click', function (e) {
@@ -885,7 +891,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const mainServices = [
             modalInputs.buffetEssencial, modalInputs.buffetEspecial, modalInputs.buffetPremium,
-            modalInputs.massas, modalInputs.crepe, modalInputs.hotdog, modalInputs.festbar,
+            modalInputs.massas, modalInputs.crepe, modalInputs.crepePremium, modalInputs.hotdog, modalInputs.festbar,
             modalInputs.carts, modalInputs.popcornPremium, modalInputs.camaElastica
         ];
         const isMainOrRentalSelected = mainServices.some(input => input && input.checked);
@@ -897,7 +903,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (modalInputs.addonCasquinha) {
-            modalInputs.addonCasquinha.disabled = !(modalInputs.crepe && modalInputs.crepe.checked);
+            modalInputs.addonCasquinha.disabled = !(modalInputs.crepe?.checked || modalInputs.crepePremium?.checked);
             if (modalInputs.addonCasquinha.disabled) {
                 modalInputs.addonCasquinha.checked = false;
             }
@@ -952,6 +958,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (modalInputs.buffetPremium?.checked) total += guests * getTierPrice('premium');
         if (modalInputs.massas?.checked) total += guests * PRICES.services.massas;
         if (modalInputs.crepe?.checked) total += guests * PRICES.services.crepe;
+        if (modalInputs.crepePremium?.checked) total += guests * PRICES.services.crepe_premium;
         if (modalInputs.festbar?.checked) total += guests * PRICES.services.festbar;
         if (modalInputs.popcornPremium?.checked) total += PRICES.services.popcorn_premium;
         if (modalInputs.camaElastica?.checked) total += PRICES.cama_elastica;
@@ -977,7 +984,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (modalInputs.addonCopeiro?.checked) total += qtdCopeiros * PRICES.addons.copeiro;
 
         const hasBuffetOuMassa = (modalInputs.buffetEssencial?.checked || modalInputs.buffetEspecial?.checked || modalInputs.buffetPremium?.checked || modalInputs.massas?.checked);
-        const hasCrepe = modalInputs.crepe?.checked;
+        const hasCrepe = modalInputs.crepe?.checked || modalInputs.crepePremium?.checked;
         const hasAnyMainService = hasBuffetOuMassa || hasCrepe;
 
         if (hasAnyMainService && !modalInputs.addonCopeiro?.checked) {
@@ -1009,6 +1016,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (modalInputs.buffetPremium?.checked) selectedServices.push('Buffet Premium');
                     if (modalInputs.massas?.checked) selectedServices.push('Estação de Massas');
                     if (modalInputs.crepe?.checked) selectedServices.push('Estação de Crepe');
+                    if (modalInputs.crepePremium?.checked) selectedServices.push('Rodízio de Crepe Premium');
                     if (modalInputs.festbar?.checked) selectedServices.push('FestBar Drinks');
                     if (modalInputs.hotdog?.checked) selectedServices.push('Hot Dog Gourmet');
                     if (modalInputs.carts?.checked) selectedServices.push('Carrinho de Pipoca / Algodão');
@@ -1076,6 +1084,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (getEl('modal-service-buffet-premium')?.checked) countPrincipals++;
         if (getEl('modal-service-massas')?.checked) countPrincipals++;
         if (getEl('modal-service-crepe')?.checked) countPrincipals++;
+        if (getEl('modal-service-crepe-premium')?.checked) countPrincipals++;
 
         if (getEl('modal-service-hotdog')?.checked) countRentals++;
         if (getEl('modal-service-festbar')?.checked) { countRentals++; hasFestBar = true; }
@@ -1107,6 +1116,7 @@ document.addEventListener('DOMContentLoaded', function () {
         check('modal-service-buffet-premium', 'Buffet Premium');
         check('modal-service-massas', 'Buffet de Massas');
         check('modal-service-crepe', 'Estação de Crepe');
+        check('modal-service-crepe-premium', 'Rodízio de Crepe Premium');
         check('modal-service-hotdog', 'Hot Dog Gourmet');
         check('modal-service-festbar', 'FestBar Drinks');
         check('modal-service-carts', 'Carrinho Pipoca/Algodão');
@@ -1123,7 +1133,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let qCopeiros = Math.ceil(guests / 100);
         if (getEl('modal-addon-copeiro')?.checked) {
             selectedServices.push(`Copeiro: Sim (${qCopeiros} profissional(is))`);
-        } else if (getEl('modal-service-crepe')?.checked) {
+        } else if (getEl('modal-service-crepe')?.checked || getEl('modal-service-crepe-premium')?.checked) {
             selectedServices.push('Copeiro: Não (Sem copeiro - Cliente ciente da recomendação)');
         }
 
@@ -1181,6 +1191,7 @@ document.addEventListener('DOMContentLoaded', function () {
             check('modal-service-buffet-premium', 'Buffet Premium');
             check('modal-service-massas', 'Buffet de Massas');
             check('modal-service-crepe', 'Estação de Crepe');
+            check('modal-service-crepe-premium', 'Rodízio de Crepe Premium');
             check('modal-service-hotdog', 'Hot Dog Gourmet');
             check('modal-service-festbar', 'FestBar Drinks');
             check('modal-service-carts', 'Carrinho Pipoca/Algodão');
@@ -1199,7 +1210,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let qCopeiros2 = Math.ceil(g / 100);
             if (getEl('modal-addon-copeiro')?.checked) {
                 selectedServices.push(`Copeiro: Sim (${qCopeiros2} profissional(is))`);
-            } else if (getEl('modal-service-crepe')?.checked) {
+            } else if (getEl('modal-service-crepe')?.checked || getEl('modal-service-crepe-premium')?.checked) {
                 selectedServices.push('Copeiro: Não (Sem copeiro - Cliente ciente da recomendação)');
             }
 
@@ -1222,7 +1233,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     getEl('booking-step-2').style.display = 'none';
 
                     if (errorMsg.includes('lotado para festas principais') || errorMsg.includes('principais')) {
-                        ['modal-service-buffet-essencial', 'modal-service-buffet-especial', 'modal-service-buffet-premium', 'modal-service-massas', 'modal-service-crepe'].forEach(id => {
+                        ['modal-service-buffet-essencial', 'modal-service-buffet-especial', 'modal-service-buffet-premium', 'modal-service-massas', 'modal-service-crepe', 'modal-service-crepe-premium'].forEach(id => {
                             const el = getEl(id);
                             if (el && el.checked) {
                                 el.checked = false;
