@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (inputs.buffetEspecial?.checked) selectedServices.push('Buffet Especial');
                     if (inputs.buffetPremium?.checked) selectedServices.push('Buffet Premium');
                     if (inputs.massas?.checked) selectedServices.push('Estação de Massas');
-                    if (inputs.crepe?.checked) selectedServices.push('Estação de Crepe');
+                    if (inputs.crepe?.checked) selectedServices.push('Rodízio de Crepe');
                     if (inputs.crepePremium?.checked) selectedServices.push('Rodízio de Crepe Premium');
                     if (inputs.festbar?.checked) selectedServices.push('FestBar Drinks');
                     if (inputs.hotdog?.checked) selectedServices.push('Hot Dog Gourmet');
@@ -1015,7 +1015,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (modalInputs.buffetEspecial?.checked) selectedServices.push('Buffet Especial');
                     if (modalInputs.buffetPremium?.checked) selectedServices.push('Buffet Premium');
                     if (modalInputs.massas?.checked) selectedServices.push('Estação de Massas');
-                    if (modalInputs.crepe?.checked) selectedServices.push('Estação de Crepe');
+                    if (modalInputs.crepe?.checked) selectedServices.push('Rodízio de Crepe');
                     if (modalInputs.crepePremium?.checked) selectedServices.push('Rodízio de Crepe Premium');
                     if (modalInputs.festbar?.checked) selectedServices.push('FestBar Drinks');
                     if (modalInputs.hotdog?.checked) selectedServices.push('Hot Dog Gourmet');
@@ -1115,7 +1115,7 @@ document.addEventListener('DOMContentLoaded', function () {
         check('modal-service-buffet-especial', 'Buffet Especial');
         check('modal-service-buffet-premium', 'Buffet Premium');
         check('modal-service-massas', 'Buffet de Massas');
-        check('modal-service-crepe', 'Estação de Crepe');
+        check('modal-service-crepe', 'Rodízio de Crepe');
         check('modal-service-crepe-premium', 'Rodízio de Crepe Premium');
         check('modal-service-hotdog', 'Hot Dog Gourmet');
         check('modal-service-festbar', 'FestBar Drinks');
@@ -1190,7 +1190,7 @@ document.addEventListener('DOMContentLoaded', function () {
             check('modal-service-buffet-especial', 'Buffet Especial');
             check('modal-service-buffet-premium', 'Buffet Premium');
             check('modal-service-massas', 'Buffet de Massas');
-            check('modal-service-crepe', 'Estação de Crepe');
+            check('modal-service-crepe', 'Rodízio de Crepe');
             check('modal-service-crepe-premium', 'Rodízio de Crepe Premium');
             check('modal-service-hotdog', 'Hot Dog Gourmet');
             check('modal-service-festbar', 'FestBar Drinks');

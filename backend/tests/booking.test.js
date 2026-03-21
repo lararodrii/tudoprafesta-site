@@ -24,7 +24,7 @@ describe('🛑 2. Regras de Exclusividade do Formulário', () => {
   });
 
   test('Deve bloquear a escolha de 3 serviços principais', () => {
-    expect(() => validarFormulario(['Buffet Essencial', 'Estação de Crepe', 'Buffet de Massas']))
+    expect(() => validarFormulario(['Buffet Essencial', 'Rodízio de Crepe', 'Buffet de Massas']))
       .toThrow('Máximo de 2 serviços principais permitidos por evento');
   });
 
@@ -35,7 +35,7 @@ describe('🛑 2. Regras de Exclusividade do Formulário', () => {
   });
 
   test('Permite misturar 1 Principal e 1 Aluguel perfeitamente', () => {
-    expect(() => validarFormulario(['Estação de Crepe', 'Carrinho de Pipoca'])).not.toThrow();
+    expect(() => validarFormulario(['Rodízio de Crepe', 'Carrinho de Pipoca'])).not.toThrow();
   });
 });
 
@@ -97,7 +97,7 @@ describe('🔗 6. Regras de Venda Casada e Dependências', () => {
   });
 
   test('Bloqueia adicional de Salgados se o cliente escolheu Crepe', () => {
-    expect(() => validarFormulario(['Estação de Crepe', 'Salgados Extras']))
+    expect(() => validarFormulario(['Rodízio de Crepe', 'Salgados Extras']))
       .toThrow('Salgados já inclusos no pacote principal');
   });
 
@@ -106,7 +106,7 @@ describe('🔗 6. Regras de Venda Casada e Dependências', () => {
   });
 
   test('Deve permitir Crepe com recusa do Copeiro', () => {
-    expect(() => validarFormulario(['Estação de Crepe', 'Copeiro: Não (Sem copeiro - Cliente ciente da recomendação)'])).not.toThrow();
+    expect(() => validarFormulario(['Rodízio de Crepe', 'Copeiro: Não (Sem copeiro - Cliente ciente da recomendação)'])).not.toThrow();
   });
 
   test('Deve bloquear a adição de Casquinha sem Crepe', () => {
@@ -115,7 +115,7 @@ describe('🔗 6. Regras de Venda Casada e Dependências', () => {
   });
 
   test('Deve permitir Casquinha se o cliente escolher Crepe', () => {
-    expect(() => validarFormulario(['Estação de Crepe', 'Crepe com casquinha de queijo'])).not.toThrow();
+    expect(() => validarFormulario(['Rodízio de Crepe', 'Crepe com casquinha de queijo'])).not.toThrow();
   });
 
   test('Permite Casquinha de Queijo com Crepe Premium', () => {
