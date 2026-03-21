@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clara's Buffet | O Melhor Buffet em Domicílio de Brasília</title>
+    <link rel="icon" href="image/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Configuração do Vídeo de Fundo */
+        .hero::before {
+            display: none !important;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body class="home-page">
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><img src="image/navbar_icon.png" alt="Clara's Buffet" class="logo-img"></a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="history.html">Nossa História</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn">Serviços <i class="fas fa-caret-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="comidas.html">Comidas</a>
+                            <a href="bebidas.html">Bebidas</a>
+                            <a href="alugueis.html">Alugueis</a>
+                        </div>
+                    </li>
+                    <li><a href="galeria.html">Galeria</a></li>
+                    <li><a href="#calculator">Orçamento</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="image/videoprincipal.mp4" type="video/quicktime">
+            <source src="image/videoprincipal.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <h2>O Melhor Buffet em Domicílio de Brasília</h2>
+            <p style="margin-bottom: 5px;">Tudo pra sua festa!<br>Buffet Infantil, Crepes, Massas, Comida de Boteco &
+                Drinks.</p>
+            <p style="margin-top: 0;">Cama Elástica e Carrinhos Gourmet.</p>
+            <a href="#calculator" class="btn-gold">Faça seu Orçamento</a>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Nossos Serviços</h2>
+            <div class="services-grid" id="comidas">
+                <div class="service-card">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Buffet Completo</h3>
+                    <p>Opções variadas de sabores para encantar todos os gostos.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-stroopwafel"></i>
+                    <h3>Crepe Francês</h3>
+                    <p>Deliciosos crepes doces e salgados feitos na hora.</p>
+                </div>
+            </div>
+
+            <div class="services-grid" id="bebidas" style="margin-top: 40px;">
+                <div class="service-card">
+                    <i class="fas fa-cocktail"></i>
+                    <h3>Drinks Especiais</h3>
+                    <p>Bartenders profissionais e uma seleção de drinks incríveis.</p>
+                </div>
+            </div>
+
+            <div class="services-grid" id="alugueis" style="margin-top: 45px;">
+                <div class="service-card">
+                    <i class="fas fa-child"></i>
+                    <h3>Alugueis & Carrinhos Gourmet</h3>
+                    <p>Diversão garantida com cama elástica, pipoca e algodão doce.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">O que dizem nossos clientes</h2>
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <div class="carousel-slide active">
+                        <div class="testimonial-card google-style">
+                            <div class="testimonial-header">
+                                <img src="image/Ruan_Carlos.png" alt="Ruan Carlos" class="client-avatar">
+                                <div class="header-info">
+                                    <p class="client-name">Ruan Carlos</p>
+                                    <div class="stars-date">
+                                        <span class="stars">★★★★★</span>
+                                        <span class="review-date">23 de nov. de 2024</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+                                    class="google-icon-small" alt="Google">
+                            </div>
+                            <p class="testimonial-text">"Sem dúvidas a melhor da região! Comidas frescas é muito gostas,
+                                preparação rápida de crepe e atendimento completo, com varias opções de recheios a
+                                serviços como louças completas!! Super indico"</p>
+                            <a href="https://www.google.com/search?q=clara%27s+buffet" target="_blank"
+                                class="google-link">Ver todas as avaliações</a>
+                        </div>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <div class="testimonial-card google-style">
+                            <div class="testimonial-header">
+                                <img src="image/Layssa_Abreu.png" alt="Layssa Abreu" class="client-avatar">
+                                <div class="header-info">
+                                    <p class="client-name">Layssa Abreu</p>
+                                    <div class="stars-date">
+                                        <span class="stars">★★★★★</span>
+                                        <span class="review-date">18 de nov. de 2024</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+                                    class="google-icon-small" alt="Google">
+                            </div>
+                            <p class="testimonial-text">"Trabalho excelente! Já contratei 2x e sempre se dedicam 100%
+                                para tornar a comida seu evento mais que especial! Sem contar na educação e proatividade
+                                das meninas que servem no evento!"</p>
+                            <a href="https://www.google.com/search?q=clara%27s+buffet" target="_blank"
+                                class="google-link">Ver todas as avaliações</a>
+                        </div>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <div class="testimonial-card google-style">
+                            <div class="testimonial-header">
+                                <img src="image/Karol.png" alt="Karol" class="client-avatar">
+                                <div class="header-info">
+                                    <p class="client-name">Karol</p>
+                                    <div class="stars-date">
+                                        <span class="stars">★★★★★</span>
+                                        <span class="review-date">25 de ago. de 2024</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+                                    class="google-icon-small" alt="Google">
+                            </div>
+                            <p class="testimonial-text">"O crepe realmente é uma delícia! As meninas que estavam
+                                servindo, muito educadas, o preço é maravilhoso! Obrigada! Nós amamos tudo. C certeza
+                                fecharei outras festinhas c vcs!"</p>
+                            <a href="https://www.google.com/search?q=clara%27s+buffet" target="_blank"
+                                class="google-link">Ver todas as avaliações</a>
+                        </div>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <div class="testimonial-card google-style">
+                            <div class="testimonial-header">
+                                <img src="image/Washington_Rodrigues.png" alt="Washington Rodrigues"
+                                    class="client-avatar">
+                                <div class="header-info">
+                                    <p class="client-name">Washington Rodrigues</p>
+                                    <div class="stars-date">
+                                        <span class="stars">★★★★★</span>
+                                        <span class="review-date">22 de jul. de 2024</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+                                    class="google-icon-small" alt="Google">
+                            </div>
+                            <p class="testimonial-text">"Ótimo atendimento, flexibilidade de horários, facilitam o
+                                pagamento e a comida nota 10."</p>
+                            <a href="https://www.google.com/search?q=clara%27s+buffet" target="_blank"
+                                class="google-link">Ver todas as avaliações</a>
+                        </div>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <div class="testimonial-card google-style">
+                            <div class="testimonial-header">
+                                <img src="image/Aparecida_Santos.png" alt="Aparecida Santos" class="client-avatar">
+                                <div class="header-info">
+                                    <p class="client-name">Aparecida Santos</p>
+                                    <div class="stars-date">
+                                        <span class="stars">★★★★★</span>
+                                        <span class="review-date">22 de jul. de 2024</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+                                    class="google-icon-small" alt="Google">
+                            </div>
+                            <p class="testimonial-text">"Equipe maravilhosa. Gostei da variedades de sabores do crepe.A
+                                massa é leve. Mto boa. O buffet infantil nota 10! Salgafos quentinhos. A ideia de
+                                oferecer o bolo incluso no buffet facilita mto. Vcs sao 10"</p>
+                            <a href="https://www.google.com/search?q=clara%27s+buffet" target="_blank"
+                                class="google-link">Ver todas as avaliações</a>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">Crianças a partir de que idade pagam? <i
+                            class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Crianças a partir de 6 anos completos são consideradas pagantes.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Qual a quantidade mínima de convidados e a duração do evento? <i
+                            class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>A quantidade mínima para realização do evento é de 25 pessoas pagantes. A duração é de 3
+                            horas para eventos com até 30 convidados, e de 4 horas para eventos a partir de 30
+                            convidados.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">O que é necessário ter no local para a realização da festa? <i
+                            class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Para o Buffet: Precisamos de uma cozinha completa com energia trifásica, preferencialmente
+                            com forno, fogão a gás, pia, freezer/geladeira e bancadas.<br><br>Para o FestBar: Exigimos
+                            um espaço mínimo de 3m x 3m para a montagem da estrutura iluminada e uma copa/pia de apoio
+                            para higienização.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Os alimentos são servidos durante toda a festa? <i
+                            class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Sim! Temos uma ordem de saída da cozinha e todos os itens são passados nas mesas durante a
+                            festa com muita fartura, podendo retornar de acordo com a demanda para evitar desperdícios.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Quantos profissionais irão atender no meu evento? <i
+                            class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Trabalhamos com 1 garçom a cada 30 convidados. Além disso, enviamos as equipes específicas de
+                            apoio (cozinha, crepeiros, fritadeira ou barmans) de acordo com o pacote e o tamanho do seu
+                            evento.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Como funciona em relação às bebidas alcoólicas e aos drinks? <i
+                            class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Nosso buffet não fornece bebidas alcoólicas. Os drinks do FestBar são preparados
+                            originalmente sem álcool com frutas frescas. Caso deseje oferecer drinks com álcool na sua
+                            festa, o cliente fica responsável por fornecer as garrafas (vodka, gin, etc.) e a nossa
+                            equipe realiza o preparo das misturas!</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Posso fazer uma degustação antes de fechar o contrato? <i
+                            class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Sim! Trabalhamos com um kit degustação no valor de R$ 25,00. Nele montamos uma caixinha com
+                            os itens principais, como salgados, mini cachorro-quente e empratadinho (conforme a
+                            disponibilidade da semana).</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Quais são as formas de pagamento? <i
+                            class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>O pagamento padrão é feito com 50% no ato da assinatura do contrato para reservar a data, e
+                            os outros 50% no dia do evento. Aceitamos cartões de crédito (com taxa da
+                            maquininha).<br><br>Para eventos fechados com antecedência mínima de 3 meses, o pagamento
+                            pode ser parcelado até a data da festa. E para pagamentos do valor total à vista, oferecemos
+                            3% de desconto!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="calculator" class="calculator-section">
+        <div class="container">
+            <h2 class="section-title">Calcule seu Evento</h2>
+            <div class="calculator-container">
+                <div class="calculator-form">
+
+                    <div class="form-group">
+                        <label for="guests">Número de Convidados:</label>
+                        <input type="number" id="guests" min="25" value="50">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Data do Evento (Ano Base: 2026):</label>
+                        <div style="display: flex; gap: 10px;">
+                            <select id="calc-day" style="display: none;">
+                                <option value="" disabled selected>Dia</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                            <select id="calc-month" style="display: none;">
+                                <option value="" disabled selected>Mês</option>
+                                <option value="01">Janeiro</option>
+                                <option value="02">Fevereiro</option>
+                                <option value="03">Março</option>
+                                <option value="04">Abril</option>
+                                <option value="05">Maio</option>
+                                <option value="06">Junho</option>
+                                <option value="07">Julho</option>
+                                <option value="08">Agosto</option>
+                                <option value="09">Setembro</option>
+                                <option value="10">Outubro</option>
+                                <option value="11">Novembro</option>
+                                <option value="12">Dezembro</option>
+                            </select>
+
+                            <div class="custom-select-wrapper" id="custom-calc-day-wrapper" style="flex: 1;">
+                                <div class="custom-select-trigger" id="custom-calc-day-trigger">Dia</div>
+                                <div class="custom-options" id="custom-calc-day-options"></div>
+                            </div>
+                            <div class="custom-select-wrapper" id="custom-calc-month-wrapper" style="flex: 2;">
+                                <div class="custom-select-trigger" id="custom-calc-month-trigger">Mês</div>
+                                <div class="custom-options" id="custom-calc-month-options"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Local do Evento:</label>
+                        <div class="radio-group" style="display: flex; gap: 20px; margin-top: 5px;">
+                            <label
+                                style="color: var(--text-gray); cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                                <input type="radio" name="calc-location-type" id="calc-location-proprio" value="proprio"
+                                    checked> Local Próprio (em domicílio)
+                            </label>
+                            <label
+                                style="color: var(--text-gray); cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                                <input type="radio" name="calc-location-type" id="calc-location-chacara"
+                                    value="chacara"> Chácara Parceira (Império da Natureza)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 30px;">
+                        <label>Duração do Evento:</label>
+                        <p style="color: var(--text-gray); font-size: 14px; margin-top: 5px; line-height: 1.5;">
+                            A duração do evento será calculada de acordo com o número de convidados. (3h até 30
+                            convidados, 4h acima de 30 convidados).
+                        </p>
+                        <p style="color: var(--primary-gold); font-size: 14px; margin-top: 5px; font-weight: bold;">
+                            * Hora extra é contratada à parte.
+                        </p>
+                        <p style="color: var(--text-gray); font-size: 14px; margin-top: 5px; line-height: 1.5;">
+                            Cardápio completo disponível na aba serviços ou em nosso whatsapp com os consultores de
+                            vendas.
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>1. Escolha os Serviços Principais:</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-buffet-essencial"> Buffet Infantil - Essencial<br>
+                                <a href="comidas.html#buffet-essencial" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-buffet-especial"> Buffet Infantil - Especial<br>
+                                <a href="comidas.html#buffet-especial" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-buffet-premium"> Buffet Infantil - Premium<br>
+                                <a href="comidas.html#buffet-premium" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-massas"> Buffet de Massas (Pratos Inclusos)<br>
+                                <a href="comidas.html#massas" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a>
+                                <p style="font-size: 0.9em; color: var(--text-gray); margin-top: 2px;">*servido em
+                                    pratos de porcelana</p>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-crepe"> Rodízio de Crepe<br>
+                                <a href="comidas.html#crepe" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a>
+                                <p style="font-size: 0.9em; color: var(--text-gray); margin-top: 2px;">*servido no cone
+                                    descartável</p>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>2. Alugueis & Carrinhos Gourmet:</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-hotdog"> Hot Dog Gourmet + Fritas<br>
+                                <a href="comidas.html#hotdog" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a>
+                                <p style="font-size: 0.9em; color: var(--text-gray); margin-top: 2px;">(Até 80 pessoas)
+                                </p>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-festbar"> FestBar Drinks<br>
+                                <a href="bebidas.html#festbar" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-carts"> Carrinho Pipoca + Algodão Doce<br>
+                                <a href="alugueis.html#carrinhos" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a>
+                                <p style="font-size: 0.9em; color: var(--text-gray); margin-top: 2px;">*valor até 100
+                                    pessoas</p>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-popcorn-premium"> Pipoca Gourmet Premium<br>
+                                <a href="alugueis.html#carrinhos" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-cama-elastica"> Cama Elástica<br>
+                                <a href="alugueis.html#cama-elastica" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="addons-group">
+                        <label>3. Adicionais:</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="addon-drinks" disabled> Refrigerante e Suco (Clara's Buffet)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="addon-savory" disabled> Salgados variados + Churros
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="addon-glass" disabled> Copos de Vidro
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="addon-cutlery" disabled> Pratos de Porcelana + Talheres
+                            </label>
+                            <label class="checkbox-label" id="container-addon-nutella" style="display: none;">
+                                <input type="checkbox" id="addon-nutella"> Calda de Nutella
+                            </label>
+                        </div>
+                        <p style="color: #666; font-size: 0.9em; margin-top: 5px; font-style: italic;">
+                            * Adicionais só podem ser selecionados após escolher um serviço principal ou Aluguel.
+                        </p>
+                    </div>
+
+                    <div id="dynamic-warnings" style="margin-top: 15px;"></div>
+                </div>
+
+                <div class="calculator-result">
+                    <h3>Estimativa de Valor</h3>
+                    <div class="price-display">
+                        <span class="currency">R$</span>
+                        <span id="total-price">0,00</span>
+                    </div>
+                    <p class="note" id="price-note">*Valores estimados. Entre em contato para um orçamento final.</p>
+                    <button id="btn-goto-booking" class="btn-gold full-width">Solicitar Reserva</button>
+                    <a href="https://api.whatsapp.com/send?phone=5561982605050" target="_blank"
+                        id="btn-whatsapp-fallback" class="btn-gold full-width"
+                        style="display: none; background: #25D366; color: white; text-align: center; text-decoration: none;">Orçamento
+                        via WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="custom-booking" class="custom-booking-section"
+        style="padding: 60px 0; background-color: var(--primary-black);">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 40px;">Verificar Disponibilidade</h2>
+            <div class="custom-calendar-container">
+                <div class="calendar-header">
+                    <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
+                    <h3 id="month-year"></h3>
+                    <button id="next-month"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="calendar-weekdays">
+                    <div>Dom</div>
+                    <div>Seg</div>
+                    <div>Ter</div>
+                    <div>Qua</div>
+                    <div>Qui</div>
+                    <div>Sex</div>
+                    <div>Sáb</div>
+                </div>
+                <div class="calendar-days" id="calendar-days"></div>
+            </div>
+        </div>
+    </section>
+
+    <div id="booking-modal" class="modal">
+        <div class="modal-content booking-modal-content">
+            <span class="close-modal" id="close-booking-modal">×</span>
+            <h3>Reservar Data</h3>
+            <p id="selected-date-display"></p>
+
+            <form id="booking-form">
+                <input type="hidden" id="selected-date-iso" name="selectedDateISO" value="">
+
+                <div id="booking-step-1">
+
+                    <div
+                        style="background-color: rgba(212, 175, 55, 0.1); padding: 15px; border: 1px solid var(--primary-gold); border-radius: 4px; text-align: center; margin-bottom: 20px;">
+                        <span style="color: var(--text-gray); font-size: 0.9em;">Orçamento Estimado:</span>
+                        <div id="modal-total-display"
+                            style="font-family: 'Playfair Display', serif; font-size: 1.8em; color: var(--primary-gold); font-weight: bold;">
+                            R$ 0,00</div>
+                    </div>
+
+                    <div class="form-group"
+                        style="border-bottom: 1px solid #333; padding-bottom: 20px; margin-bottom: 20px;">
+                        <label for="modal-guests" style="color: var(--primary-gold); font-size: 1.1em;">1º Passo:
+                            Quantos convidados?</label>
+                        <input type="number" id="modal-guests" required min="25" placeholder="Digite a quantidade..."
+                            style="font-size: 1.1em; border: 1px solid var(--primary-gold);">
+                        <small style="color: #888; display: block; margin-top: 5px;">Digite o número de pessoas para
+                            liberar as opções abaixo.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <div id="modal-guest-warning"
+                            style="color: #ff6b6b; font-weight: bold; font-size: 0.9em; margin-bottom: 10px; display: none;">
+                            ⚠️ Digite o número de convidados acima para selecionar os serviços.
+                        </div>
+
+                        <h4 style='color: var(--primary-gold); margin-bottom: 10px; border-bottom: 1px solid #333;'>1.
+                            Serviços Principais</h4>
+                        <div class="modal-services-grid">
+                            <label><input type="checkbox" id="modal-service-buffet-essencial" disabled> Buffet Infantil
+                                Essencial<br><a href="comidas.html#buffet-essencial" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a></label>
+                            <label><input type="checkbox" id="modal-service-buffet-especial" disabled> Buffet Infantil
+                                Especial<br><a href="comidas.html#buffet-especial" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a></label>
+                            <label><input type="checkbox" id="modal-service-buffet-premium" disabled> Buffet Infantil
+                                Premium<br><a href="comidas.html#buffet-premium" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a></label>
+                            <label><input type="checkbox" id="modal-service-massas" disabled> Buffet de Massas (Pratos
+                                Inclusos)<br><a href="comidas.html#massas" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a></label>
+                            <label><input type="checkbox" id="modal-service-crepe" disabled> Rodízio de Crepe<br><a
+                                    href="comidas.html#crepe" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a></label>
+                        </div>
+
+                        <h4
+                            style='color: var(--primary-gold); margin-bottom: 10px; border-bottom: 1px solid #333; margin-top: 20px;'>
+                            2. Alugueis & Carrinhos Gourmet</h4>
+                        <div class="modal-services-grid">
+                            <label><input type="checkbox" id="modal-service-hotdog" disabled> Hot Dog Gourmet +
+                                Fritas<br><a href="comidas.html#hotdog" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a></label>
+                            <label><input type="checkbox" id="modal-service-festbar" disabled> FestBar Drinks<br><a
+                                    href="bebidas.html#festbar" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a></label>
+                            <label><input type="checkbox" id="modal-service-carts" disabled> Carrinho
+                                Pipoca/Algodão<br><a href="alugueis.html#carrinhos" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a></label>
+                            <label><input type="checkbox" id="modal-service-popcorn-premium" disabled> Pipoca
+                                Gourmet<br><a href="alugueis.html#carrinhos" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a></label>
+                            <label><input type="checkbox" id="modal-service-cama-elastica" disabled> Cama Elástica<br><a
+                                    href="alugueis.html#cama-elastica" target="_blank"
+                                    style="font-size: 12px; color: #3498db; text-decoration: underline; margin-left: 5px; cursor: pointer; display: inline-block; margin-top: 3px;">(Consultar
+                                    Cardápio)</a></label>
+                        </div>
+
+                        <h4
+                            style='color: var(--primary-gold); margin-bottom: 10px; border-bottom: 1px solid #333; margin-top: 20px;'>
+                            3. Adicionais</h4>
+                        <div class="modal-services-grid">
+                            <label><input type="checkbox" id="modal-addon-drinks" disabled> Refrigerante e Suco (Clara's
+                                Buffet)</label>
+                            <label><input type="checkbox" id="modal-addon-savory" disabled> Salgados + Churros</label>
+                            <label><input type="checkbox" id="modal-addon-glass" disabled> Copos de Vidro</label>
+                            <label><input type="checkbox" id="modal-addon-cutlery" disabled> Pratos/Talheres</label>
+                            <div id="modal-container-addon-nutella" style="display: none; margin-top: 5px;">
+                                <label
+                                    style="display: flex; align-items: center; gap: 8px; color: var(--text-gray); cursor: pointer;">
+                                    <input type="checkbox" id="modal-addon-nutella" disabled> Calda de Nutella (R$
+                                    120,00)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="client-name">Nome do Cliente</label>
+                        <input type="text" id="client-name" required placeholder="Seu nome completo">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Localização do Evento</label>
+                        <div class="radio-group"
+                            style="display: flex; gap: 15px; margin-top: 5px; margin-bottom: 15px;">
+                            <label><input type="radio" name="modal-location-type" id="modal-location-proprio"
+                                    value="proprio" checked> Local Próprio</label>
+                            <label><input type="radio" name="modal-location-type" id="modal-location-chacara"
+                                    value="chacara"> Chácara Parceira</label>
+                        </div>
+                        <input type="text" id="event-location" required placeholder="Endereço ou Link do Google Maps">
+                        <small style="color: #aaa; display: block; margin-top: 5px; font-style: italic;">* O frete será
+                            calculado no WhatsApp</small>
+                    </div>
+
+                    <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div>
+                            <label for="event-time">Horário de Início</label>
+                            <input type="time" id="event-time" required>
+                        </div>
+                        <div>
+                            <label for="event-end-time">Horário de Término</label>
+                            <input type="time" id="event-end-time" readonly
+                                style="background-color: #333; cursor: not-allowed; color: #888;">
+                        </div>
+                    </div>
+
+                    <button type="button" id="review-booking-btn" class="btn-gold full-width">Revisar
+                        Agendamento</button>
+                    <a href="https://api.whatsapp.com/send?phone=5561982605050" target="_blank"
+                        id="modal-btn-whatsapp-fallback" class="btn-gold full-width"
+                        style="display: none; background: #25D366; color: white; text-align: center; text-decoration: none; margin-top: 10px;">Orçamento
+                        via WhatsApp</a>
+                </div>
+
+                <div id="booking-step-2" style="display: none;">
+                    <h4 style="color: var(--primary-gold); text-align: center; margin-bottom: 15px;">Resumo do
+                        Agendamento</h4>
+                    <div id="summary-content"
+                        style="background-color: var(--primary-black); padding: 15px; border-radius: 5px; margin-bottom: 15px; text-align: left;">
+                    </div>
+
+                    <p style="color: red; font-weight: bold; text-align: center; margin-bottom: 15px;">Atenção: A
+                        confirmação final será realizada pelo WhatsApp.</p>
+
+                    <div class="form-group">
+                        <label class="checkbox-label" style="font-size: 0.9em; align-items: flex-start;">
+                            <input type="checkbox" id="booking-disclaimer" style="margin-top: 3px;">
+                            <span>Estou ciente de que este envio é uma pré-reserva.</span>
+                        </label>
+                    </div>
+
+                    <div style="display: flex; gap: 10px;">
+                        <button type="button" id="back-booking-btn" class="btn-gold"
+                            style="background-color: transparent; border: 1px solid var(--primary-gold); width: 30%;">Voltar</button>
+                        <button type="submit" class="btn-gold"
+                            style="width: 70%; background-color: #25D366; border-color: #25D366; color: white;">Concluir
+                            e Ir para WhatsApp</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="image/footer_logo_new.png" alt="Clara's Buffet" class="footer-logo-img">
+                </div>
+                <div class="footer-info">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-phone"></i> 61 8260-5050</p>
+                    <p><i class="fas fa-envelope"></i> clarassbuffet@gmail.com</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/tudoprafestadf/" target="_blank"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/people/Claras-Buffet/61557872615470/" target="_blank"><i
+                                class="fab fa-facebook"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone=5561982605050" target="_blank"><i
+                                class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Clara's Serviços e Buffet. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://api.whatsapp.com/send?phone=5561982605050" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drinks & Bar | Clara's Buffet</title>
+    <link rel="icon" href="image/favicon.ico">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* AJUSTES RESPONSIVOS PARA MOBILE */
+        @media (max-width: 768px) {
+
+            /* Empilha imagem no topo e conteúdo embaixo */
+            .service-card-wide {
+                flex-direction: column-reverse !important;
+                height: auto !important;
+                margin-bottom: 30px;
+            }
+
+            /* Ajusta espaçamento do conteúdo */
+            .service-content {
+                padding: 30px 20px !important;
+                text-align: center;
+                /* Centraliza para ficar mais bonito no mobile */
+            }
+
+            /* Ajusta altura da imagem */
+            .service-image {
+                min-height: 250px !important;
+                width: 100% !important;
+            }
+
+            /* Alinha a lista de itens à esquerda, mas centralizada no bloco */
+            .service-checklist {
+                display: inline-block;
+                text-align: left;
+                margin-top: 20px !important;
+            }
+
+            /* Ajustes de Títulos */
+            .service-title {
+                font-size: 1.8rem !important;
+            }
+
+            .brand-header-section h2 {
+                font-size: 2rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo"><a href="index.html"><img src="image/navbar_icon.png" alt="Clara's Buffet"
+                        class="logo-img"></a></div>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="history.html">Nossa História</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn active">Serviços <i
+                                class="fas fa-caret-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="comidas.html">Comidas</a>
+                            <a href="bebidas.html">Bebidas</a>
+                            <a href="alugueis.html">Alugueis</a>
+                        </div>
+                    </li>
+                    <li><a href="galeria.html">Galeria</a></li>
+                    <li><a href="index.html#calculator">Orçamento</a></li>
+                    <li><a href="index.html#contact">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="brand-header-section"
+        style="border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-top: 150px; padding-bottom: 60px;">
+        <div class="container">
+
+            <h2 style="font-family: 'Playfair Display'; color: var(--primary-gold); font-size: 2.5rem;">Festbar Drinks
+            </h2>
+            <p style="max-width: 700px; margin: 0 auto; color: #ccc; font-size: 1.1rem;">A arte da coquetelaria no seu
+                evento. Estrutura de
+                bar iluminada, bartenders profissionais.</p>
+        </div>
+    </section>
+
+    <div class="container" style="padding-top: 60px; padding-bottom: 80px;">
+
+        <div class="services-list">
+            <div id="festbar" class="service-card-wide"
+                style="display: flex; flex-direction: row; box-shadow: 0 15px 40px rgba(0,0,0,0.6); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.2);">
+                <div class="service-content" style="padding: 50px; flex: 1;">
+                    <h3 class="service-title" style="font-size: 2.2rem; color: var(--primary-gold);">FestBar Drinks</h3>
+                    <p class="service-description" style="font-size: 1.2rem;">R$ 40,00 por pessoa (Mínimo 25 convidados
+                        / Duração: 4 horas).</p>
+                    <ul class="service-checklist" style="margin-top: 30px; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 15px; display: flex; align-items: start; font-size: 1.05rem;"><i
+                                class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Incluso:</strong> Estrutura de bar rústica iluminada, Barman Profissional,
+                                Auxiliar, Copos, Frutas e Ingredientes.</span>
+                        </li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: start; font-size: 1.05rem;"><i
+                                class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Cardápio (Escolha 5):</strong> Caipifrutas (Limão, Morango, Abacaxi,
+                                Maracujá), Mojito, Pink Lemonade, Coquetel Tropical, Refresco de Morango e Hortelã, Soda
+                                Italiana, Piña Colada e Suco Especial da Casa.</span>
+                        </li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: start; font-size: 1.05rem;"><i
+                                class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Nota:</strong> Todos os drinks são sem álcool.<br> Caso queira incluir bebida
+                                alcoolica, o cliente pode fornecê-la e nossa equipe realiza a mistura no preparo dos
+                                drinks.</span>
+                        </li>
+                    </ul>
+                    <div style="margin-top: 30px; display: flex; flex-wrap: wrap; gap: 15px;"><a
+                            href="index.html#calculator" class="btn-gold"
+                            style="font-size: 1rem; padding: 15px 30px; display: inline-block;">Solicitar Orçamento</a>
+                        <a href="image/pdf/cardapio-festbar.pdf" target="_blank" class="btn-gold-outline"
+                            style="font-size: 1rem; padding: 15px 30px; margin-left: 0;">Consultar Cardápio</a>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- 📸 IMAGEM DO SERVIÇO AQUI 👇                 -->
+                <!-- Troque a classe ou a imagem dentro da div  -->
+                <!-- ========================================== -->
+                <div class="service-image"
+                    style="background-image: url('image/festbarlogo.PNG'); min-height: 450px; flex: 1; background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="image/footer_logo_new.png" alt="Clara's Buffet" class="footer-logo-img">
+                </div>
+                <div class="footer-info">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-phone"></i> 61 8260-5050</p>
+                    <p><i class="fas fa-envelope"></i> clarassbuffet@gmail.com</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/tudoprafestadf/" target="_blank"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/people/Claras-Buffet/61557872615470/" target="_blank"><i
+                                class="fab fa-facebook"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone=5561982605050" target="_blank"><i
+                                class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Clara's Serviços e Buffet. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://api.whatsapp.com/send?phone=5561982605050" class="whatsapp-float" target="_blank"><i
+            class="fab fa-whatsapp"></i></a>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

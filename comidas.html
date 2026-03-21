@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comidas & Buffet | Clara's Buffet</title>
+    <link rel="icon" href="image/favicon.ico">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* AJUSTES RESPONSIVOS PARA MOBILE */
+        @media (max-width: 768px) {
+
+            /* Empilha imagem no topo e conteúdo embaixo */
+            .service-card-wide {
+                flex-direction: column-reverse !important;
+                height: auto !important;
+                margin-bottom: 30px;
+            }
+
+            /* Ajusta espaçamento do conteúdo */
+            .service-content {
+                padding: 30px 20px !important;
+                text-align: center;
+                /* Centraliza para ficar mais bonito no mobile */
+            }
+
+            /* Ajusta altura da imagem */
+            .service-image {
+                min-height: 250px !important;
+                width: 100% !important;
+            }
+
+            /* Alinha a lista de itens à esquerda, mas centralizada no bloco */
+            .service-checklist {
+                display: inline-block;
+                text-align: left;
+                margin-top: 20px !important;
+            }
+
+            /* Ajustes de Títulos */
+            .service-title {
+                font-size: 1.8rem !important;
+            }
+
+            .brand-header-section h2 {
+                font-size: 2rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo"><a href="index.html"><img src="image/navbar_icon.png" alt="Clara's Buffet"
+                        class="logo-img"></a></div>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="history.html">Nossa História</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn active">Serviços <i
+                                class="fas fa-caret-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="comidas.html">Comidas</a>
+                            <a href="bebidas.html">Bebidas</a>
+                            <a href="alugueis.html">Alugueis</a>
+                        </div>
+                    </li>
+                    <li><a href="galeria.html">Galeria</a></li>
+                    <li><a href="index.html#calculator">Orçamento</a></li>
+                    <li><a href="index.html#contact">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="brand-header-section"
+        style="border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-top: 150px; padding-bottom: 60px;">
+        <div class="container">
+            <h2 style="font-family: 'Playfair Display'; color: var(--primary-gold); font-size: 2.5rem;">Clara's Buffet
+            </h2>
+            <p style="max-width: 700px; margin: 0 auto; color: #ccc; font-size: 1.1rem;">Transformamos celebrações em
+                experiências inesquecíveis, com sabor, encanto, organização e excelência em cada detalhe..</p>
+        </div>
+    </section>
+
+    <div class="container" style="padding-top: 60px; padding-bottom: 60px;">
+
+        <div class="services-list" style="display: flex; flex-direction: column; gap: 60px;">
+
+            <div id="buffet-essencial" class="service-card-wide"
+                style="display: flex; flex-direction: row; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <div class="service-content" style="padding: 40px; flex: 1;">
+                    <h3 class="service-title" style="font-size: 2rem; color: var(--primary-gold);">Buffet Infantil -
+                        ESSENCIAL</h3>
+                    <p class="service-description" style="font-size: 1.1rem;">Alegria servida quentinha, com os
+                        clássicos que toda criança ama.</p>
+                    <ul class="service-checklist" style="margin-top: 25px; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i> <span><strong>Salgados
+                                    Fritos (Escolha até 4 sabores):</strong> Coxinha, Bolinha de queijo, Kibe, Risoles
+                                de presunto/queijo e
+                                carne, etc.</span></li>
+
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Lanchinhos:</strong> Mini Cachorro Quente, Batata Frita, Pipoca.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Bebidas:</strong> Coca-Cola, Guaraná, Sprite (Normal/Zero), Sucos (Diversos
+                                Sabores).</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Sobremesa:</strong> Mini Churros de Doce de Leite e Geladinho Colorido.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Incluso:</strong> Garçons, Equipe de Cozinha e Descartáveis.</span>
+                        </li>
+                    </ul>
+                    <div style="margin-top: 25px; display: flex; flex-wrap: wrap; gap: 15px;"><a
+                            href="index.html#calculator" class="btn-gold"
+                            style="font-size: 0.9rem; padding: 12px 25px; display: inline-block;">Solicitar
+                            Orçamento</a>
+                        <a href="image/pdf/cardapio-buffet-infantil.pdf" target="_blank" class="btn-gold-outline"
+                            style="font-size: 0.9rem; padding: 12px 25px; margin-left: 0;">Consultar Cardápio</a>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- 📸 IMAGEM DO SERVIÇO AQUI 👇                 -->
+                <!-- Troque a classe ou a imagem dentro da div  -->
+                <!-- ========================================== -->
+                <div class="service-image"
+                    style="background-image: url('image/buffet.png'); min-height: 400px; flex: 1; background-size: cover; background-position: center;">
+                </div>
+            </div>
+
+            <div id="buffet-especial" class="service-card-wide"
+                style="display: flex; flex-direction: row-reverse; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <div class="service-content" style="padding: 40px; flex: 1;">
+                    <h3 class="service-title" style="font-size: 2rem; color: var(--primary-gold);">Buffet Infantil -
+                        ESPECIAL</h3>
+                    <p class="service-description" style="font-size: 1.1rem;">Sabores irresistivéis para surpreender os
+                        pequenos e os adultos.</p>
+                    <ul class="service-checklist" style="margin-top: 25px; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i> <span><strong> Salgados
+                                    Fritos
+                                    (Escolha até 6 sabores):</strong> Coxinha, Bolinha de queijo, Kibe, Risoles de
+                                presunto/queijo e carne, etc.</span></li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i> <span><strong>
+                                    Assados:</strong> Pão de Queijo e Mini Pizza.</span></li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Lanchinhos:</strong> Mini Hot Dog, Salada de Frutas, Batata Frita, Pipoca,
+                                Sorvete e Mini Hamburguer.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Empratadinhos:</strong> Macarronada ou Estrogonoff de Frango.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Bebidas:</strong> Coca-Cola, Guaraná, Sprite (Normal/Zero), Sucos (Diversos
+                                Sabores).</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Incluso:</strong> Garçons, Equipe de Cozinha e Descartáveis.</span>
+                        </li>
+                    </ul>
+                    <div style="margin-top: 25px; display: flex; flex-wrap: wrap; gap: 15px;"><a
+                            href="index.html#calculator" class="btn-gold"
+                            style="font-size: 0.9rem; padding: 12px 25px; display: inline-block;">Solicitar
+                            Orçamento</a>
+                        <a href="image/pdf/cardapio-buffet-infantil.pdf" target="_blank" class="btn-gold-outline"
+                            style="font-size: 0.9rem; padding: 12px 25px; margin-left: 0;">Consultar Cardápio</a>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- 📸 IMAGEM DO SERVIÇO AQUI 👇                 -->
+                <!-- Troque a classe ou a imagem dentro da div  -->
+                <!-- ========================================== -->
+                <div class="service-image"
+                    style="background-image: url('image/buffet_especial.png'); min-height: 400px; flex: 1; background-size: cover; background-position: center;">
+                </div>
+            </div>
+
+            <div id="buffet-premium" class="service-card-wide"
+                style="display: flex; flex-direction: row; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <div class="service-content" style="padding: 40px; flex: 1;">
+                    <h3 class="service-title" style="font-size: 2rem; color: var(--primary-gold);">Buffet Infantil -
+                        PREMIUM</h3>
+                    <p class="service-description" style="font-size: 1.1rem;">Uma experiência completa, sofisticada e
+                        memorável para festas inesquecíveis.
+                    </p>
+                    <ul class="service-checklist" style="margin-top: 25px; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Salgados Fritos:</strong> Coxinha, Bolinha de queijo, Kibe, Risoles de
+                                presunto/queijo e carne, etc.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Assados:</strong> Mini Pizza, Pão de Queijo, Rosquinhas.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Lanchinhos:</strong> Mini Cachorro Quente, Saladas de Frutas, Batata Frita,
+                                Nuggets Crocantes, Pipoca, Mini Hamburguer e Sorvete.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i> <span><strong>Empratados (3
+                                    Opções):</strong> Escondidinho de Carne, Strogonoff ou Macarronada.</span></li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Bebidas:</strong> Coca-Cola, Guaraná, Sprite (Normal/Zero), Sucos
+                                Naturais da Fruta.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Incluso:</strong> Garçons, Equipe de Cozinha e Descartáveis.</span>
+                        </li>
+
+                    </ul>
+                    <div style="margin-top: 25px; display: flex; flex-wrap: wrap; gap: 15px;"><a
+                            href="index.html#calculator" class="btn-gold"
+                            style="font-size: 0.9rem; padding: 12px 25px; display: inline-block;">Solicitar
+                            Orçamento</a>
+                        <a href="image/pdf/cardapio-buffet-infantil.pdf" target="_blank" class="btn-gold-outline"
+                            style="font-size: 0.9rem; padding: 12px 25px; margin-left: 0;">Consultar Cardápio</a>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- 📸 IMAGEM DO SERVIÇO AQUI 👇                 -->
+                <!-- Troque a classe ou a imagem dentro da div  -->
+                <!-- ========================================== -->
+                <div class="service-image"
+                    style="background-image: url('image/buffet_premium.png'); min-height: 400px; flex: 1; background-size: cover; background-position: center;">
+                </div>
+            </div>
+
+            <div id="massas" class="service-card-wide"
+                style="display: flex; flex-direction: row-reverse; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <div class="service-content" style="padding: 40px; flex: 1;">
+                    <h3 class="service-title" style="font-size: 2rem; color: var(--primary-gold);">Buffet de Massas
+                    </h3>
+                    <p class="service-description" style="font-size: 1.1rem;">Massas artesanais preparadas na hora que
+                        transformam qualquer evento em uma experiência italiana.</p>
+                    <ul class="service-checklist" style="margin-top: 25px; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Massas:</strong> Espaguete, Penne e Parafuso.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i> <span><strong>Molhos
+                                    Quentes:</strong> Bolonhesa, Ao Sugo e Branco.</span></li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Acompanhamentos (+20):</strong> Bacon, Calabresa, Queijos, Milho, Azeitona,
+                                etc.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Entrada (Opcional):</strong> Salgados fritos e bebidas à vontade.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Incluso:</strong> Equipe especializada, pratos de porcelana e talheres de
+                                inox.</span>
+                        </li>
+                    </ul>
+                    <div style="margin-top: 25px; display: flex; flex-wrap: wrap; gap: 15px;"><a
+                            href="index.html#calculator" class="btn-gold"
+                            style="font-size: 0.9rem; padding: 12px 25px; display: inline-block;">Solicitar
+                            Orçamento</a>
+                        <a href="image/pdf/cardapio-massas.pdf" target="_blank" class="btn-gold-outline"
+                            style="font-size: 0.9rem; padding: 12px 25px; margin-left: 0;">Consultar Cardápio</a>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- 📸 IMAGEM DO SERVIÇO AQUI 👇                 -->
+                <!-- Troque a classe ou a imagem dentro da div  -->
+                <!-- ========================================== -->
+                <div class="service-image"
+                    style="background-image: url('image/kit_prataria.png'); min-height: 400px; flex: 1; background-size: cover; background-position: center;">
+                </div>
+            </div>
+
+            <div id="crepe" class="service-card-wide"
+                style="display: flex; flex-direction: row; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <div class="service-content" style="padding: 40px; flex: 1;">
+                    <h3 class="service-title" style="font-size: 2rem; color: var(--primary-gold);">Rodízio de Crepe
+                        Francês</h3>
+                    <p class="service-description" style="font-size: 1.1rem;">Crepes delicados e recheios irresistíveis,
+                        preparados ao vivo para encantar seus convidados.</p>
+                    <ul class="service-checklist" style="margin-top: 25px; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Ingredientes Salgados:</strong> Frango, Catupiry, Carne Seca, Bacon,
+                                Calabresa,
+                                Presunto, Azeitona, Palmito, etc.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Doces:</strong> Chocolate, Doce de Leite, Goiabada, Banana com
+                                Canela, Leite Condensado, Côco ralado, etc.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Acompanha:</strong> Massas, profissionais, decoração da mesa, montagem e
+                                desmontagem, etc.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Entrada:</strong> Salgados fritos e bebidas (opcional).</span>
+                        </li>
+                    </ul>
+                    <p style="font-size: 0.9rem; color: var(--primary-gold);">*Para realização do evento, é necessário
+                        disponibilizar espaço com mesas e/ou balcão, tomadas e preferencialmente pia, para a
+                        higienização dos materiais utilizados pela equipe.</p>
+                    <div style="margin-top: 25px; display: flex; flex-wrap: wrap; gap: 15px;"><a
+                            href="index.html#calculator" class="btn-gold"
+                            style="font-size: 0.9rem; padding: 12px 25px; display: inline-block;">Solicitar
+                            Orçamento</a>
+                        <a href="image/pdf/cardapio-crepe.pdf" target="_blank" class="btn-gold-outline"
+                            style="font-size: 0.9rem; padding: 12px 25px; margin-left: 0;">Consultar Cardápio</a>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- 📸 IMAGEM DO SERVIÇO AQUI 👇                 -->
+                <!-- Troque a classe ou a imagem dentro da div  -->
+                <!-- ========================================== -->
+                <div class="service-image"
+                    style="background-image: url('image/crepe.PNG'); min-height: 400px; flex: 1; background-size: cover; background-position: center;">
+                </div>
+            </div>
+
+            <div id="boteco" class="service-card-wide"
+                style="display: flex; flex-direction: row-reverse; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <div class="service-content" style="padding: 40px; flex: 1;">
+                    <h3 class="service-title" style="font-size: 2rem; color: var(--primary-gold);">Comida de Boteco</h3>
+                    <p class="service-description" style="font-size: 1.1rem;">Petiscos saborosos, clima descontraído e
+                        aquele gostinho perfeito de celebração.</p>
+                    <ul class="service-checklist" style="margin-top: 25px; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Petiscos:</strong> Carne frita picadinha, linguiça de frango e toscana,
+                                frango a passarinho, mandioca e batata frita, sacanagem, ovo de codorna, etc.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i> <span><strong>Salgados
+                                    Fritos (Escolha até 4 sabores):</strong> Coxinha, Bolinha de queijo, Kibe, Risoles
+                                de presunto/queijo e
+                                carne, pastelzinho e etc.</span></li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i> <span><strong>Pratos:
+                                </strong>Arroz Carreteito e Galinhada.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Bebidas (Opcional):</strong> Coca-Cola, Guaraná, Sprite (Normal/Zero), Sucos
+                                (Diversos
+                                Sabores).</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Incluso:</strong> Equipe especializada, garçons e descartáveis.</span>
+                        </li>
+                    </ul>
+                    <div style="margin-top: 25px; display: flex; flex-wrap: wrap; gap: 15px;"><a
+                            href="index.html#calculator" class="btn-gold"
+                            style="font-size: 0.9rem; padding: 12px 25px; display: inline-block;">Solicitar
+                            Orçamento</a>
+                        <a href="image/pdf/comida_de_boteco.pdf" target="_blank" class="btn-gold-outline"
+                            style="font-size: 0.9rem; padding: 12px 25px; margin-left: 0;">Consultar Cardápio</a>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- 📸 IMAGEM DO SERVIÇO AQUI 👇                 -->
+                <!-- Troque a classe ou a imagem dentro da div  -->
+                <!-- ========================================== -->
+                <div class="service-image"
+                    style="background-image: url('image/memorias_construidas.png'); min-height: 400px; flex: 1; background-size: cover; background-position: center;">
+                </div>
+            </div>
+
+            <div id="hotdog" class="service-card-wide"
+                style="display: flex; flex-direction: row; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <div class="service-content" style="padding: 40px; flex: 1;">
+                    <h3 class="service-title" style="font-size: 2rem; color: var(--primary-gold);">Carrinho Gourmet de
+                        Hot Dog +
+                        Fritas</h3>
+                    <p class="service-description" style="font-size: 1.1rem;"></p>
+                    <ul class="service-checklist" style="margin-top: 25px; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Ingredientes Premium:</strong> Pão macio, Salsicha e Molho de
+                                tomate especial.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Complementos:</strong> Milho, Ervilha, Azeitona, Batata Palha, Queijo Ralado,
+                                Maionese, Purê de Batata, Ketchup e Mostarda.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Acompanhamento:</strong> Batata Frita palito feita na hora (Sequinha e
+                                crocante).</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Incluso:</strong> Barraquinha personalizada, Atendente uniformizado e
+                                Descartáveis.</span>
+                        </li>
+                    </ul>
+                    <div style="margin-top: 25px; display: flex; flex-wrap: wrap; gap: 15px;"><a
+                            href="index.html#calculator" class="btn-gold"
+                            style="font-size: 0.9rem; padding: 12px 25px; display: inline-block;">Solicitar
+                            Orçamento</a>
+                        <a href="https://api.whatsapp.com/send?phone=5561982605050&text=Ol%C3%A1!%20Gostaria%20de%20consultar%20o%20card%C3%A1pio%20do%20Hot%20Dog%20Gourmet."
+                            target="_blank" class="btn-gold-outline"
+                            style="font-size: 0.9rem; padding: 12px 25px; margin-left: 0;">Consultar Cardápio</a>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- 📸 IMAGEM DO SERVIÇO AQUI 👇                 -->
+                <!-- Troque a classe ou a imagem dentro da div  -->
+                <!-- ========================================== -->
+                <div class="service-image"
+                    style="background-image: url('image/hotdog.PNG'); min-height: 400px; flex: 1; background-size: cover; background-position: center;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="image/footer_logo_new.png" alt="Clara's Buffet" class="footer-logo-img">
+                </div>
+                <div class="footer-info">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-phone"></i> 61 8260-5050</p>
+                    <p><i class="fas fa-envelope"></i> clarassbuffet@gmail.com</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/tudoprafestadf/" target="_blank"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/people/Claras-Buffet/61557872615470/" target="_blank"><i
+                                class="fab fa-facebook"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone=5561982605050" target="_blank"><i
+                                class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Clara's Serviços e Buffet. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://api.whatsapp.com/send?phone=5561982605050" class="whatsapp-float" target="_blank"><i
+            class="fab fa-whatsapp"></i></a>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

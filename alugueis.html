@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alugueis & Diversão | Clara's Buffet</title>
+    <link rel="icon" href="image/favicon.ico">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* AJUSTES RESPONSIVOS PARA MOBILE */
+        @media (max-width: 768px) {
+
+            /* Empilha imagem no topo e conteúdo embaixo */
+            .service-card-wide {
+                flex-direction: column-reverse !important;
+                height: auto !important;
+                margin-bottom: 30px;
+            }
+
+            /* Ajusta espaçamento do conteúdo */
+            .service-content {
+                padding: 30px 20px !important;
+                text-align: center;
+                /* Centraliza para ficar mais bonito no mobile */
+            }
+
+            /* Ajusta altura da imagem */
+            .service-image {
+                min-height: 250px !important;
+                width: 100% !important;
+            }
+
+            /* Alinha a lista de itens à esquerda, mas centralizada no bloco */
+            .service-checklist {
+                display: inline-block;
+                text-align: left;
+                margin-top: 20px !important;
+            }
+
+            /* Ajustes de Títulos */
+            .service-title {
+                font-size: 1.8rem !important;
+            }
+
+            .brand-header-section h2 {
+                font-size: 2rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo"><a href="index.html"><img src="image/navbar_icon.png" alt="Clara's Buffet"
+                        class="logo-img"></a></div>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="history.html">Nossa História</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn active">Serviços <i
+                                class="fas fa-caret-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="comidas.html">Comidas</a>
+                            <a href="bebidas.html">Bebidas</a>
+                            <a href="alugueis.html">Alugueis</a>
+                        </div>
+                    </li>
+                    <li><a href="galeria.html">Galeria</a></li>
+                    <li><a href="index.html#calculator">Orçamento</a></li>
+                    <li><a href="index.html#contact">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="brand-header-section"
+        style="border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-top: 150px; padding-bottom: 60px;">
+        <div class="container">
+            <h2 style="font-family: 'Playfair Display'; color: var(--primary-gold); font-size: 2.5rem;">Up Festas</h2>
+            <p style="max-width: 700px; margin: 0 auto; color: #ccc; font-size: 1.1rem;">A alegria da criançada
+                garantida. Brinquedos
+                seguros, revisados e carrinhos gourmet que trazem o gostinho de infância.</p>
+        </div>
+    </section>
+
+    <div class="container" style="padding-top: 60px; padding-bottom: 60px;">
+
+        <div class="services-list" style="display: flex; flex-direction: column; gap: 60px;">
+
+            <div id="popcorn-premium" class="service-card-wide"
+                style="display: flex; flex-direction: row-reverse; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <div class="service-content" style="padding: 40px; flex: 1;">
+                    <h3 class="service-title" style="font-size: 2rem; color: var(--primary-gold);">Pipoca Gourmet
+                        Premium</h3>
+                    <p class="service-description" style="font-size: 1.1rem;">Carrinho de Pipoca personalizado.</p>
+                    <ul class="service-checklist" style="margin-top: 25px; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i> <span><strong>Sabores
+                                    Doces:</strong> Leite Ninho, Chocolate, Caramelo e Fini.</span></li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Sabores Salgados:</strong> Calda de manteiga de cinema e temperos.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Estrutura:</strong> Carrinho decorado.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Opcional:</strong> Adicional de Calda de Nutella disponível.</span>
+                        </li>
+                    </ul>
+                    <div style="margin-top: 25px; display: flex; flex-wrap: wrap; gap: 15px;"><a
+                            href="index.html#calculator" class="btn-gold"
+                            style="font-size: 0.9rem; padding: 12px 25px; display: inline-block;">Solicitar
+                            Orçamento</a>
+                        <a href="https://api.whatsapp.com/send?phone=5561982605050&text=Ol%C3%A1!%20Gostaria%20de%20consultar%20as%20op%C3%A7%C3%B5es%20da%20Pipoca%20Gourmet%20Premium."
+                            target="_blank" class="btn-gold-outline"
+                            style="font-size: 0.9rem; padding: 12px 25px; margin-left: 0;">Consultar Cardápio</a>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- 📸 IMAGEM DO SERVIÇO AQUI 👇                 -->
+                <!-- Troque a classe ou a imagem dentro da div  -->
+                <!-- ========================================== -->
+                <div class="service-image"
+                    style="background-image: url('image/pipoca_gourmet.png'); min-height: 400px; flex: 1; background-size: cover; background-position: center;">
+                </div>
+            </div>
+
+            <div id="carrinhos" class="service-card-wide"
+                style="display: flex; flex-direction: row-reverse; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <div class="service-content" style="padding: 40px; flex: 1;">
+                    <h3 class="service-title" style="font-size: 2rem; color: var(--primary-gold);">Carrinho de Pipoca e
+                        Algodão Doce</h3>
+                    <p class="service-description" style="font-size: 1.1rem;">A alegria tradicional das festas infantis
+                        com pipoca quentinha e algodão doce feito na hora.</p>
+                    <ul class="service-checklist" style="margin-top: 25px; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Capacidade:</strong> Atende até 100 pessoas.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Equipe:</strong> Monitor uniformizado incluso.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Qualidade:</strong> Milho de pipoca premium e açúcar colorido.</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Incluso:</strong> Todos os descartáveis necessários.</span>
+                        </li>
+                    </ul>
+                    <div style="margin-top: 25px; display: flex; flex-wrap: wrap; gap: 15px;"><a
+                            href="index.html#calculator" class="btn-gold"
+                            style="font-size: 0.9rem; padding: 12px 25px; display: inline-block;">Solicitar
+                            Orçamento</a>
+                        <a href="https://api.whatsapp.com/send?phone=5561982605050&text=Ol%C3%A1!%20Gostaria%20de%20consultar%20o%20card%C3%A1pio%20do%20Carrinho%20de%20Pipoca%20e%20Algod%C3%A3o%20Doce."
+                            target="_blank" class="btn-gold-outline"
+                            style="font-size: 0.9rem; padding: 12px 25px; margin-left: 0;">Consultar Cardápio</a>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- 📸 IMAGEM DO SERVIÇO AQUI 👇                 -->
+                <!-- Troque a classe ou a imagem dentro da div  -->
+                <!-- ========================================== -->
+                <div class="service-image"
+                    style="background-image: url('image/algodão.PNG'); min-height: 400px; flex: 1; background-size: cover; background-position: center;">
+                </div>
+            </div>
+
+            <div id="cama-elastica" class="service-card-wide"
+                style="display: flex; flex-direction: row; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <div class="service-content" style="padding: 40px; flex: 1;">
+                    <h3 class="service-title" style="font-size: 2rem; color: var(--primary-gold);">Cama Elástica
+                    </h3>
+                    <p class="service-description" style="font-size: 1.1rem;">A alegria da criançada garantida.</p>
+                    <ul class="service-checklist" style="margin-top: 25px; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i> <span><strong>Cama
+                                    Elástica:</strong> Tamanho médio (3,05m), higienizada e com monitor.</span></li>
+
+                        <li style="margin-bottom: 12px; display: flex; align-items: start;"><i class="fas fa-check"
+                                style="color: var(--primary-gold); margin-right: 10px;"></i>
+                            <span><strong>Segurança:</strong> Equipamento novo e revisado periodicamente.</span>
+                        </li>
+                    </ul>
+                    <div style="margin-top: 25px; display: flex; flex-wrap: wrap; gap: 15px;"><a
+                            href="index.html#calculator" class="btn-gold"
+                            style="font-size: 0.9rem; padding: 12px 25px; display: inline-block;">Solicitar
+                            Orçamento</a>
+                        <a href="https://api.whatsapp.com/send?phone=5561982605050&text=Ol%C3%A1!%20Gostaria%20de%20consultar%20sobre%20as%20Loca%C3%A7%C3%B5es%20e%20Cama%20El%C3%A1stica."
+                            target="_blank" class="btn-gold-outline"
+                            style="font-size: 0.9rem; padding: 12px 25px; margin-left: 0;">Consultar Cardápio</a>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- 📸 IMAGEM DO SERVIÇO AQUI 👇                 -->
+                <!-- Troque a classe ou a imagem dentro da div  -->
+                <!-- ========================================== -->
+                <div class="service-image"
+                    style="background-image: url('image/cama_elastica.png'); min-height: 400px; flex: 1; background-size: cover; background-position: center;">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="image/footer_logo_new.png" alt="Clara's Buffet" class="footer-logo-img">
+                </div>
+                <div class="footer-info">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-phone"></i> 61 8260-5050</p>
+                    <p><i class="fas fa-envelope"></i> clarassbuffet@gmail.com</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/tudoprafestadf/" target="_blank"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/people/Claras-Buffet/61557872615470/" target="_blank"><i
+                                class="fab fa-facebook"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone=5561982605050" target="_blank"><i
+                                class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Clara's Serviços e Buffet. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://api.whatsapp.com/send?phone=5561982605050" class="whatsapp-float" target="_blank"><i
+            class="fab fa-whatsapp"></i></a>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
