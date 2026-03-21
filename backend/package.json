@@ -16,6 +16,7 @@
     "multer": "^2.0.2"
   },
   "devDependencies": {
+    "jest": "^30.3.0",
     "live-server": "^1.2.2"
   }
 }

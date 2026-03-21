@@ -100,6 +100,23 @@ describe('🔗 6. Regras de Venda Casada e Dependências', () => {
     expect(() => validarFormulario(['Estação de Crepe', 'Salgados Extras']))
       .toThrow('Salgados já inclusos no pacote principal');
   });
+
+  test('Deve permitir a inclusão do Copeiro sem barrar o fluxo', () => {
+    expect(() => validarFormulario(['Buffet Essencial', 'Copeiro: Sim (1 profissional(is))'])).not.toThrow();
+  });
+
+  test('Deve permitir Crepe com recusa do Copeiro', () => {
+    expect(() => validarFormulario(['Estação de Crepe', 'Copeiro: Não (Sem copeiro - Cliente ciente da recomendação)'])).not.toThrow();
+  });
+
+  test('Deve bloquear a adição de Casquinha sem Crepe', () => {
+    expect(() => validarFormulario(['Buffet Essencial', 'Crepe com casquinha de queijo']))
+      .toThrow('A casquinha de queijo é exclusiva para o serviço de Crepe');
+  });
+
+  test('Deve permitir Casquinha se o cliente escolher Crepe', () => {
+    expect(() => validarFormulario(['Estação de Crepe', 'Crepe com casquinha de queijo'])).not.toThrow();
+  });
 });
 
 describe('🧪 7. Novas Regras (Cama Elástica e Chácara)', () => {

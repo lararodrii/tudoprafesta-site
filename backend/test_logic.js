@@ -1,7 +1,7 @@
-const isPrincipal = (txt) => /buffet|essencial|especial|premium|massa|crepe/i.test(txt);
-const isRental = (txt) => /carrinho|algodão|pipoca|festbar|drinks|bar|hot dog|barraquinha/i.test(txt);
-const isCamaElastica = (txt) => /cama elástica/i.test(txt);
-const isBuffetInfantil = (txt) => /essencial|especial|premium/i.test(txt);
+const isPrincipal = (txt) => /^(buffet|estação de crepe)/i.test(txt);
+const isRental = (txt) => /^(carrinho|festbar|hot dog|pipoca gourmet)/i.test(txt);
+const isCamaElastica = (txt) => /^cama elástica/i.test(txt);
+const isBuffetInfantil = (txt) => /^buffet (essencial|especial|premium)/i.test(txt);
 
 function contarServicos(servicos, isChacara = false) {
     let principais = 0;
@@ -63,8 +63,13 @@ function validarFormulario(servicos, isChacara = false) {
 
     // Trava de venda casada (Adicionais repetidos)
     const hasSalgadoExtra = servicos.some(s => /salgado/i.test(s));
-    if (hasSalgadoExtra && servicos.some(s => /buffet|crepe/i.test(s))) {
+    if (hasSalgadoExtra && servicos.some(s => /^(buffet|estação de crepe)/i.test(s))) {
         throw new Error('Salgados já inclusos no pacote principal');
+    }
+
+    const hasCasquinha = servicos.some(s => /casquinha/i.test(s));
+    if (hasCasquinha && !servicos.some(s => /^(estação de crepe|rodízio de crepe)/i.test(s))) {
+        throw new Error('A casquinha de queijo é exclusiva para o serviço de Crepe');
     }
 }
 
