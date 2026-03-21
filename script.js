@@ -1114,10 +1114,10 @@ document.addEventListener('DOMContentLoaded', function () {
         check('modal-service-cama-elastica', 'Cama Elástica');
         check('modal-addon-drinks', 'Bebidas');
         check('modal-addon-savory', 'Salgados + Churros');
-        check('modal-addon-cone-descartavel', 'Cone Descartável');
-        check('modal-addon-prato-descartavel', 'Pratos/Talheres Descartáveis');
-        check('modal-addon-copo-descartavel', 'Copos Descartáveis');
-        check('modal-addon-casquinha', 'Crepe com casquinha de queijo');
+        if (getEl('modal-addon-cone-descartavel')?.checked) selectedServices.push(`Cone Descartável: R$ ${(guests * 1.5).toFixed(2)} (${guests} pessoas)`);
+        if (getEl('modal-addon-prato-descartavel')?.checked) selectedServices.push(`Pratos/Talheres Descartáveis: R$ ${(guests * 1.5).toFixed(2)} (${guests} pessoas)`);
+        if (getEl('modal-addon-copo-descartavel')?.checked) selectedServices.push(`Copos Descartáveis: R$ ${(guests * 1.0).toFixed(2)} (${guests} pessoas)`);
+        if (getEl('modal-addon-casquinha')?.checked) selectedServices.push(`Crepe com casquinha de queijo: R$ ${(guests * 6).toFixed(2)} (${guests} pessoas)`);
         check('modal-addon-nutella', 'Calda de Nutella');
 
         let qCopeiros = Math.ceil(guests / 100);
@@ -1188,10 +1188,11 @@ document.addEventListener('DOMContentLoaded', function () {
             check('modal-service-cama-elastica', 'Cama Elástica');
             check('modal-addon-drinks', 'Bebidas');
             check('modal-addon-savory', 'Salgados + Churros');
-            check('modal-addon-cone-descartavel', 'Cone Descartável');
-            check('modal-addon-prato-descartavel', 'Pratos/Talheres Descartáveis');
-            check('modal-addon-copo-descartavel', 'Copos Descartáveis');
-            check('modal-addon-casquinha', 'Crepe com casquinha de queijo');
+            const guestsNum = parseInt(getEl('modal-guests').value) || 0;
+            if (getEl('modal-addon-cone-descartavel')?.checked) selectedServices.push(`Cone Descartável: R$ ${(guestsNum * 1.5).toFixed(2)} (${guestsNum} pessoas)`);
+            if (getEl('modal-addon-prato-descartavel')?.checked) selectedServices.push(`Pratos/Talheres Descartáveis: R$ ${(guestsNum * 1.5).toFixed(2)} (${guestsNum} pessoas)`);
+            if (getEl('modal-addon-copo-descartavel')?.checked) selectedServices.push(`Copos Descartáveis: R$ ${(guestsNum * 1.0).toFixed(2)} (${guestsNum} pessoas)`);
+            if (getEl('modal-addon-casquinha')?.checked) selectedServices.push(`Crepe com casquinha de queijo: R$ ${(guestsNum * 6).toFixed(2)} (${guestsNum} pessoas)`);
             check('modal-addon-nutella', 'Calda de Nutella');
 
             let g = parseInt(getEl('modal-guests').value) || 0;
