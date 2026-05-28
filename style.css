@@ -794,13 +794,22 @@ footer {
 
 /* Promo Modal Styles */
 .promo-modal-content {
-    max-width: 550px;
+    max-width: 650px;
+    width: 95%;
     border: 2px solid var(--primary-gold);
     box-shadow: 0 0 30px rgba(212, 175, 55, 0.35);
     background: radial-gradient(circle at top, var(--secondary-black), var(--primary-black));
     transform: scale(0.95);
     transition: transform 0.3s ease;
     text-align: center;
+    padding: 40px 35px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 500px) {
+    .promo-modal-content {
+        padding: 30px 15px;
+    }
 }
 
 .promo-modal-content .promo-intro {
@@ -870,8 +879,28 @@ footer {
 
 #promo-cta-btn {
     font-size: 1.1rem;
-    padding: 14px 28px;
-    width: 100%;
+    padding: 16px 45px;
+    width: auto;
+    max-width: 100%;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    #promo-cta-btn {
+        font-size: 0.8rem;
+        padding: 12px 25px;
+    }
+}
+
+@media (max-width: 375px) {
+    #promo-cta-btn {
+        font-size: 0.72rem;
+        padding: 10px 15px;
+    }
 }
 
 /* History Page Styles */
