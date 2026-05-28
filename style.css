@@ -792,6 +792,88 @@ footer {
     border-radius: 2px;
 }
 
+/* Promo Modal Styles */
+.promo-modal-content {
+    max-width: 550px;
+    border: 2px solid var(--primary-gold);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.35);
+    background: radial-gradient(circle at top, var(--secondary-black), var(--primary-black));
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.promo-modal-content .promo-intro {
+    font-size: 1.3rem;
+    font-family: 'Playfair Display', serif;
+    color: var(--primary-gold);
+    margin-bottom: 20px;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+.promo-modal-content p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+.promo-prizes-box {
+    background-color: rgba(20, 20, 20, 0.8);
+    border: 1px dashed rgba(212, 175, 55, 0.4);
+    padding: 20px;
+    border-radius: 6px;
+    margin: 25px 0;
+    text-align: left;
+}
+
+.promo-prizes-box h4 {
+    color: var(--primary-gold);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.promo-prizes-list {
+    list-style: none;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.promo-prizes-list li {
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+@media (max-width: 480px) {
+    .promo-prizes-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+.promo-outro {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+#promo-cta-btn {
+    font-size: 1.1rem;
+    padding: 14px 28px;
+    width: 100%;
+}
+
 /* History Page Styles */
 .history-page-hero {
     position: relative;
