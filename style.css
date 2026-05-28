@@ -920,8 +920,15 @@ footer {
     }
 
     #promo-cta-btn {
-        font-size: 0.95rem;
-        padding: 14px 35px; /* Tamanho de toque super confortável */
+        width: 100%;
+        box-sizing: border-box;
+        white-space: normal;
+        font-size: 14px;
+        padding: 12px 10px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 
@@ -968,8 +975,8 @@ footer {
     }
 
     #promo-cta-btn {
-        font-size: 0.8rem;
-        padding: 14px 22px; /* Garante altura mínima ideal para touch de ~45px */
+        font-size: 13px;
+        padding: 12px 10px;
     }
 }
 
@@ -994,8 +1001,8 @@ footer {
     }
 
     #promo-cta-btn {
-        font-size: 0.72rem;
-        padding: 12px 15px; /* Mantém toque excelente (~40px) e cabe perfeitamente */
+        font-size: 12px;
+        padding: 10px 10px;
     }
 }
 
