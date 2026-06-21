@@ -46,7 +46,8 @@
     <header>
         <div class="container">
             <div class="logo">
-                <a href="index.html"><!-- Proporção: 1:1 (Resolução: 192x192) --> <img src="image/navbar_icon.png" alt="Clara's Buffet" class="logo-img"></a>
+                <a href="index.html"><!-- Proporção: 1:1 (Resolução: 192x192) --> <img src="image/navbar_icon.png"
+                        alt="Clara's Buffet" class="logo-img"></a>
             </div>
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
@@ -129,7 +130,7 @@
                     <div class="carousel-slide active">
                         <div class="testimonial-card google-style">
                             <div class="testimonial-header">
-                                
+
                                 <!-- Proporção: 1:1 (Resolução: 72x72) -->
                                 <img src="image/Ruan_Carlos.png" alt="Ruan Carlos" class="client-avatar">
                                 <div class="header-info">
@@ -139,7 +140,7 @@
                                         <span class="review-date">23 de nov. de 2024</span>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Proporção: SVG (Escalável) -->
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
                                     class="google-icon-small" alt="Google">
@@ -155,7 +156,7 @@
                     <div class="carousel-slide">
                         <div class="testimonial-card google-style">
                             <div class="testimonial-header">
-                                
+
                                 <!-- Proporção: 1:1 (Resolução: 72x72) -->
                                 <img src="image/Layssa_Abreu.png" alt="Layssa Abreu" class="client-avatar">
                                 <div class="header-info">
@@ -165,7 +166,7 @@
                                         <span class="review-date">18 de nov. de 2024</span>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Proporção: SVG (Escalável) -->
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
                                     class="google-icon-small" alt="Google">
@@ -181,7 +182,7 @@
                     <div class="carousel-slide">
                         <div class="testimonial-card google-style">
                             <div class="testimonial-header">
-                                
+
                                 <!-- Proporção: 1:1 (Resolução: 72x72) -->
                                 <img src="image/Karol.png" alt="Karol" class="client-avatar">
                                 <div class="header-info">
@@ -191,7 +192,7 @@
                                         <span class="review-date">25 de ago. de 2024</span>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Proporção: SVG (Escalável) -->
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
                                     class="google-icon-small" alt="Google">
@@ -207,7 +208,7 @@
                     <div class="carousel-slide">
                         <div class="testimonial-card google-style">
                             <div class="testimonial-header">
-                                
+
                                 <!-- Proporção: 1:1 (Resolução: 72x72) -->
                                 <img src="image/Washington_Rodrigues.png" alt="Washington Rodrigues"
                                     class="client-avatar">
@@ -218,7 +219,7 @@
                                         <span class="review-date">22 de jul. de 2024</span>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Proporção: SVG (Escalável) -->
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
                                     class="google-icon-small" alt="Google">
@@ -233,7 +234,7 @@
                     <div class="carousel-slide">
                         <div class="testimonial-card google-style">
                             <div class="testimonial-header">
-                                
+
                                 <!-- Proporção: 1:1 (Resolução: 72x72) -->
                                 <img src="image/Aparecida_Santos.png" alt="Aparecida Santos" class="client-avatar">
                                 <div class="header-info">
@@ -243,7 +244,7 @@
                                         <span class="review-date">22 de jul. de 2024</span>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Proporção: SVG (Escalável) -->
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
                                     class="google-icon-small" alt="Google">
@@ -499,6 +500,10 @@
                                 <p style="font-size: 0.9em; color: var(--text-gray); margin-top: 2px;">Sabores salgados
                                     (Camarão, Carne Seca, 4 Queijos, etc.) e doces (Nutella c/ morango, etc.)</p>
                             </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="service-crepe-palito"> Crepe no Palito (R$ 15,00/pessoa)<br>
+                                <p style="font-size: 0.9em; color: var(--text-gray); margin-top: 2px;">Mínimo de 20 convidados. Sabores salgados e doces no palito.</p>
+                            </label>
                         </div>
                     </div>
 
@@ -575,6 +580,9 @@
                             </label>
                             <label class="checkbox-label" id="container-addon-nutella" style="display: none;">
                                 <input type="checkbox" id="addon-nutella"> Calda de Nutella
+                            </label>
+                            <label class="checkbox-label" id="container-addon-nutella-crepe" style="display: none;">
+                                <input type="checkbox" id="addon-nutella-crepe"> Calda de Nutella (Crepe no Palito) (R$ 120,00)
                             </label>
                         </div>
                         <p style="color: #666; font-size: 0.9em; margin-top: 5px; font-style: italic;">
@@ -689,6 +697,9 @@
                                 <p style="font-size: 0.9em; color: var(--text-gray); margin-top: 2px;">Sabores salgados
                                     (Camarão, Carne Seca, 4 Queijos, etc.) e doces (Nutella c/ morango, etc.)</p>
                             </label>
+                            <label><input type="checkbox" id="modal-service-crepe-palito" disabled> Crepe no Palito<br>
+                                <p style="font-size: 0.9em; color: var(--text-gray); margin-top: 2px;">Mínimo de 20 convidados. Sabores salgados e doces no palito.</p>
+                            </label>
                         </div>
 
                         <h4
@@ -744,6 +755,12 @@
                                     style="display: flex; align-items: center; gap: 8px; color: var(--text-gray); cursor: pointer;">
                                     <input type="checkbox" id="modal-addon-nutella" disabled> Calda de Nutella (R$
                                     120,00)
+                                </label>
+                            </div>
+                            <div id="modal-container-addon-nutella-crepe" style="display: none; margin-top: 5px;">
+                                <label
+                                    style="display: flex; align-items: center; gap: 8px; color: var(--text-gray); cursor: pointer;">
+                                    <input type="checkbox" id="modal-addon-nutella-crepe" disabled> Calda de Nutella (Crepe no Palito) (R$ 120,00)
                                 </label>
                             </div>
                         </div>
@@ -826,9 +843,10 @@
                     Aqui a comemoração já começa antes da festa! 💚💛
                 </p>
                 <p style="margin-bottom: 20px; text-align: center; color: var(--text-light);">
-                    Ao fechar seu evento conosco durante o período da campanha, você ganha a chance de girar nossa roleta premiada e concorrer a brindes especiais para deixar sua festa ainda mais incrível 🎁
+                    Ao fechar seu evento conosco durante o período da campanha, você ganha a chance de girar nossa
+                    roleta premiada e concorrer a brindes especiais para deixar sua festa ainda mais incrível 🎁
                 </p>
-                
+
                 <div class="promo-prizes-box">
                     <h4>Entre os prêmios:</h4>
                     <ul class="promo-prizes-list">
@@ -840,14 +858,15 @@
                         <li><span>🎁</span> E muito mais!</li>
                     </ul>
                 </div>
-                
+
                 <p class="promo-outro">
                     Porque aqui, além de uma experiência deliciosa, seu evento também vem cheio de surpresas 🥳⚽
                 </p>
-                
+
                 <div style="text-align: center;">
                     <a href="https://wa.me/556182605050" target="_blank" id="promo-cta-btn" class="btn-gold">
-                        <i class="fab fa-whatsapp" style="margin-right: 8px;"></i> FECHAR MEU EVENTO E CONCORRER A PRÊMIOS
+                        <i class="fab fa-whatsapp" style="margin-right: 8px;"></i> FECHAR MEU EVENTO E CONCORRER A
+                        PRÊMIOS
                     </a>
                 </div>
             </div>
@@ -858,7 +877,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    
+
                     <!-- Proporção: 1:1 (Resolução: 192x192) -->
                     <img src="image/footer_logo_new.png" alt="Clara's Buffet" class="footer-logo-img">
                 </div>

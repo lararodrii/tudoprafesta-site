@@ -134,7 +134,10 @@ app.post('/api/schedule', upload.none(), async (req, res) => {
     const release = await mutex.acquire();
     try {
         const p = req.body;
-        if (parseInt(p.guests) < 25) return res.json({ status: 'error', message: 'O número mínimo para qualquer evento é de 25 convidados.' });
+        const guestsNum = parseInt(p.guests);
+        const isCrepePalito = /crepe.*palito/i.test(p.services || "");
+        const minGuests = isCrepePalito ? 20 : 25;
+        if (guestsNum < minGuests) return res.json({ status: 'error', message: `O número mínimo para qualquer evento é de ${minGuests} convidados.` });
 
         // Travas de Convidados e Aluguéis (Segurança Server-Side)
         const servicesStr = (p.services || "").toLowerCase();
@@ -228,6 +231,8 @@ app.get('/api/month-availability', async (req, res) => {
     } catch (e) { res.json({ fullDays: [] }); }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Backend rodando na porta ${PORT}`));
+if (require.main === module) {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => console.log(`Backend rodando na porta ${PORT}`));
+}
 module.exports = { validateAppointment };

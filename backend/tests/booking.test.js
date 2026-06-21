@@ -79,6 +79,15 @@ describe('👥 5. Regras de Convidados', () => {
       .toThrow('O número mínimo de convidados é 25');
   });
 
+  test('Permite Crepe no Palito com mínimo de 20 convidados', () => {
+    expect(() => validarConvidados('Crepe no Palito', 20)).not.toThrow();
+  });
+
+  test('Bloqueia Crepe no Palito com menos de 20 convidados (ex: 19)', () => {
+    expect(() => validarConvidados('Crepe no Palito', 19))
+      .toThrow('O número mínimo de convidados é 20');
+  });
+
   test('Bloqueia Hot Dog para mais de 80 convidados no automático', () => {
     expect(() => validarConvidados('Hot Dog Gourmet', 85))
       .toThrow('Hot Dog excede limite automático');

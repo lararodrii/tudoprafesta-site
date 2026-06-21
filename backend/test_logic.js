@@ -1,4 +1,4 @@
-const isPrincipal = (txt) => /^(buffet|estação de crepe|rodízio de crepe)/i.test(txt);
+const isPrincipal = (txt) => /^(buffet|estação de crepe|rodízio de crepe|crepe no palito|crepe suíço no palito)/i.test(txt);
 const isRental = (txt) => /^(carrinho|festbar|hot dog|pipoca gourmet)/i.test(txt);
 const isCamaElastica = (txt) => /^cama elástica/i.test(txt);
 const isBuffetInfantil = (txt) => /^buffet (essencial|especial|premium)/i.test(txt);
@@ -75,7 +75,8 @@ function validarFormulario(servicos, isChacara = false) {
 
 // 👥 TRAVAS DE CONVIDADOS
 function validarConvidados(servico, convidados) {
-    if (convidados < 25) throw new Error('O número mínimo de convidados é 25');
+    const minGuests = /crepe.*palito/i.test(servico) ? 20 : 25;
+    if (convidados < minGuests) throw new Error(`O número mínimo de convidados é ${minGuests}`);
     if (/hot dog/i.test(servico) && convidados > 80) throw new Error('Hot Dog excede limite automático');
     if (/carrinho/i.test(servico) && convidados > 100) throw new Error('Carrinho excede limite automático');
 }

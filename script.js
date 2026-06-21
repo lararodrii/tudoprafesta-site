@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
             massas: 39.99,
             crepe: 38.90,
             crepe_premium: 46.90,
+            crepe_palito: 15.00,
             festbar: 40.00,
             hotdog: 750.00,
             carts: 300.00,
@@ -142,7 +143,8 @@ document.addEventListener('DOMContentLoaded', function () {
             copo_descartavel: 1.00,
             copeiro: 150.00,
             casquinha_queijo: 6.00,
-            nutella: 120.00
+            nutella: 120.00,
+            nutella_crepe: 120.00
         },
         cama_elastica: 250.00,
         chacara: {
@@ -160,6 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
         massas: getEl('service-massas'),
         crepe: getEl('service-crepe'),
         crepePremium: getEl('service-crepe-premium'),
+        crepePalito: getEl('service-crepe-palito'),
         hotdog: getEl('service-hotdog'),
         festbar: getEl('service-festbar'),
         carts: getEl('service-carts'),
@@ -173,7 +176,9 @@ document.addEventListener('DOMContentLoaded', function () {
         addonCasquinha: getEl('addon-casquinha'),
         addonCopeiro: getEl('addon-copeiro'),
         addonNutella: getEl('addon-nutella'),
-        containerNutella: getEl('container-addon-nutella')
+        containerNutella: getEl('container-addon-nutella'),
+        addonNutellaCrepe: getEl('addon-nutella-crepe'),
+        containerNutellaCrepe: getEl('container-addon-nutella-crepe')
     };
 
     const guestsInput = getEl('guests');
@@ -186,12 +191,12 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateAddonsState() {
         const mainServices = [
             inputs.buffetEssencial, inputs.buffetEspecial, inputs.buffetPremium,
-            inputs.massas, inputs.crepe, inputs.crepePremium, inputs.hotdog, inputs.festbar,
+            inputs.massas, inputs.crepe, inputs.crepePremium, inputs.crepePalito, inputs.hotdog, inputs.festbar,
             inputs.carts, inputs.popcornPremium, inputs.camaElastica
         ];
 
         const isMainOrRentalSelected = mainServices.some(input => input && input.checked);
-        const addons = [inputs.addonDrinks, inputs.addonSavory, inputs.addonConeDescartavel, inputs.addonPratoDescartavel, inputs.addonCopoDescartavel, inputs.addonCasquinha, inputs.addonCopeiro, inputs.addonNutella];
+        const addons = [inputs.addonDrinks, inputs.addonSavory, inputs.addonConeDescartavel, inputs.addonPratoDescartavel, inputs.addonCopoDescartavel, inputs.addonCasquinha, inputs.addonCopeiro, inputs.addonNutella, inputs.addonNutellaCrepe];
 
         addons.forEach(addon => {
             if (addon) {
@@ -208,12 +213,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         let guests = parseInt(guestsInput?.value) || 0;
+        const minGuests = inputs.crepePalito?.checked ? 20 : 25;
+        if (guests < minGuests) {
+            guestsInput.value = minGuests;
+            guests = minGuests;
+            showCustomAlert(`⚠️ Como o serviço selecionado exige um mínimo de ${minGuests} convidados, ajustamos a quantidade.`);
+        }
         let qtdCopeiros = Math.ceil(guests / 100);
 
         if (inputs.popcornPremium && inputs.containerNutella) {
             const showNutella = inputs.popcornPremium.checked;
             inputs.containerNutella.style.display = showNutella ? 'flex' : 'none';
             if (!showNutella && inputs.addonNutella) inputs.addonNutella.checked = false;
+        }
+
+        if (inputs.crepePalito && inputs.containerNutellaCrepe) {
+            const showNutellaCrepe = inputs.crepePalito.checked;
+            inputs.containerNutellaCrepe.style.display = showNutellaCrepe ? 'flex' : 'none';
+            if (!showNutellaCrepe && inputs.addonNutellaCrepe) inputs.addonNutellaCrepe.checked = false;
         }
 
         calculateTotal();
@@ -248,6 +265,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (inputs.massas?.checked) total += guests * PRICES.services.massas;
         if (inputs.crepe?.checked) total += guests * PRICES.services.crepe;
         if (inputs.crepePremium?.checked) total += guests * PRICES.services.crepe_premium;
+        if (inputs.crepePalito?.checked) total += guests * PRICES.services.crepe_palito;
         if (inputs.festbar?.checked) total += guests * PRICES.services.festbar;
         if (inputs.popcornPremium?.checked) total += PRICES.services.popcorn_premium;
         if (inputs.camaElastica?.checked) total += PRICES.cama_elastica;
@@ -276,12 +294,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (inputs.addonPratoDescartavel?.checked) total += guests * PRICES.addons.prato_descartavel;
         if (inputs.addonCopoDescartavel?.checked) total += guests * PRICES.addons.copo_descartavel;
         if (inputs.addonCasquinha?.checked) total += guests * PRICES.addons.casquinha_queijo;
-        
+
         let qtdCopeiros = Math.ceil(guests / 100);
         if (inputs.addonCopeiro?.checked) total += qtdCopeiros * PRICES.addons.copeiro;
-        
+
         const hasBuffetOuMassa = (inputs.buffetEssencial?.checked || inputs.buffetEspecial?.checked || inputs.buffetPremium?.checked || inputs.massas?.checked);
-        const hasCrepe = inputs.crepe?.checked || inputs.crepePremium?.checked;
+        const hasCrepe = inputs.crepe?.checked || inputs.crepePremium?.checked || inputs.crepePalito?.checked;
         const hasAnyMainService = hasBuffetOuMassa || hasCrepe;
 
         if (hasAnyMainService && !inputs.addonCopeiro?.checked) {
@@ -289,6 +307,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         if (inputs.popcornPremium?.checked && inputs.addonNutella?.checked) total += PRICES.addons.nutella;
+        if (inputs.crepePalito?.checked && inputs.addonNutellaCrepe?.checked) total += PRICES.addons.nutella_crepe;
 
         globalGuests = guests;
 
@@ -309,6 +328,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (inputs.massas?.checked) selectedServices.push('Estação de Massas');
                     if (inputs.crepe?.checked) selectedServices.push('Rodízio de Crepe');
                     if (inputs.crepePremium?.checked) selectedServices.push('Rodízio de Crepe Premium');
+                    if (inputs.crepePalito?.checked) selectedServices.push('Crepe no Palito');
                     if (inputs.festbar?.checked) selectedServices.push('FestBar Drinks');
                     if (inputs.hotdog?.checked) selectedServices.push('Hot Dog Gourmet');
                     if (inputs.carts?.checked) selectedServices.push('Carrinho de Pipoca / Algodão');
@@ -334,9 +354,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (guestsInput) {
         guestsInput.addEventListener('change', () => {
             let guests = parseInt(guestsInput.value) || 0;
-            if (guests < 25) {
-                guestsInput.value = 25;
-                showCustomAlert("⚠️ O número mínimo para realização de eventos é de 25 convidados.");
+            const minGuests = inputs.crepePalito?.checked ? 20 : 25;
+            if (guests < minGuests) {
+                guestsInput.value = minGuests;
+                showCustomAlert(`⚠️ O número mínimo para realização de eventos é de ${minGuests} convidados.`);
             }
             calculateTotal();
             updateAddonsState();
@@ -477,7 +498,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Validar Limite de Serviços Principais (Máximo 2 por evento - Calculadora)
-    const mainServiceInputs = [inputs.buffetEssencial, inputs.buffetEspecial, inputs.buffetPremium, inputs.massas, inputs.crepe, inputs.crepePremium];
+    const mainServiceInputs = [inputs.buffetEssencial, inputs.buffetEspecial, inputs.buffetPremium, inputs.massas, inputs.crepe, inputs.crepePremium, inputs.crepePalito];
     mainServiceInputs.forEach(service => {
         if (service) {
             service.addEventListener('click', function (e) {
@@ -517,7 +538,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function checkDependencyAndAlert(e, contextInputs) {
-        const mainServicesKeys = ['buffetEssencial', 'buffetEspecial', 'buffetPremium', 'massas', 'crepe', 'crepePremium', 'hotdog', 'festbar', 'carts', 'popcornPremium', 'camaElastica'];
+        const mainServicesKeys = ['buffetEssencial', 'buffetEspecial', 'buffetPremium', 'massas', 'crepe', 'crepePremium', 'crepePalito', 'hotdog', 'festbar', 'carts', 'popcornPremium', 'camaElastica'];
         const isMainSelected = mainServicesKeys.some(k => contextInputs[k] && contextInputs[k].checked);
 
         if (!isMainSelected) {
@@ -546,7 +567,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    ['addonDrinks', 'addonSavory', 'addonConeDescartavel', 'addonPratoDescartavel', 'addonCopoDescartavel', 'addonCasquinha', 'addonCopeiro', 'addonNutella'].forEach(key => {
+    ['addonDrinks', 'addonSavory', 'addonConeDescartavel', 'addonPratoDescartavel', 'addonCopoDescartavel', 'addonCasquinha', 'addonCopeiro', 'addonNutella', 'addonNutellaCrepe'].forEach(key => {
         if (inputs[key]) {
             inputs[key].addEventListener('click', (e) => checkDependencyAndAlert(e, inputs));
         }
@@ -716,6 +737,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'service-massas': 'modal-service-massas',
             'service-crepe': 'modal-service-crepe',
             'service-crepe-premium': 'modal-service-crepe-premium',
+            'service-crepe-palito': 'modal-service-crepe-palito',
             'service-hotdog': 'modal-service-hotdog',
             'service-festbar': 'modal-service-festbar',
             'service-carts': 'modal-service-carts',
@@ -728,7 +750,8 @@ document.addEventListener('DOMContentLoaded', function () {
             'addon-copo-descartavel': 'modal-addon-copo-descartavel',
             'addon-casquinha': 'modal-addon-casquinha',
             'addon-copeiro': 'modal-addon-copeiro',
-            'addon-nutella': 'modal-addon-nutella'
+            'addon-nutella': 'modal-addon-nutella',
+            'addon-nutella-crepe': 'modal-addon-nutella-crepe'
         };
 
         Object.keys(syncMap).forEach(sourceId => {
@@ -783,6 +806,7 @@ document.addEventListener('DOMContentLoaded', function () {
         massas: getEl('modal-service-massas'),
         crepe: getEl('modal-service-crepe'),
         crepePremium: getEl('modal-service-crepe-premium'),
+        crepePalito: getEl('modal-service-crepe-palito'),
         hotdog: getEl('modal-service-hotdog'),
         festbar: getEl('modal-service-festbar'),
         carts: getEl('modal-service-carts'),
@@ -796,10 +820,12 @@ document.addEventListener('DOMContentLoaded', function () {
         addonCasquinha: getEl('modal-addon-casquinha'),
         addonCopeiro: getEl('modal-addon-copeiro'),
         addonNutella: getEl('modal-addon-nutella'),
-        containerNutella: getEl('modal-container-addon-nutella')
+        containerNutella: getEl('modal-container-addon-nutella'),
+        addonNutellaCrepe: getEl('modal-addon-nutella-crepe'),
+        containerNutellaCrepe: getEl('modal-container-addon-nutella-crepe')
     };
 
-    ['addonDrinks', 'addonSavory', 'addonConeDescartavel', 'addonPratoDescartavel', 'addonCopoDescartavel', 'addonCasquinha', 'addonCopeiro', 'addonNutella'].forEach(key => {
+    ['addonDrinks', 'addonSavory', 'addonConeDescartavel', 'addonPratoDescartavel', 'addonCopoDescartavel', 'addonCasquinha', 'addonCopeiro', 'addonNutella', 'addonNutellaCrepe'].forEach(key => {
         if (modalInputs[key]) {
             modalInputs[key].addEventListener('click', (e) => checkDependencyAndAlert(e, modalInputs));
         }
@@ -824,7 +850,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Validar Limite de Serviços Principais (Máximo 2 por evento - Modal)
-    const modalMainServiceInputs = [modalInputs.buffetEssencial, modalInputs.buffetEspecial, modalInputs.buffetPremium, modalInputs.massas, modalInputs.crepe, modalInputs.crepePremium];
+    const modalMainServiceInputs = [modalInputs.buffetEssencial, modalInputs.buffetEspecial, modalInputs.buffetPremium, modalInputs.massas, modalInputs.crepe, modalInputs.crepePremium, modalInputs.crepePalito];
     modalMainServiceInputs.forEach(service => {
         if (service) {
             service.addEventListener('click', function (e) {
@@ -863,7 +889,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function updateModalState() {
-        const guests = parseInt(modalGuestsInput.value) || 0;
+        const minGuests = modalInputs.crepePalito?.checked ? 20 : 25;
+        let guests = parseInt(modalGuestsInput.value) || 0;
+        if (guests < minGuests) {
+            modalGuestsInput.value = minGuests;
+            guests = minGuests;
+            showCustomAlert(`⚠️ Como o serviço selecionado exige um mínimo de ${minGuests} convidados, ajustamos a quantidade.`);
+        }
         const warning = getEl('modal-guest-warning');
 
         if (warning) warning.style.display = 'none';
@@ -891,12 +923,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const mainServices = [
             modalInputs.buffetEssencial, modalInputs.buffetEspecial, modalInputs.buffetPremium,
-            modalInputs.massas, modalInputs.crepe, modalInputs.crepePremium, modalInputs.hotdog, modalInputs.festbar,
+            modalInputs.massas, modalInputs.crepe, modalInputs.crepePremium, modalInputs.crepePalito, modalInputs.hotdog, modalInputs.festbar,
             modalInputs.carts, modalInputs.popcornPremium, modalInputs.camaElastica
         ];
         const isMainOrRentalSelected = mainServices.some(input => input && input.checked);
 
-        ['addonDrinks', 'addonSavory', 'addonConeDescartavel', 'addonPratoDescartavel', 'addonCopoDescartavel', 'addonCasquinha', 'addonCopeiro', 'addonNutella'].forEach(k => {
+        ['addonDrinks', 'addonSavory', 'addonConeDescartavel', 'addonPratoDescartavel', 'addonCopoDescartavel', 'addonCasquinha', 'addonCopeiro', 'addonNutella', 'addonNutellaCrepe'].forEach(k => {
             if (modalInputs[k]) {
                 if (!isMainOrRentalSelected) modalInputs[k].checked = false;
             }
@@ -909,12 +941,16 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // guests was already parsed above
-
         if (modalInputs.popcornPremium && modalInputs.containerNutella) {
             const show = modalInputs.popcornPremium.checked;
             modalInputs.containerNutella.style.display = show ? 'block' : 'none';
             if (!show && modalInputs.addonNutella) modalInputs.addonNutella.checked = false;
+        }
+
+        if (modalInputs.crepePalito && modalInputs.containerNutellaCrepe) {
+            const show = modalInputs.crepePalito.checked;
+            modalInputs.containerNutellaCrepe.style.display = show ? 'block' : 'none';
+            if (!show && modalInputs.addonNutellaCrepe) modalInputs.addonNutellaCrepe.checked = false;
         }
 
         const locationInput = getEl('event-location');
@@ -959,6 +995,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (modalInputs.massas?.checked) total += guests * PRICES.services.massas;
         if (modalInputs.crepe?.checked) total += guests * PRICES.services.crepe;
         if (modalInputs.crepePremium?.checked) total += guests * PRICES.services.crepe_premium;
+        if (modalInputs.crepePalito?.checked) total += guests * PRICES.services.crepe_palito;
         if (modalInputs.festbar?.checked) total += guests * PRICES.services.festbar;
         if (modalInputs.popcornPremium?.checked) total += PRICES.services.popcorn_premium;
         if (modalInputs.camaElastica?.checked) total += PRICES.cama_elastica;
@@ -984,7 +1021,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (modalInputs.addonCopeiro?.checked) total += qtdCopeiros * PRICES.addons.copeiro;
 
         const hasBuffetOuMassa = (modalInputs.buffetEssencial?.checked || modalInputs.buffetEspecial?.checked || modalInputs.buffetPremium?.checked || modalInputs.massas?.checked);
-        const hasCrepe = modalInputs.crepe?.checked || modalInputs.crepePremium?.checked;
+        const hasCrepe = modalInputs.crepe?.checked || modalInputs.crepePremium?.checked || modalInputs.crepePalito?.checked;
         const hasAnyMainService = hasBuffetOuMassa || hasCrepe;
 
         if (hasAnyMainService && !modalInputs.addonCopeiro?.checked) {
@@ -997,6 +1034,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         if (modalInputs.popcornPremium?.checked && modalInputs.addonNutella?.checked) total += PRICES.addons.nutella;
+        if (modalInputs.crepePalito?.checked && modalInputs.addonNutellaCrepe?.checked) total += PRICES.addons.nutella_crepe;
 
         const display = getEl('modal-total-display');
         const btnReview = getEl('review-booking-btn');
@@ -1017,6 +1055,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (modalInputs.massas?.checked) selectedServices.push('Estação de Massas');
                     if (modalInputs.crepe?.checked) selectedServices.push('Rodízio de Crepe');
                     if (modalInputs.crepePremium?.checked) selectedServices.push('Rodízio de Crepe Premium');
+                    if (modalInputs.crepePalito?.checked) selectedServices.push('Crepe no Palito');
                     if (modalInputs.festbar?.checked) selectedServices.push('FestBar Drinks');
                     if (modalInputs.hotdog?.checked) selectedServices.push('Hot Dog Gourmet');
                     if (modalInputs.carts?.checked) selectedServices.push('Carrinho de Pipoca / Algodão');
@@ -1049,9 +1088,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (modalGuestsInput) {
         modalGuestsInput.addEventListener('change', () => {
             let guests = parseInt(modalGuestsInput.value) || 0;
-            if (guests < 25) {
-                modalGuestsInput.value = 25;
-                showCustomAlert("⚠️ O número mínimo para realização de eventos é de 25 convidados.");
+            const minGuests = modalInputs.crepePalito?.checked ? 20 : 25;
+            if (guests < minGuests) {
+                modalGuestsInput.value = minGuests;
+                showCustomAlert(`⚠️ O número mínimo para realização de eventos é de ${minGuests} convidados.`);
             }
             updateModalState();
         });
@@ -1085,6 +1125,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (getEl('modal-service-massas')?.checked) countPrincipals++;
         if (getEl('modal-service-crepe')?.checked) countPrincipals++;
         if (getEl('modal-service-crepe-premium')?.checked) countPrincipals++;
+        if (getEl('modal-service-crepe-palito')?.checked) countPrincipals++;
 
         if (getEl('modal-service-hotdog')?.checked) countRentals++;
         if (getEl('modal-service-festbar')?.checked) { countRentals++; hasFestBar = true; }
@@ -1117,6 +1158,7 @@ document.addEventListener('DOMContentLoaded', function () {
         check('modal-service-massas', 'Buffet de Massas');
         check('modal-service-crepe', 'Rodízio de Crepe');
         check('modal-service-crepe-premium', 'Rodízio de Crepe Premium');
+        check('modal-service-crepe-palito', 'Crepe no Palito');
         check('modal-service-hotdog', 'Hot Dog Gourmet');
         check('modal-service-festbar', 'FestBar Drinks');
         check('modal-service-carts', 'Carrinho Pipoca/Algodão');
@@ -1129,11 +1171,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (getEl('modal-addon-copo-descartavel')?.checked) selectedServices.push(`Copos Descartáveis: R$ ${(guests * 1.0).toFixed(2)} (${guests} pessoas)`);
         if (getEl('modal-addon-casquinha')?.checked) selectedServices.push(`Crepe com casquinha de queijo: R$ ${(guests * 6).toFixed(2)} (${guests} pessoas)`);
         check('modal-addon-nutella', 'Calda de Nutella');
+        check('modal-addon-nutella-crepe', 'Calda de Nutella (Crepe no Palito)');
 
         let qCopeiros = Math.ceil(guests / 100);
         if (getEl('modal-addon-copeiro')?.checked) {
             selectedServices.push(`Copeiro: Sim (${qCopeiros} profissional(is))`);
-        } else if (getEl('modal-service-crepe')?.checked || getEl('modal-service-crepe-premium')?.checked) {
+        } else if (getEl('modal-service-crepe')?.checked || getEl('modal-service-crepe-premium')?.checked || getEl('modal-service-crepe-palito')?.checked) {
             selectedServices.push('Copeiro: Não (Sem copeiro - Cliente ciente da recomendação)');
         }
 
@@ -1192,6 +1235,7 @@ document.addEventListener('DOMContentLoaded', function () {
             check('modal-service-massas', 'Buffet de Massas');
             check('modal-service-crepe', 'Rodízio de Crepe');
             check('modal-service-crepe-premium', 'Rodízio de Crepe Premium');
+            check('modal-service-crepe-palito', 'Crepe no Palito');
             check('modal-service-hotdog', 'Hot Dog Gourmet');
             check('modal-service-festbar', 'FestBar Drinks');
             check('modal-service-carts', 'Carrinho Pipoca/Algodão');
@@ -1205,12 +1249,13 @@ document.addEventListener('DOMContentLoaded', function () {
             if (getEl('modal-addon-copo-descartavel')?.checked) selectedServices.push(`Copos Descartáveis: R$ ${(guestsNum * 1.0).toFixed(2)} (${guestsNum} pessoas)`);
             if (getEl('modal-addon-casquinha')?.checked) selectedServices.push(`Crepe com casquinha de queijo: R$ ${(guestsNum * 6).toFixed(2)} (${guestsNum} pessoas)`);
             check('modal-addon-nutella', 'Calda de Nutella');
+            check('modal-addon-nutella-crepe', 'Calda de Nutella (Crepe no Palito)');
 
             let g = parseInt(getEl('modal-guests').value) || 0;
             let qCopeiros2 = Math.ceil(g / 100);
             if (getEl('modal-addon-copeiro')?.checked) {
                 selectedServices.push(`Copeiro: Sim (${qCopeiros2} profissional(is))`);
-            } else if (getEl('modal-service-crepe')?.checked || getEl('modal-service-crepe-premium')?.checked) {
+            } else if (getEl('modal-service-crepe')?.checked || getEl('modal-service-crepe-premium')?.checked || getEl('modal-service-crepe-palito')?.checked) {
                 selectedServices.push('Copeiro: Não (Sem copeiro - Cliente ciente da recomendação)');
             }
 
@@ -1233,7 +1278,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     getEl('booking-step-2').style.display = 'none';
 
                     if (errorMsg.includes('lotado para festas principais') || errorMsg.includes('principais')) {
-                        ['modal-service-buffet-essencial', 'modal-service-buffet-especial', 'modal-service-buffet-premium', 'modal-service-massas', 'modal-service-crepe', 'modal-service-crepe-premium'].forEach(id => {
+                        ['modal-service-buffet-essencial', 'modal-service-buffet-especial', 'modal-service-buffet-premium', 'modal-service-massas', 'modal-service-crepe', 'modal-service-crepe-premium', 'modal-service-crepe-palito'].forEach(id => {
                             const el = getEl(id);
                             if (el && el.checked) {
                                 el.checked = false;
@@ -1468,5 +1513,4 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-
 });
