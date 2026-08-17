@@ -1479,5 +1479,38 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // ==========================================
+    // 🎁 MODAL PROMOCIONAL AUTOMÁTICO
+    // ==========================================
+    const promoModal = getEl('promo-modal');
+    const closePromoBtn = getEl('close-promo-modal');
+    const promoCtaBtn = getEl('promo-cta-btn');
 
+    if (promoModal) {
+        // Exibe o modal automaticamente com um pequeno delay elegante de 1 segundo para maior suavidade
+        setTimeout(() => {
+            promoModal.style.display = 'block';
+        }, 1000);
+
+        // Fechar ao clicar no botão "X"
+        if (closePromoBtn) {
+            closePromoBtn.addEventListener('click', () => {
+                promoModal.style.display = 'none';
+            });
+        }
+
+        // Ação do CTA (Fecha o modal ao clicar para abrir o WhatsApp em nova aba)
+        if (promoCtaBtn) {
+            promoCtaBtn.addEventListener('click', () => {
+                promoModal.style.display = 'none';
+            });
+        }
+
+        // Fechar ao clicar fora da área interna do modal (no overlay escuro)
+        window.addEventListener('click', (e) => {
+            if (e.target === promoModal) {
+                promoModal.style.display = 'none';
+            }
+        });
+    }
 });
