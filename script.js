@@ -73,8 +73,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const messageElement = document.createElement('p');
             messageElement.id = 'custom-alert-message';
-            // Allow HTML inside the alert as some warnings had HTML in strings originally, though alert() doesn't parse it.
-            // Wait, alert() doesn't parse HTML, so just use textContent to be safe.
 
             const okButton = document.createElement('button');
             okButton.className = 'btn-gold custom-alert-ok-btn';
@@ -107,7 +105,9 @@ document.addEventListener('DOMContentLoaded', function () {
         alertModal.style.display = 'flex';
     };
 
-    const showCustomAlert = window.showCustomAlert;    // ==========================================
+    const showCustomAlert = window.showCustomAlert;
+
+    // ==========================================
     // ⚙️ 1. CONFIGURAÇÕES E PREÇOS
     // ==========================================
     const PRICES = {
@@ -565,8 +565,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-
-
     ['addonDrinks', 'addonSavory', 'addonConeDescartavel', 'addonPratoDescartavel', 'addonCopoDescartavel', 'addonCasquinha', 'addonCopeiro', 'addonNutella', 'addonNutellaCrepe'].forEach(key => {
         if (inputs[key]) {
             inputs[key].addEventListener('click', (e) => checkDependencyAndAlert(e, inputs));
@@ -830,8 +828,6 @@ document.addEventListener('DOMContentLoaded', function () {
             modalInputs[key].addEventListener('click', (e) => checkDependencyAndAlert(e, modalInputs));
         }
     });
-
-
 
     const modalBuffetInputs = [modalInputs.buffetEssencial, modalInputs.buffetEspecial, modalInputs.buffetPremium];
     modalBuffetInputs.forEach(buffet => {
