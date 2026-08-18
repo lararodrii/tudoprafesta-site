@@ -1187,6 +1187,26 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
 
         getEl('summary-content').innerHTML = summaryHtml;
+ 
+        // 📥 Captura Silenciosa de Lead (Firebase Firestore)
+        try {
+            if (window.firebaseDb && window.firebaseAddDoc && window.firebaseCollection) {
+                const loc = isChacara ? 'Chácara Parceira (Império da Natureza)' : (getEl('event-location')?.value || '');
+                const totalVal = getEl('modal-total-display')?.textContent || '';
+                const dataAtual = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+
+                window.firebaseAddDoc(window.firebaseCollection(window.firebaseDb, "leads_abandonados"), {
+                    data: dataAtual,
+                    clientName: name,
+                    eventLocation: loc,
+                    guests: guests,
+                    total: totalVal,
+                    status: 'Abandono (Não foi pro Zap)'
+                }).catch(err => console.log('Lead Firebase ignorado:', err));
+            }
+        } catch (err) {
+            console.log('Lead Firebase ignorado:', err);
+        }
 
         getEl('booking-step-1').style.display = 'none';
         getEl('booking-step-2').style.display = 'block';

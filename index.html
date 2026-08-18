@@ -871,6 +871,28 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <!-- Firebase SDK (Firestore) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAGk9hxnkqI6p3BgF8vZBUGLPQYuAyW_Kw",
+            authDomain: "tudo-pra-festa.firebaseapp.com",
+            projectId: "tudo-pra-festa",
+            storageBucket: "tudo-pra-festa.firebasestorage.app",
+            messagingSenderId: "512588293195",
+            appId: "1:512588293195:web:5601e480d5ed5132a199ce"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.firebaseDb = db;
+        window.firebaseCollection = collection;
+        window.firebaseAddDoc = addDoc;
+    </script>
+
     <script src="script.js"></script>
 </body>
 
