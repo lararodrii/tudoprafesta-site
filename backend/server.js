@@ -35,6 +35,9 @@ const isCamaElastica = (txt) => /cama elástica/i.test(txt);
 const isBuffetInfantil = (txt) => /essencial|especial|premium/i.test(txt);
 
 function validateAppointment(dayEvents, newRequest) {
+    if (newRequest.action === 'lead_capture') {
+        return { status: 'success' };
+    }
     const reqServicesStr = (newRequest.services || "").toLowerCase();
     const reqItems = reqServicesStr.split(',').map(s => s.trim());
     const start = new Date(newRequest.start);

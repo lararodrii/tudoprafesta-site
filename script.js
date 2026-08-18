@@ -1191,6 +1191,27 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
 
         getEl('summary-content').innerHTML = summaryHtml;
+
+        // 📥 Captura Silenciosa de Lead (Carrinho Abandonado)
+        try {
+            const loc = isChacara ? 'Chácara Parceira (Império da Natureza)' : (getEl('event-location')?.value || '');
+            const totalVal = getEl('modal-total-display')?.textContent || '';
+
+            const leadFormData = new FormData();
+            leadFormData.append('action', 'lead_capture');
+            leadFormData.append('clientName', name);
+            leadFormData.append('eventLocation', loc);
+            leadFormData.append('guests', guests);
+            leadFormData.append('total', totalVal);
+
+            fetch('https://script.google.com/macros/s/AKfycbywYl8DmGmVc3ZWYzHCYCJp8XOnBTql6zxr0L2cXP0RctfpZ7BPjlgShr0y1H90x7cO-Q/exec', {
+                method: 'POST',
+                body: leadFormData
+            }).catch(err => console.log('Lead ignorado: ', err));
+        } catch (err) {
+            console.log('Lead ignorado: ', err);
+        }
+
         getEl('booking-step-1').style.display = 'none';
         getEl('booking-step-2').style.display = 'block';
     });
