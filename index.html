@@ -885,14 +885,19 @@
             appId: "1:512588293195:web:5601e480d5ed5132a199ce"
         };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        try {
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore(app);
 
-        window.firebaseDb = db;
-        window.firebaseCollection = collection;
-        window.firebaseAddDoc = addDoc;
-        window.firebaseDoc = doc;
-        window.firebaseUpdateDoc = updateDoc;
+            window.firebaseDb = db;
+            window.firebaseCollection = collection;
+            window.firebaseAddDoc = addDoc;
+            window.firebaseDoc = doc;
+            window.firebaseUpdateDoc = updateDoc;
+            console.log("🔥 Firebase inicializado com sucesso e variáveis exportadas para window!");
+        } catch (e) {
+            console.error("❌ Erro ao inicializar o Firebase:", e);
+        }
     </script>
 
     <script src="script.js"></script>

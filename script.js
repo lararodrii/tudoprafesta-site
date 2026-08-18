@@ -1191,6 +1191,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // 📥 Captura Silenciosa de Lead (Firebase Firestore)
         try {
             if (window.firebaseDb && window.firebaseAddDoc && window.firebaseCollection) {
+                console.log("✅ Variáveis do Firebase encontradas. Tentando salvar lead...");
                 const loc = isChacara ? 'Chácara Parceira (Império da Natureza)' : (getEl('event-location')?.value || '');
                 const totalVal = getEl('modal-total-display')?.textContent || '';
                 const dataAtual = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
@@ -1203,11 +1204,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     total: totalVal,
                     status: 'Abandonado (Passo 2)'
                 }).then(docRef => {
+                    console.log("🚀 Lead salvo no Firebase com sucesso! ID:", docRef.id);
                     window.currentLeadId = docRef.id;
-                }).catch(err => console.log('Lead Firebase ignorado:', err));
+                }).catch(err => console.error('❌ Erro no Firebase ao salvar lead:', err));
+            } else {
+                console.error("❌ Firebase não foi encontrado no objeto window!", { db: !!window.firebaseDb, addDoc: !!window.firebaseAddDoc, collection: !!window.firebaseCollection });
             }
         } catch (err) {
-            console.log('Lead Firebase ignorado:', err);
+            console.error('❌ Exceção ao capturar lead Firebase:', err);
         }
 
         getEl('booking-step-1').style.display = 'none';
