@@ -1201,7 +1201,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     eventLocation: loc,
                     guests: guests,
                     total: totalVal,
-                    status: 'Abandono (Não foi pro Zap)'
+                    status: 'Abandonado (Passo 2)'
+                }).then(docRef => {
+                    window.currentLeadId = docRef.id;
                 }).catch(err => console.log('Lead Firebase ignorado:', err));
             }
         } catch (err) {
@@ -1325,6 +1327,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     btn.disabled = false;
                     btn.textContent = originalText;
                 } else {
+                    // Atualiza status do lead no Firebase para 'Convertido para WhatsApp'
+                    try {
+                        if (window.currentLeadId && window.firebaseDb && window.firebaseDoc && window.firebaseUpdateDoc) {
+                            const leadRef = window.firebaseDoc(window.firebaseDb, "leads_abandonados", window.currentLeadId);
+                            window.firebaseUpdateDoc(leadRef, {
+                                status: 'Convertido para WhatsApp'
+                            }).catch(err => console.log('Erro ao atualizar status do lead:', err));
+                        }
+                    } catch (err) {
+                        console.log('Erro ao atualizar status do lead:', err);
+                    }
+
                     const finalMsgLocation = isChacara ? 'Chácara Parceira (Império da Natureza)' : getEl('event-location').value;
                     const msg = `*Novo Agendamento*\n\n*Cliente:* ${getEl('client-name').value}\n*Data:* ${getEl('selected-date-display').textContent}\n*Horário:* ${getEl('event-time').value}\n*Local:* ${finalMsgLocation}\n*Convidados:* ${getEl('modal-guests').value}\n*Serviços:* ${selectedServices.join(', ')}\n*Total Estimado:* ${getEl('modal-total-display').textContent}\n\n_Aguardo confirmação do contrato._`;
                     const encodedMsg = encodeURIComponent(msg);

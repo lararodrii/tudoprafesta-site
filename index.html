@@ -874,7 +874,7 @@
     <!-- Firebase SDK (Firestore) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAGk9hxnkqI6p3BgF8vZBUGLPQYuAyW_Kw",
@@ -891,6 +891,8 @@
         window.firebaseDb = db;
         window.firebaseCollection = collection;
         window.firebaseAddDoc = addDoc;
+        window.firebaseDoc = doc;
+        window.firebaseUpdateDoc = updateDoc;
     </script>
 
     <script src="script.js"></script>
