@@ -132,8 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
             crepe_palito: 15.00,
             festbar: 40.00,
             hotdog: 750.00,
-            carts: 300.00,
-            popcorn_premium: 600.00
+            carts: 300.00
         },
         addons: {
             drinks: 9.90,
@@ -143,10 +142,8 @@ document.addEventListener('DOMContentLoaded', function () {
             copo_descartavel: 1.00,
             copeiro: 150.00,
             casquinha_queijo: 6.00,
-            nutella: 120.00,
-            nutella_crepe: 120.00
+            nutella: 120.00
         },
-        cama_elastica: 250.00,
         chacara: {
             weekday: 1400.00,
             weekend: 1800.00
@@ -166,8 +163,6 @@ document.addEventListener('DOMContentLoaded', function () {
         hotdog: getEl('service-hotdog'),
         festbar: getEl('service-festbar'),
         carts: getEl('service-carts'),
-        popcornPremium: getEl('service-popcorn-premium'),
-        camaElastica: getEl('service-cama-elastica'),
         addonDrinks: getEl('addon-drinks'),
         addonSavory: getEl('addon-savory'),
         addonConeDescartavel: getEl('addon-cone-descartavel'),
@@ -176,9 +171,7 @@ document.addEventListener('DOMContentLoaded', function () {
         addonCasquinha: getEl('addon-casquinha'),
         addonCopeiro: getEl('addon-copeiro'),
         addonNutella: getEl('addon-nutella'),
-        containerNutella: getEl('container-addon-nutella'),
-        addonNutellaCrepe: getEl('addon-nutella-crepe'),
-        containerNutellaCrepe: getEl('container-addon-nutella-crepe')
+        containerNutella: getEl('container-addon-nutella')
     };
 
     const guestsInput = getEl('guests');
@@ -192,11 +185,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const mainServices = [
             inputs.buffetEssencial, inputs.buffetEspecial, inputs.buffetPremium,
             inputs.massas, inputs.crepe, inputs.crepePremium, inputs.crepePalito, inputs.hotdog, inputs.festbar,
-            inputs.carts, inputs.popcornPremium, inputs.camaElastica
+            inputs.carts
         ];
 
         const isMainOrRentalSelected = mainServices.some(input => input && input.checked);
-        const addons = [inputs.addonDrinks, inputs.addonSavory, inputs.addonConeDescartavel, inputs.addonPratoDescartavel, inputs.addonCopoDescartavel, inputs.addonCasquinha, inputs.addonCopeiro, inputs.addonNutella, inputs.addonNutellaCrepe];
+        const addons = [inputs.addonDrinks, inputs.addonSavory, inputs.addonConeDescartavel, inputs.addonPratoDescartavel, inputs.addonCopoDescartavel, inputs.addonCasquinha, inputs.addonCopeiro, inputs.addonNutella];
 
         addons.forEach(addon => {
             if (addon) {
@@ -221,16 +214,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         let qtdCopeiros = Math.ceil(guests / 100);
 
-        if (inputs.popcornPremium && inputs.containerNutella) {
-            const showNutella = inputs.popcornPremium.checked;
+        if (inputs.carts && inputs.containerNutella) {
+            const showNutella = inputs.carts.checked;
             inputs.containerNutella.style.display = showNutella ? 'flex' : 'none';
             if (!showNutella && inputs.addonNutella) inputs.addonNutella.checked = false;
-        }
-
-        if (inputs.crepePalito && inputs.containerNutellaCrepe) {
-            const showNutellaCrepe = inputs.crepePalito.checked;
-            inputs.containerNutellaCrepe.style.display = showNutellaCrepe ? 'flex' : 'none';
-            if (!showNutellaCrepe && inputs.addonNutellaCrepe) inputs.addonNutellaCrepe.checked = false;
         }
 
         calculateTotal();
@@ -267,8 +254,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (inputs.crepePremium?.checked) total += guests * PRICES.services.crepe_premium;
         if (inputs.crepePalito?.checked) total += guests * PRICES.services.crepe_palito;
         if (inputs.festbar?.checked) total += guests * PRICES.services.festbar;
-        if (inputs.popcornPremium?.checked) total += PRICES.services.popcorn_premium;
-        if (inputs.camaElastica?.checked) total += PRICES.cama_elastica;
         if (isChacara) total += PRICES.chacara[dateType];
 
         if (inputs.hotdog?.checked) {
@@ -306,8 +291,7 @@ document.addEventListener('DOMContentLoaded', function () {
             warnings.push('<span style="color:#f39c12; font-weight:bold;">⚠️ Aviso: O serviço de copeiro é opcional, mas altamente recomendável, pois sem a contratação desse profissional não haverá reposição de pratos, talheres e copos durante o evento.</span>');
         }
 
-        if (inputs.popcornPremium?.checked && inputs.addonNutella?.checked) total += PRICES.addons.nutella;
-        if (inputs.crepePalito?.checked && inputs.addonNutellaCrepe?.checked) total += PRICES.addons.nutella_crepe;
+        if (inputs.carts?.checked && inputs.addonNutella?.checked) total += PRICES.addons.nutella;
 
         globalGuests = guests;
 
@@ -322,18 +306,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     btnWhats.style.display = 'block';
 
                     const selectedServices = [];
-                    if (inputs.buffetEssencial?.checked) selectedServices.push('Buffet Essencial');
-                    if (inputs.buffetEspecial?.checked) selectedServices.push('Buffet Especial');
-                    if (inputs.buffetPremium?.checked) selectedServices.push('Buffet Premium');
-                    if (inputs.massas?.checked) selectedServices.push('Estação de Massas');
+                    if (inputs.buffetEssencial?.checked) selectedServices.push('Rodízio Infantil Essencial');
+                    if (inputs.buffetEspecial?.checked) selectedServices.push('Rodízio Infantil Especial');
+                    if (inputs.buffetPremium?.checked) selectedServices.push('Rodízio Infantil Premium');
+                    if (inputs.massas?.checked) selectedServices.push('Rodízio de Massas');
                     if (inputs.crepe?.checked) selectedServices.push('Rodízio de Crepe');
                     if (inputs.crepePremium?.checked) selectedServices.push('Rodízio de Crepe Premium');
                     if (inputs.crepePalito?.checked) selectedServices.push('Crepe no Palito');
                     if (inputs.festbar?.checked) selectedServices.push('FestBar Drinks');
                     if (inputs.hotdog?.checked) selectedServices.push('Hot Dog Gourmet');
                     if (inputs.carts?.checked) selectedServices.push('Carrinho de Pipoca / Algodão');
-                    if (inputs.popcornPremium?.checked) selectedServices.push('Carrinho Premium (Gourmet)');
-                    if (inputs.camaElastica?.checked) selectedServices.push('Cama Elástica');
 
                     const d = calcDayEl && calcDayEl.value ? calcDayEl.value : '??';
                     const m = calcMonthEl && calcMonthEl.value ? calcMonthEl.value : '??';
@@ -515,7 +497,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Validar Exclusividade de Aluguéis (1 por evento - Calculadora)
-    const rentalInputs = [inputs.hotdog, inputs.festbar, inputs.carts, inputs.popcornPremium];
+    const rentalInputs = [inputs.hotdog, inputs.festbar, inputs.carts];
     rentalInputs.forEach(rental => {
         if (rental) {
             rental.addEventListener('click', function (e) {
@@ -538,7 +520,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function checkDependencyAndAlert(e, contextInputs) {
-        const mainServicesKeys = ['buffetEssencial', 'buffetEspecial', 'buffetPremium', 'massas', 'crepe', 'crepePremium', 'crepePalito', 'hotdog', 'festbar', 'carts', 'popcornPremium', 'camaElastica'];
+        const mainServicesKeys = ['buffetEssencial', 'buffetEspecial', 'buffetPremium', 'massas', 'crepe', 'crepePremium', 'crepePalito', 'hotdog', 'festbar', 'carts'];
         const isMainSelected = mainServicesKeys.some(k => contextInputs[k] && contextInputs[k].checked);
 
         if (!isMainSelected) {
@@ -565,7 +547,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    ['addonDrinks', 'addonSavory', 'addonConeDescartavel', 'addonPratoDescartavel', 'addonCopoDescartavel', 'addonCasquinha', 'addonCopeiro', 'addonNutella', 'addonNutellaCrepe'].forEach(key => {
+    ['addonDrinks', 'addonSavory', 'addonConeDescartavel', 'addonPratoDescartavel', 'addonCopoDescartavel', 'addonCasquinha', 'addonCopeiro', 'addonNutella'].forEach(key => {
         if (inputs[key]) {
             inputs[key].addEventListener('click', (e) => checkDependencyAndAlert(e, inputs));
         }
@@ -739,8 +721,6 @@ document.addEventListener('DOMContentLoaded', function () {
             'service-hotdog': 'modal-service-hotdog',
             'service-festbar': 'modal-service-festbar',
             'service-carts': 'modal-service-carts',
-            'service-popcorn-premium': 'modal-service-popcorn-premium',
-            'service-cama-elastica': 'modal-service-cama-elastica',
             'addon-drinks': 'modal-addon-drinks',
             'addon-savory': 'modal-addon-savory',
             'addon-cone-descartavel': 'modal-addon-cone-descartavel',
@@ -748,8 +728,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'addon-copo-descartavel': 'modal-addon-copo-descartavel',
             'addon-casquinha': 'modal-addon-casquinha',
             'addon-copeiro': 'modal-addon-copeiro',
-            'addon-nutella': 'modal-addon-nutella',
-            'addon-nutella-crepe': 'modal-addon-nutella-crepe'
+            'addon-nutella': 'modal-addon-nutella'
         };
 
         Object.keys(syncMap).forEach(sourceId => {
@@ -808,8 +787,6 @@ document.addEventListener('DOMContentLoaded', function () {
         hotdog: getEl('modal-service-hotdog'),
         festbar: getEl('modal-service-festbar'),
         carts: getEl('modal-service-carts'),
-        popcornPremium: getEl('modal-service-popcorn-premium'),
-        camaElastica: getEl('modal-service-cama-elastica'),
         addonDrinks: getEl('modal-addon-drinks'),
         addonSavory: getEl('modal-addon-savory'),
         addonConeDescartavel: getEl('modal-addon-cone-descartavel'),
@@ -818,12 +795,10 @@ document.addEventListener('DOMContentLoaded', function () {
         addonCasquinha: getEl('modal-addon-casquinha'),
         addonCopeiro: getEl('modal-addon-copeiro'),
         addonNutella: getEl('modal-addon-nutella'),
-        containerNutella: getEl('modal-container-addon-nutella'),
-        addonNutellaCrepe: getEl('modal-addon-nutella-crepe'),
-        containerNutellaCrepe: getEl('modal-container-addon-nutella-crepe')
+        containerNutella: getEl('modal-container-addon-nutella')
     };
 
-    ['addonDrinks', 'addonSavory', 'addonConeDescartavel', 'addonPratoDescartavel', 'addonCopoDescartavel', 'addonCasquinha', 'addonCopeiro', 'addonNutella', 'addonNutellaCrepe'].forEach(key => {
+    ['addonDrinks', 'addonSavory', 'addonConeDescartavel', 'addonPratoDescartavel', 'addonCopoDescartavel', 'addonCasquinha', 'addonCopeiro', 'addonNutella'].forEach(key => {
         if (modalInputs[key]) {
             modalInputs[key].addEventListener('click', (e) => checkDependencyAndAlert(e, modalInputs));
         }
@@ -862,7 +837,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    const modalRentalInputs = [modalInputs.hotdog, modalInputs.festbar, modalInputs.carts, modalInputs.popcornPremium];
+    const modalRentalInputs = [modalInputs.hotdog, modalInputs.festbar, modalInputs.carts];
     modalRentalInputs.forEach(rental => {
         if (rental) {
             rental.addEventListener('click', function (e) {
@@ -900,31 +875,14 @@ document.addEventListener('DOMContentLoaded', function () {
             if (el) el.disabled = false;
         });
 
-        if (modalInputs.carts && modalInputs.popcornPremium) {
-            modalInputs.carts.addEventListener('click', function () {
-                if (this.checked && modalInputs.popcornPremium.checked) {
-                    modalInputs.popcornPremium.checked = false;
-                    showCustomAlert("⚠️ Atenção: Estas duas opções utilizam a mesma máquina física. O sistema selecionou apenas o último tipo de pipoca escolhido.");
-                }
-                updateModalState();
-            });
-            modalInputs.popcornPremium.addEventListener('click', function () {
-                if (this.checked && modalInputs.carts.checked) {
-                    modalInputs.carts.checked = false;
-                    showCustomAlert("⚠️ Atenção: Estas duas opções utilizam a mesma máquina física. O sistema selecionou apenas o último tipo de pipoca escolhido.");
-                }
-                updateModalState();
-            });
-        }
-
         const mainServices = [
             modalInputs.buffetEssencial, modalInputs.buffetEspecial, modalInputs.buffetPremium,
             modalInputs.massas, modalInputs.crepe, modalInputs.crepePremium, modalInputs.crepePalito, modalInputs.hotdog, modalInputs.festbar,
-            modalInputs.carts, modalInputs.popcornPremium, modalInputs.camaElastica
+            modalInputs.carts
         ];
         const isMainOrRentalSelected = mainServices.some(input => input && input.checked);
 
-        ['addonDrinks', 'addonSavory', 'addonConeDescartavel', 'addonPratoDescartavel', 'addonCopoDescartavel', 'addonCasquinha', 'addonCopeiro', 'addonNutella', 'addonNutellaCrepe'].forEach(k => {
+        ['addonDrinks', 'addonSavory', 'addonConeDescartavel', 'addonPratoDescartavel', 'addonCopoDescartavel', 'addonCasquinha', 'addonCopeiro', 'addonNutella'].forEach(k => {
             if (modalInputs[k]) {
                 if (!isMainOrRentalSelected) modalInputs[k].checked = false;
             }
@@ -937,16 +895,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        if (modalInputs.popcornPremium && modalInputs.containerNutella) {
-            const show = modalInputs.popcornPremium.checked;
+        if (modalInputs.carts && modalInputs.containerNutella) {
+            const show = modalInputs.carts.checked;
             modalInputs.containerNutella.style.display = show ? 'block' : 'none';
             if (!show && modalInputs.addonNutella) modalInputs.addonNutella.checked = false;
-        }
-
-        if (modalInputs.crepePalito && modalInputs.containerNutellaCrepe) {
-            const show = modalInputs.crepePalito.checked;
-            modalInputs.containerNutellaCrepe.style.display = show ? 'block' : 'none';
-            if (!show && modalInputs.addonNutellaCrepe) modalInputs.addonNutellaCrepe.checked = false;
         }
 
         const locationInput = getEl('event-location');
@@ -993,8 +945,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (modalInputs.crepePremium?.checked) total += guests * PRICES.services.crepe_premium;
         if (modalInputs.crepePalito?.checked) total += guests * PRICES.services.crepe_palito;
         if (modalInputs.festbar?.checked) total += guests * PRICES.services.festbar;
-        if (modalInputs.popcornPremium?.checked) total += PRICES.services.popcorn_premium;
-        if (modalInputs.camaElastica?.checked) total += PRICES.cama_elastica;
         if (isChacara) total += PRICES.chacara[dateType];
 
         if (modalInputs.hotdog?.checked) {
@@ -1029,8 +979,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        if (modalInputs.popcornPremium?.checked && modalInputs.addonNutella?.checked) total += PRICES.addons.nutella;
-        if (modalInputs.crepePalito?.checked && modalInputs.addonNutellaCrepe?.checked) total += PRICES.addons.nutella_crepe;
+        if (modalInputs.carts?.checked && modalInputs.addonNutella?.checked) total += PRICES.addons.nutella;
 
         const display = getEl('modal-total-display');
         const btnReview = getEl('review-booking-btn');
@@ -1045,18 +994,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     btnWhats.style.display = 'block';
 
                     const selectedServices = [];
-                    if (modalInputs.buffetEssencial?.checked) selectedServices.push('Buffet Essencial');
-                    if (modalInputs.buffetEspecial?.checked) selectedServices.push('Buffet Especial');
-                    if (modalInputs.buffetPremium?.checked) selectedServices.push('Buffet Premium');
-                    if (modalInputs.massas?.checked) selectedServices.push('Estação de Massas');
+                    if (modalInputs.buffetEssencial?.checked) selectedServices.push('Rodízio Infantil Essencial');
+                    if (modalInputs.buffetEspecial?.checked) selectedServices.push('Rodízio Infantil Especial');
+                    if (modalInputs.buffetPremium?.checked) selectedServices.push('Rodízio Infantil Premium');
+                    if (modalInputs.massas?.checked) selectedServices.push('Rodízio de Massas');
                     if (modalInputs.crepe?.checked) selectedServices.push('Rodízio de Crepe');
                     if (modalInputs.crepePremium?.checked) selectedServices.push('Rodízio de Crepe Premium');
                     if (modalInputs.crepePalito?.checked) selectedServices.push('Crepe no Palito');
                     if (modalInputs.festbar?.checked) selectedServices.push('FestBar Drinks');
                     if (modalInputs.hotdog?.checked) selectedServices.push('Hot Dog Gourmet');
                     if (modalInputs.carts?.checked) selectedServices.push('Carrinho de Pipoca / Algodão');
-                    if (modalInputs.popcornPremium?.checked) selectedServices.push('Carrinho Premium (Gourmet)');
-                    if (modalInputs.camaElastica?.checked) selectedServices.push('Cama Elástica');
 
                     let dateStr = '??/??/2026';
                     if (window.currentSelectedDateObj) {
@@ -1102,12 +1049,13 @@ document.addEventListener('DOMContentLoaded', function () {
     getEl('review-booking-btn')?.addEventListener('click', () => {
         const guests = getEl('modal-guests').value;
         const name = getEl('client-name').value;
+        const phone = getEl('client-phone')?.value.trim();
         const time = getEl('event-time').value;
         const locationInput = getEl('event-location');
         const isChacara = getEl('modal-location-chacara')?.checked;
 
-        if (!guests || !name || !time || (!isChacara && locationInput && !locationInput.value.trim())) {
-            showCustomAlert("Preencha todos os campos obrigatórios.");
+        if (!guests || !name || !phone || !time || (!isChacara && locationInput && !locationInput.value.trim())) {
+            showCustomAlert("Preencha todos os campos obrigatórios (incluindo seu WhatsApp/Telefone).");
             return;
         }
 
@@ -1126,7 +1074,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (getEl('modal-service-hotdog')?.checked) countRentals++;
         if (getEl('modal-service-festbar')?.checked) { countRentals++; hasFestBar = true; }
         if (getEl('modal-service-carts')?.checked) countRentals++;
-        if (getEl('modal-service-popcorn-premium')?.checked) countRentals++;
 
         if (countPrincipals > 2) {
             showCustomAlert("🛑 Limite Excedido: Aceitamos no máximo 2 serviços principais por evento.");
@@ -1148,26 +1095,23 @@ document.addEventListener('DOMContentLoaded', function () {
             if (el && el.checked) selectedServices.push(label);
         };
 
-        check('modal-service-buffet-essencial', 'Buffet Essencial');
-        check('modal-service-buffet-especial', 'Buffet Especial');
-        check('modal-service-buffet-premium', 'Buffet Premium');
-        check('modal-service-massas', 'Buffet de Massas');
+        check('modal-service-buffet-essencial', 'Rodízio Infantil Essencial');
+        check('modal-service-buffet-especial', 'Rodízio Infantil Especial');
+        check('modal-service-buffet-premium', 'Rodízio Infantil Premium');
+        check('modal-service-massas', 'Rodízio de Massas');
         check('modal-service-crepe', 'Rodízio de Crepe');
         check('modal-service-crepe-premium', 'Rodízio de Crepe Premium');
         check('modal-service-crepe-palito', 'Crepe no Palito');
         check('modal-service-hotdog', 'Hot Dog Gourmet');
         check('modal-service-festbar', 'FestBar Drinks');
         check('modal-service-carts', 'Carrinho Pipoca/Algodão');
-        check('modal-service-popcorn-premium', 'Pipoca Gourmet');
-        check('modal-service-cama-elastica', 'Cama Elástica');
         check('modal-addon-drinks', 'Bebidas');
         check('modal-addon-savory', 'Salgados + Churros');
         if (getEl('modal-addon-cone-descartavel')?.checked) selectedServices.push(`Cone Descartável: R$ ${(guests * 1.5).toFixed(2)} (${guests} pessoas)`);
         if (getEl('modal-addon-prato-descartavel')?.checked) selectedServices.push(`Pratos/Talheres Descartáveis: R$ ${(guests * 1.5).toFixed(2)} (${guests} pessoas)`);
         if (getEl('modal-addon-copo-descartavel')?.checked) selectedServices.push(`Copos Descartáveis: R$ ${(guests * 1.0).toFixed(2)} (${guests} pessoas)`);
         if (getEl('modal-addon-casquinha')?.checked) selectedServices.push(`Crepe com casquinha de queijo: R$ ${(guests * 6).toFixed(2)} (${guests} pessoas)`);
-        check('modal-addon-nutella', 'Calda de Nutella');
-        check('modal-addon-nutella-crepe', 'Calda de Nutella (Crepe no Palito)');
+        check('modal-addon-nutella', 'Calda de Nutella (Pipoca)');
 
         let qCopeiros = Math.ceil(guests / 100);
         if (getEl('modal-addon-copeiro')?.checked) {
@@ -1178,6 +1122,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const summaryHtml = `
             <p><strong>Nome:</strong> ${name}</p>
+            <p><strong>WhatsApp:</strong> ${phone}</p>
             <p><strong>Data:</strong> ${getEl('selected-date-display').textContent}</p>
             <p><strong>Horário:</strong> ${time} às ${getEl('event-end-time').value}</p>
             <p><strong>Local:</strong> ${isChacara ? 'Chácara Parceira (Império da Natureza)' : getEl('event-location').value}</p>
@@ -1199,6 +1144,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 window.firebaseAddDoc(window.firebaseCollection(window.firebaseDb, "leads_abandonados"), {
                     data: dataAtual,
                     clientName: name,
+                    clientPhone: phone,
                     eventLocation: loc,
                     guests: guests,
                     total: totalVal,
@@ -1252,18 +1198,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 const el = document.getElementById(id);
                 if (el && el.checked) selectedServices.push(label);
             };
-            check('modal-service-buffet-essencial', 'Buffet Essencial');
-            check('modal-service-buffet-especial', 'Buffet Especial');
-            check('modal-service-buffet-premium', 'Buffet Premium');
-            check('modal-service-massas', 'Buffet de Massas');
+            check('modal-service-buffet-essencial', 'Rodízio Infantil Essencial');
+            check('modal-service-buffet-especial', 'Rodízio Infantil Especial');
+            check('modal-service-buffet-premium', 'Rodízio Infantil Premium');
+            check('modal-service-massas', 'Rodízio de Massas');
             check('modal-service-crepe', 'Rodízio de Crepe');
             check('modal-service-crepe-premium', 'Rodízio de Crepe Premium');
             check('modal-service-crepe-palito', 'Crepe no Palito');
             check('modal-service-hotdog', 'Hot Dog Gourmet');
             check('modal-service-festbar', 'FestBar Drinks');
             check('modal-service-carts', 'Carrinho Pipoca/Algodão');
-            check('modal-service-popcorn-premium', 'Pipoca Gourmet');
-            check('modal-service-cama-elastica', 'Cama Elástica');
             check('modal-addon-drinks', 'Bebidas');
             check('modal-addon-savory', 'Salgados + Churros');
             const guestsNum = parseInt(getEl('modal-guests').value) || 0;
@@ -1271,8 +1215,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (getEl('modal-addon-prato-descartavel')?.checked) selectedServices.push(`Pratos/Talheres Descartáveis: R$ ${(guestsNum * 1.5).toFixed(2)} (${guestsNum} pessoas)`);
             if (getEl('modal-addon-copo-descartavel')?.checked) selectedServices.push(`Copos Descartáveis: R$ ${(guestsNum * 1.0).toFixed(2)} (${guestsNum} pessoas)`);
             if (getEl('modal-addon-casquinha')?.checked) selectedServices.push(`Crepe com casquinha de queijo: R$ ${(guestsNum * 6).toFixed(2)} (${guestsNum} pessoas)`);
-            check('modal-addon-nutella', 'Calda de Nutella');
-            check('modal-addon-nutella-crepe', 'Calda de Nutella (Crepe no Palito)');
+            check('modal-addon-nutella', 'Calda de Nutella (Pipoca)');
 
             let g = parseInt(getEl('modal-guests').value) || 0;
             let qCopeiros2 = Math.ceil(g / 100);
@@ -1311,14 +1254,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         warningText += "\n\nRemovemos os serviços principais conflitantes.";
                     }
                     else if (errorMsg.includes('lotado para alugueis') || errorMsg.includes('1 serviço de aluguel')) {
-                        ['modal-service-hotdog', 'modal-service-festbar', 'modal-service-carts', 'modal-service-popcorn-premium', 'modal-service-cama-elastica'].forEach(id => {
+                        ['modal-service-hotdog', 'modal-service-festbar', 'modal-service-carts'].forEach(id => {
                             const el = getEl(id);
                             if (el && el.checked) el.checked = false;
                         });
                         warningText = "🛑 " + data.message;
                     }
                     else if (errorMsg.includes('logística') || errorMsg.includes('conflito')) {
-                        ['modal-service-hotdog', 'modal-service-festbar', 'modal-service-carts', 'modal-service-popcorn-premium', 'modal-service-cama-elastica'].forEach(id => {
+                        ['modal-service-hotdog', 'modal-service-festbar', 'modal-service-carts'].forEach(id => {
                             const el = getEl(id);
                             if (el && el.checked) el.checked = false;
                         });
@@ -1344,7 +1287,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
 
                     const finalMsgLocation = isChacara ? 'Chácara Parceira (Império da Natureza)' : getEl('event-location').value;
-                    const msg = `*Novo Agendamento*\n\n*Cliente:* ${getEl('client-name').value}\n*Data:* ${getEl('selected-date-display').textContent}\n*Horário:* ${getEl('event-time').value}\n*Local:* ${finalMsgLocation}\n*Convidados:* ${getEl('modal-guests').value}\n*Serviços:* ${selectedServices.join(', ')}\n*Total Estimado:* ${getEl('modal-total-display').textContent}\n\n_Aguardo confirmação do contrato._`;
+                    const phoneVal = getEl('client-phone')?.value || '';
+                    const msg = `*Novo Agendamento*\n\n*Cliente:* ${getEl('client-name').value}\n*WhatsApp:* ${phoneVal}\n*Data:* ${getEl('selected-date-display').textContent}\n*Horário:* ${getEl('event-time').value}\n*Local:* ${finalMsgLocation}\n*Convidados:* ${getEl('modal-guests').value}\n*Serviços:* ${selectedServices.join(', ')}\n*Total Estimado:* ${getEl('modal-total-display').textContent}\n\n_Aguardo confirmação do contrato._`;
                     const encodedMsg = encodeURIComponent(msg);
                     window.open(`https://api.whatsapp.com/send?phone=5561982605050&text=${encodedMsg}`, '_blank');
 
@@ -1376,7 +1320,7 @@ document.addEventListener('DOMContentLoaded', function () {
     getEl('event-time')?.addEventListener('change', validateTime);
 
     // ==========================================
-    // 🎨 4. LÓGICA DE UI (CARROSSEL, MENU MOBILE)
+    // 🎨 4. LÓGICA DE UI (CARROSSEL, MENU MOBILE, ATALHOS)
     // ==========================================
     const track = document.querySelector('.carousel-track');
     const slides = Array.from(track ? track.children : []);
@@ -1387,6 +1331,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (track && slides.length > 0) {
         slides.forEach((_, index) => {
             const dot = document.createElement('button');
+            dot.classList.add('carousel-dot');
             dot.classList.add('dot');
             if (index === 0) dot.classList.add('active');
             dotsNav.appendChild(dot);
@@ -1403,11 +1348,11 @@ document.addEventListener('DOMContentLoaded', function () {
             const currentSlide = slides[currentSlideIndex];
             const targetSlide = slides[targetIndex];
 
-            currentSlide.classList.remove('active');
-            targetSlide.classList.add('active');
+            if (currentSlide) currentSlide.classList.remove('active');
+            if (targetSlide) targetSlide.classList.add('active');
 
-            dots[currentSlideIndex].classList.remove('active');
-            dots[targetIndex].classList.add('active');
+            if (dots[currentSlideIndex]) dots[currentSlideIndex].classList.remove('active');
+            if (dots[targetIndex]) dots[targetIndex].classList.add('active');
 
             const slideWidth = slides[0].getBoundingClientRect().width;
             track.style.transform = 'translateX(-' + (slideWidth * targetIndex) + 'px)';
@@ -1418,13 +1363,130 @@ document.addEventListener('DOMContentLoaded', function () {
         if (nextButton) nextButton.addEventListener('click', () => moveToSlide(currentSlideIndex + 1));
         if (prevButton) prevButton.addEventListener('click', () => moveToSlide(currentSlideIndex - 1));
 
-        setInterval(() => moveToSlide(currentSlideIndex + 1), 5000);
+        setInterval(() => moveToSlide(currentSlideIndex + 1), 6000);
 
         window.addEventListener('resize', () => {
             const slideWidth = slides[0].getBoundingClientRect().width;
             track.style.transform = 'translateX(-' + (slideWidth * currentSlideIndex) + 'px)';
         });
     }
+
+    // ==========================================
+    // 📸 CARROSSEL DA GALERIA DE FOTOS (6 POR VEZ)
+    // ==========================================
+    const galleryTrack = document.getElementById('gallery-carousel-track');
+    const galleryItems = galleryTrack ? Array.from(galleryTrack.children) : [];
+    const galleryPrevBtn = document.getElementById('gallery-prev-btn');
+    const galleryNextBtn = document.getElementById('gallery-next-btn');
+    const galleryDotsContainer = document.getElementById('gallery-carousel-dots');
+
+    if (galleryTrack && galleryItems.length > 0) {
+        let galleryIndex = 0;
+
+        function getVisibleCount() {
+            if (window.innerWidth <= 768) return 2;
+            if (window.innerWidth <= 1200) return 4;
+            return 6; // 6 fotos por vez em desktop
+        }
+
+        function getMaxIndex() {
+            const visible = getVisibleCount();
+            return Math.max(0, galleryItems.length - visible);
+        }
+
+        function updateGalleryDots() {
+            if (!galleryDotsContainer) return;
+            galleryDotsContainer.innerHTML = '';
+            const visible = getVisibleCount();
+            const totalPages = Math.ceil(galleryItems.length / visible);
+            const currentPage = Math.min(totalPages - 1, Math.floor(galleryIndex / visible));
+
+            for (let i = 0; i < totalPages; i++) {
+                const dot = document.createElement('button');
+                dot.classList.add('carousel-dot');
+                dot.classList.add('dot');
+                if (i === currentPage) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    galleryIndex = Math.min(i * visible, getMaxIndex());
+                    slideGallery();
+                });
+                galleryDotsContainer.appendChild(dot);
+            }
+        }
+
+        function slideGallery() {
+            const maxIdx = getMaxIndex();
+            if (galleryIndex > maxIdx) galleryIndex = 0;
+            if (galleryIndex < 0) galleryIndex = maxIdx;
+
+            const itemWidth = galleryItems[0].getBoundingClientRect().width;
+            const gap = 16;
+            const offset = (itemWidth + gap) * galleryIndex;
+            galleryTrack.style.transform = `translateX(-${offset}px)`;
+
+            updateGalleryDots();
+        }
+
+        if (galleryNextBtn) {
+            galleryNextBtn.addEventListener('click', () => {
+                const visible = getVisibleCount();
+                if (galleryIndex >= getMaxIndex()) {
+                    galleryIndex = 0;
+                } else {
+                    galleryIndex = Math.min(galleryIndex + visible, getMaxIndex());
+                }
+                slideGallery();
+            });
+        }
+
+        if (galleryPrevBtn) {
+            galleryPrevBtn.addEventListener('click', () => {
+                const visible = getVisibleCount();
+                if (galleryIndex <= 0) {
+                    galleryIndex = getMaxIndex();
+                } else {
+                    galleryIndex = Math.max(0, galleryIndex - visible);
+                }
+                slideGallery();
+            });
+        }
+
+        updateGalleryDots();
+        slideGallery();
+
+        // Loop automático contínuo a cada rodada de 6 fotos
+        setInterval(() => {
+            if (document.hidden) return;
+            const visible = getVisibleCount();
+            if (galleryIndex >= getMaxIndex()) {
+                galleryIndex = 0;
+            } else {
+                galleryIndex = Math.min(galleryIndex + visible, getMaxIndex());
+            }
+            slideGallery();
+        }, 4000);
+
+        window.addEventListener('resize', () => {
+            if (galleryIndex > getMaxIndex()) galleryIndex = getMaxIndex();
+            slideGallery();
+        });
+    }
+
+    // Botões "Simular" nos Cards de Serviços (Atalho inteligente para a Calculadora)
+    const serviceSimularButtons = document.querySelectorAll('.btn-service-simular');
+    serviceSimularButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const targetServiceId = btn.getAttribute('data-service-target');
+            if (targetServiceId) {
+                const targetCheckbox = getEl(targetServiceId);
+                if (targetCheckbox) {
+                    targetCheckbox.checked = true;
+                    updateAddonsState();
+                    calculateTotal();
+                }
+            }
+        });
+    });
 
     const mobileBtn = document.querySelector('.mobile-menu-btn');
     const nav = document.querySelector('.main-nav');
@@ -1458,29 +1520,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         });
-
-        const dropdowns = document.querySelectorAll('.dropdown');
-        dropdowns.forEach(drop => {
-            const btn = drop.querySelector('.dropbtn');
-            if (btn) {
-                btn.addEventListener('click', (e) => {
-                    if (window.innerWidth <= 768) {
-                        e.preventDefault();
-                        drop.classList.toggle('active');
-                        const content = drop.querySelector('.dropdown-content');
-                        if (content) {
-                            content.style.position = (content.style.position === 'static') ? 'absolute' : 'static';
-                            content.style.display = (content.style.display === 'block') ? 'none' : 'block';
-                        }
-                    }
-                });
-            }
-        });
     }
 
     window.addEventListener('scroll', () => {
         if (header) {
-            if (window.scrollY > 50) header.classList.add('scrolled');
+            if (window.scrollY > 40) header.classList.add('scrolled');
             else header.classList.remove('scrolled');
         }
     });
@@ -1488,29 +1532,17 @@ document.addEventListener('DOMContentLoaded', function () {
     // ==========================================
     // 💡 FAQ LÓGICA (ACCORDION)
     // ==========================================
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', () => {
-            // Fecha os outros (opcional)
-            faqQuestions.forEach(q => {
-                if (q !== question) {
-                    q.classList.remove('active');
-                    if (q.nextElementSibling) {
-                        q.nextElementSibling.style.maxHeight = null;
-                    }
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const questionBtn = item.querySelector('.faq-question');
+        if (questionBtn) {
+            questionBtn.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                faqItems.forEach(otherItem => otherItem.classList.remove('active'));
+                if (!isActive) {
+                    item.classList.add('active');
                 }
             });
-
-            // Abre/Fecha o clicado
-            question.classList.toggle('active');
-            const answer = question.nextElementSibling;
-            if (answer) {
-                if (question.classList.contains('active')) {
-                    answer.style.maxHeight = answer.scrollHeight + "px";
-                } else {
-                    answer.style.maxHeight = null;
-                }
-            }
-        });
+        }
     });
 });
