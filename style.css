@@ -2188,3 +2188,312 @@ footer {
         height: 180px;
     }
 }
+
+/* ==========================================================================
+   04. POR QUE NOS ESCOLHEM? (DIFERENCIAIS SECTION - OFF WHITE / AREIA)
+   ========================================================================== */
+.why-choose-us-section {
+    background-color: #EDE5D8;
+    color: #1C1512;
+    padding: 100px 0;
+    position: relative;
+}
+
+.why-choose-us-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 70px;
+    align-items: center;
+}
+
+.why-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #9E7D3B;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.why-tag::before {
+    content: "";
+    display: inline-block;
+    width: 30px;
+    height: 1.5px;
+    background-color: #9E7D3B;
+}
+
+.why-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    color: #1C1512;
+    line-height: 1.15;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.why-title em {
+    font-style: italic;
+    color: #B88B2A;
+    font-weight: 400;
+}
+
+.why-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    color: #4A4036;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    max-width: 480px;
+}
+
+.why-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1C1512;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    transition: var(--transition);
+}
+
+.why-cta-link:hover {
+    color: #B88B2A;
+    transform: translateX(5px);
+}
+
+.why-items-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid rgba(28, 21, 18, 0.15);
+    border-left: 1px solid rgba(28, 21, 18, 0.15);
+}
+
+.why-item {
+    display: grid;
+    grid-template-columns: 35px 1fr 30px;
+    align-items: center;
+    padding: 22px 20px;
+    border-right: 1px solid rgba(28, 21, 18, 0.15);
+    border-bottom: 1px solid rgba(28, 21, 18, 0.15);
+    transition: background-color 0.3s ease;
+}
+
+.why-item:hover {
+    background-color: rgba(184, 139, 42, 0.08);
+}
+
+.why-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: #B88B2A;
+    font-weight: 600;
+}
+
+.why-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1C1512;
+    padding-right: 10px;
+}
+
+.why-check {
+    color: #1C1512;
+    font-size: 0.9rem;
+    text-align: right;
+}
+
+@media (max-width: 900px) {
+    .why-choose-us-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .why-items-grid {
+        grid-template-columns: 1fr;
+    }
+    .why-title {
+        font-size: 2.4rem;
+    }
+}
+
+/* ==========================================================================
+   PRÉ-FOOTER CTA SECTION (MARROM NOBRE ESCURO)
+   ========================================================================== */
+.pre-footer-cta-section {
+    background: linear-gradient(135deg, #261613 0%, #1A0F0D 100%);
+    color: #ffffff;
+    padding: 100px 0 90px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.pre-footer-cta-bg-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.shape-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 175, 55, 0.12);
+}
+
+.shape-1 {
+    width: 600px;
+    height: 600px;
+    top: -200px;
+    left: -150px;
+}
+
+.shape-2 {
+    width: 800px;
+    height: 800px;
+    bottom: -350px;
+    right: -200px;
+}
+
+.pre-footer-cta-container {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pre-footer-crown-badge {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(212, 175, 55, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    color: var(--primary-gold);
+    font-size: 1.5rem;
+    background: rgba(212, 175, 55, 0.05);
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+}
+
+.pre-footer-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--primary-gold);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.pre-footer-tag::before,
+.pre-footer-tag::after {
+    content: "";
+    display: inline-block;
+    width: 30px;
+    height: 1px;
+    background-color: var(--primary-gold);
+}
+
+.pre-footer-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    color: #ffffff;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.pre-footer-title em {
+    font-style: italic;
+    color: var(--primary-gold);
+    font-weight: 400;
+}
+
+.pre-footer-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    color: #ded2c8;
+    margin-bottom: 40px;
+    max-width: 600px;
+    line-height: 1.5;
+}
+
+.pre-footer-btn {
+    padding: 16px 38px;
+    font-size: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pre-footer-micro-copy {
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    margin-top: 30px;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .pre-footer-title {
+        font-size: 2.4rem;
+    }
+    .pre-footer-subtitle {
+        font-size: 1.05rem;
+    }
+}
+
+/* ==========================================================================
+   INTERCALAÇÃO DE FAIXAS DE CORES
+   ========================================================================== */
+.essence-section {
+    background-color: #121212 !important; /* Cinza Escuro */
+}
+
+.services-section {
+    background-color: #1C1310 !important; /* Marrom Café Profundo */
+}
+
+.experience-section {
+    background-color: #141414 !important; /* Cinza Grafite */
+}
+
+.history-section {
+    background-color: #0A0A0A !important; /* Preto */
+}
+
+.testimonials-section {
+    background-color: #1A1210 !important; /* Marrom Escuro */
+}
+
+.faq-section {
+    background-color: #121212 !important; /* Cinza */
+}
+
+.how-it-works-section {
+    background-color: #0D0D0D !important; /* Preto */
+}
+
+#contact {
+    background-color: #070707 !important; /* Preto Rodapé */
+}
