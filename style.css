@@ -2825,3 +2825,639 @@ footer {
 #contact {
     background-color: #070707 !important;
 }
+
+/* ==========================================================================
+   SISTEMA DE RESPONSIVIDADE MOBILE COMPLETO & PROPORCIONAL
+   Otimizado para smartphones (iOS / Android) e tablets
+   ========================================================================== */
+
+@media (max-width: 992px) {
+    .container {
+        padding: 0 20px !important;
+    }
+    
+    .essence-grid {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+    }
+    
+    .essence-image-frame {
+        max-width: 440px !important;
+        height: 380px !important;
+        margin: 0 auto !important;
+    }
+    
+    .modern-services-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+    }
+    
+    .why-choose-us-grid {
+        grid-template-columns: 1fr !important;
+        gap: 45px !important;
+    }
+    
+    .history-grid {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+    }
+    
+    .how-it-works-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    /* --- Reset e Padding de Seções no Mobile --- */
+    html, body {
+        overflow-x: hidden !important;
+        font-size: 15px !important;
+    }
+    
+    .container {
+        padding: 0 16px !important;
+    }
+    
+    .essence-section,
+    .services-section,
+    .experience-section,
+    #diferenciais,
+    .why-choose-us-section,
+    .history-section,
+    .testimonials-section,
+    .faq-section,
+    .how-it-works-section,
+    .pre-footer-cta-section {
+        padding: 55px 0 !important;
+        min-height: auto !important;
+    }
+    
+    #contact {
+        padding: 50px 0 25px !important;
+    }
+    
+    /* --- Header & Mobile Menu --- */
+    header {
+        padding: 12px 0 !important;
+    }
+    
+    .header-container {
+        padding: 0 16px !important;
+    }
+    
+    .logo-img {
+        height: 40px !important;
+    }
+    
+    .logo-title {
+        font-size: 1.05rem !important;
+        letter-spacing: 1.5px !important;
+    }
+    
+    .logo-subtitle {
+        font-size: 0.65rem !important;
+    }
+    
+    .header-cta-btn {
+        display: none !important;
+    }
+    
+    .mobile-menu-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 8px;
+        background: rgba(212, 175, 55, 0.12);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        color: var(--primary-gold);
+        font-size: 1.25rem;
+    }
+    
+    .main-nav {
+        position: fixed !important;
+        top: 0 !important;
+        right: -100% !important;
+        width: 82% !important;
+        max-width: 310px !important;
+        height: 100vh !important;
+        background: rgba(10, 10, 10, 0.98) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        padding: 80px 24px 30px !important;
+        transition: right 0.35s ease !important;
+        border-left: 1px solid rgba(212, 175, 55, 0.4) !important;
+        z-index: 1001 !important;
+        overflow-y: auto !important;
+    }
+    
+    .main-nav.active {
+        right: 0 !important;
+    }
+    
+    .main-nav ul {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 16px !important;
+    }
+    
+    .main-nav a {
+        font-size: 1.05rem !important;
+        padding: 8px 0 !important;
+        display: block !important;
+        width: 100% !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    /* --- Hero Section --- */
+    .hero-section {
+        padding-top: 105px !important;
+        padding-bottom: 50px !important;
+        min-height: auto !important;
+    }
+    
+    .hero-badge {
+        font-size: 0.72rem !important;
+        padding: 5px 12px !important;
+        letter-spacing: 1.5px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .hero-title {
+        font-size: 2.15rem !important;
+        line-height: 1.18 !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .hero-description {
+        font-size: 0.92rem !important;
+        line-height: 1.55 !important;
+        margin-bottom: 24px !important;
+    }
+    
+    .hero-cta-group {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 12px !important;
+    }
+    
+    .hero-cta-group .btn-gold,
+    .hero-cta-group .btn-outline {
+        width: 100% !important;
+        padding: 13px 20px !important;
+        font-size: 0.92rem !important;
+        justify-content: center !important;
+    }
+    
+    .hero-seal {
+        display: none !important;
+    }
+
+    /* --- 01. Nossa Essência --- */
+    .section-tag,
+    .essence-section .section-tag,
+    .testimonials-section .section-tag,
+    .why-tag {
+        font-size: 0.75rem !important;
+        letter-spacing: 1.8px !important;
+        margin-bottom: 12px !important;
+        gap: 8px !important;
+    }
+    
+    .section-title,
+    .section-title-large,
+    .essence-section .section-title-large,
+    .testimonials-section .section-title-large,
+    .how-it-works-title,
+    .pre-footer-title {
+        font-size: 2.05rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 16px !important;
+    }
+    
+    .essence-section .essence-text {
+        font-size: 0.92rem !important;
+        line-height: 1.65 !important;
+    }
+    
+    .essence-section .essence-quote-card {
+        padding: 16px 18px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .essence-section .essence-quote-card p {
+        font-size: 0.92rem !important;
+        line-height: 1.55 !important;
+    }
+    
+    .essence-metrics {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+        margin-top: 25px !important;
+    }
+    
+    .essence-metric-card {
+        padding: 16px 12px !important;
+    }
+    
+    .metric-number {
+        font-size: 1.8rem !important;
+    }
+    
+    .metric-label {
+        font-size: 0.75rem !important;
+    }
+    
+    .essence-image-frame {
+        max-width: 100% !important;
+        height: 280px !important;
+    }
+
+    /* --- 02. Nossos Serviços --- */
+    .services-requirements-box {
+        padding: 18px 15px !important;
+        margin-bottom: 28px !important;
+        border-radius: 12px !important;
+    }
+    
+    .requirements-title {
+        font-size: 0.92rem !important;
+    }
+    
+    .requirements-list {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+    
+    .requirement-item {
+        font-size: 0.82rem !important;
+    }
+    
+    .modern-services-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    
+    .modern-service-card {
+        border-radius: 14px !important;
+    }
+    
+    .modern-service-card .card-image-box {
+        height: 190px !important;
+    }
+    
+    .modern-service-card .card-body {
+        padding: 18px 16px !important;
+    }
+    
+    .modern-service-card .card-title {
+        font-size: 1.25rem !important;
+        margin-bottom: 8px !important;
+    }
+    
+    .modern-service-card .card-desc {
+        font-size: 0.85rem !important;
+        line-height: 1.55 !important;
+        margin-bottom: 14px !important;
+    }
+    
+    .modern-service-card .card-actions {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+    
+    .modern-service-card .btn-catalog,
+    .modern-service-card .btn-whatsapp {
+        width: 100% !important;
+        padding: 11px 16px !important;
+        font-size: 0.85rem !important;
+        justify-content: center !important;
+    }
+    
+    .services-bottom-cta {
+        padding: 24px 18px !important;
+        margin-top: 30px !important;
+        border-radius: 14px !important;
+    }
+    
+    .services-bottom-cta h3 {
+        font-size: 1.3rem !important;
+    }
+    
+    .services-bottom-cta p {
+        font-size: 0.88rem !important;
+        margin-bottom: 18px !important;
+    }
+
+    /* --- 03. A Experiência --- */
+    .experience-card-carousel {
+        height: 250px !important;
+    }
+    
+    .gallery-item-card {
+        height: 150px !important;
+    }
+
+    /* --- 04. Por Que Nos Escolhem? (Diferenciais) --- */
+    #diferenciais .why-title,
+    .why-title {
+        font-size: 2.1rem !important;
+        line-height: 1.18 !important;
+        margin-bottom: 16px !important;
+    }
+    
+    #diferenciais .why-quote,
+    .why-quote {
+        font-size: 1.02rem !important;
+        line-height: 1.55 !important;
+        margin-bottom: 24px !important;
+    }
+    
+    #diferenciais .why-items-grid,
+    .why-items-grid {
+        grid-template-columns: 1fr !important;
+        border-radius: 10px !important;
+    }
+    
+    #diferenciais .why-item,
+    .why-item {
+        padding: 15px 14px !important;
+        grid-template-columns: 32px 1fr 24px !important;
+        border-right: none !important;
+    }
+    
+    #diferenciais .why-item:not(:last-child),
+    .why-item:not(:last-child) {
+        border-bottom: 1px solid rgba(28, 21, 18, 0.15) !important;
+    }
+    
+    #diferenciais .why-num,
+    .why-num {
+        font-size: 0.95rem !important;
+    }
+    
+    #diferenciais .why-name,
+    .why-name {
+        font-size: 0.92rem !important;
+    }
+    
+    #diferenciais .why-check i,
+    .why-check i {
+        font-size: 0.95rem !important;
+    }
+
+    /* --- 05. Nossa História --- */
+    .history-content h3 {
+        font-size: 1.6rem !important;
+    }
+    
+    .history-text {
+        font-size: 0.9rem !important;
+        line-height: 1.6 !important;
+    }
+    
+    .history-stats {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+    
+    .history-stat-card {
+        padding: 15px !important;
+    }
+    
+    .stat-number {
+        font-size: 1.7rem !important;
+    }
+    
+    .stat-label {
+        font-size: 0.72rem !important;
+    }
+
+    /* --- 06. Depoimentos --- */
+    .testimonial-card {
+        padding: 22px 18px !important;
+        border-radius: 14px !important;
+    }
+    
+    .testimonial-header {
+        gap: 12px !important;
+        margin-bottom: 14px !important;
+    }
+    
+    .client-avatar {
+        width: 44px !important;
+        height: 44px !important;
+    }
+    
+    .client-name {
+        font-size: 0.98rem !important;
+    }
+    
+    .stars-date {
+        font-size: 0.78rem !important;
+    }
+    
+    .testimonial-card .testimonial-text {
+        font-size: 0.88rem !important;
+        line-height: 1.55 !important;
+    }
+    
+    .carousel-controls {
+        gap: 14px !important;
+        margin-top: 20px !important;
+    }
+    
+    .carousel-btn {
+        width: 38px !important;
+        height: 38px !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* --- 07. FAQ --- */
+    .faq-container {
+        max-width: 100% !important;
+    }
+    
+    .faq-item {
+        margin-bottom: 10px !important;
+        border-radius: 10px !important;
+    }
+    
+    .faq-question {
+        padding: 14px 16px !important;
+        font-size: 0.92rem !important;
+    }
+    
+    .faq-answer {
+        padding: 0 16px 16px !important;
+        font-size: 0.86rem !important;
+        line-height: 1.55 !important;
+    }
+
+    /* --- 08. Como Contratar --- */
+    .how-it-works-card {
+        padding: 28px 16px !important;
+        border-radius: 16px !important;
+    }
+    
+    .how-it-works-header {
+        margin-bottom: 25px !important;
+    }
+    
+    .how-it-works-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+        margin-bottom: 25px !important;
+    }
+    
+    .how-it-works-section .step-card,
+    .step-card {
+        padding: 16px 14px !important;
+        border-radius: 12px !important;
+    }
+    
+    .how-it-works-section .step-badge,
+    .step-badge {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 0.82rem !important;
+        top: 6px !important;
+        left: 6px !important;
+    }
+    
+    .how-it-works-section .step-icon-box,
+    .step-icon-box {
+        height: 70px !important;
+        margin: 8px 0 12px !important;
+        border-radius: 10px !important;
+    }
+    
+    .how-it-works-section .step-icon-box i,
+    .step-icon-box i {
+        font-size: 1.8rem !important;
+    }
+    
+    .how-it-works-section .step-title,
+    .step-title {
+        font-size: 0.92rem !important;
+        margin-bottom: 6px !important;
+    }
+    
+    .how-it-works-section .step-desc,
+    .step-desc {
+        font-size: 0.82rem !important;
+        line-height: 1.45 !important;
+    }
+    
+    .how-it-works-footer {
+        padding-top: 20px !important;
+    }
+    
+    .how-it-works-quote {
+        font-size: 0.85rem !important;
+    }
+
+    /* --- 09. Pré-Footer CTA --- */
+    .pre-footer-crown i {
+        font-size: 2.2rem !important;
+    }
+    
+    .pre-footer-subtitle {
+        font-size: 0.92rem !important;
+        line-height: 1.5 !important;
+        margin-bottom: 25px !important;
+    }
+    
+    .pre-footer-btn {
+        width: 100% !important;
+        padding: 14px 20px !important;
+        font-size: 0.92rem !important;
+        justify-content: center !important;
+    }
+    
+    .pre-footer-micro-copy {
+        font-size: 0.68rem !important;
+        margin-top: 20px !important;
+    }
+
+    /* --- 10. Footer --- */
+    .footer-content {
+        flex-direction: column !important;
+        gap: 30px !important;
+        text-align: center !important;
+    }
+    
+    .footer-logo {
+        justify-content: center !important;
+        margin-bottom: 12px !important;
+    }
+    
+    .footer-info {
+        text-align: center !important;
+    }
+    
+    .footer-links-group {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 15px !important;
+    }
+    
+    .social-links {
+        justify-content: center !important;
+    }
+    
+    .footer-bottom {
+        margin-top: 30px !important;
+        padding-top: 20px !important;
+        font-size: 0.75rem !important;
+    }
+
+    /* --- Botão Flutuante WhatsApp --- */
+    .whatsapp-float {
+        width: 50px !important;
+        height: 50px !important;
+        bottom: 16px !important;
+        right: 16px !important;
+        font-size: 26px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Telas menores de smartphone (iPhone SE, telas ~360px-400px) */
+    .hero-title {
+        font-size: 1.85rem !important;
+    }
+    
+    .section-title,
+    .section-title-large,
+    .essence-section .section-title-large,
+    .testimonials-section .section-title-large,
+    .how-it-works-title,
+    .pre-footer-title,
+    #diferenciais .why-title {
+        font-size: 1.75rem !important;
+    }
+    
+    .essence-metrics {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .history-stats {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .why-item {
+        grid-template-columns: 28px 1fr 20px !important;
+        padding: 13px 10px !important;
+    }
+    
+    .why-name {
+        font-size: 0.88rem !important;
+    }
+    
+    .why-num {
+        font-size: 0.88rem !important;
+    }
+}
