@@ -2192,9 +2192,11 @@ footer {
 /* ==========================================================================
    04. POR QUE NOS ESCOLHEM? (DIFERENCIAIS SECTION - OFF WHITE / AREIA)
    ========================================================================== */
+#diferenciais,
 .why-choose-us-section {
-    background-color: #EDE5D8;
-    color: #1C1512;
+    background-color: #EDE5D8 !important;
+    background: #EDE5D8 !important;
+    color: #1C1512 !important;
     padding: 100px 0;
     position: relative;
 }
@@ -2206,11 +2208,12 @@ footer {
     align-items: center;
 }
 
+#diferenciais .why-tag,
 .why-tag {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    color: #9E7D3B;
+    color: #9E7D3B !important;
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 2px;
@@ -2218,94 +2221,106 @@ footer {
     margin-bottom: 20px;
 }
 
+#diferenciais .why-tag::before,
 .why-tag::before {
     content: "";
     display: inline-block;
     width: 30px;
     height: 1.5px;
-    background-color: #9E7D3B;
+    background-color: #9E7D3B !important;
 }
 
+#diferenciais .why-title,
 .why-title {
     font-family: 'Playfair Display', serif;
     font-size: 3.2rem;
-    color: #1C1512;
+    color: #1C1512 !important;
     line-height: 1.15;
     margin-bottom: 25px;
     font-weight: 700;
 }
 
+#diferenciais .why-title em,
 .why-title em {
     font-style: italic;
-    color: #B88B2A;
+    color: #B88B2A !important;
     font-weight: 400;
 }
 
+#diferenciais .why-quote,
 .why-quote {
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: 1.25rem;
-    color: #4A4036;
+    color: #4A4036 !important;
     line-height: 1.6;
     margin-bottom: 35px;
     max-width: 480px;
 }
 
+#diferenciais .why-cta-link,
 .why-cta-link {
     display: inline-flex;
     align-items: center;
     gap: 10px;
     font-size: 0.95rem;
     font-weight: 700;
-    color: #1C1512;
+    color: #1C1512 !important;
     text-decoration: underline;
     text-underline-offset: 6px;
     transition: var(--transition);
 }
 
+#diferenciais .why-cta-link:hover,
 .why-cta-link:hover {
-    color: #B88B2A;
+    color: #B88B2A !important;
     transform: translateX(5px);
 }
 
+#diferenciais .why-items-grid,
 .why-items-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    border-top: 1px solid rgba(28, 21, 18, 0.15);
-    border-left: 1px solid rgba(28, 21, 18, 0.15);
+    border-top: 1px solid rgba(28, 21, 18, 0.2) !important;
+    border-left: 1px solid rgba(28, 21, 18, 0.2) !important;
 }
 
+#diferenciais .why-item,
 .why-item {
     display: grid;
     grid-template-columns: 35px 1fr 30px;
     align-items: center;
     padding: 22px 20px;
-    border-right: 1px solid rgba(28, 21, 18, 0.15);
-    border-bottom: 1px solid rgba(28, 21, 18, 0.15);
+    border-right: 1px solid rgba(28, 21, 18, 0.2) !important;
+    border-bottom: 1px solid rgba(28, 21, 18, 0.2) !important;
     transition: background-color 0.3s ease;
 }
 
+#diferenciais .why-item:hover,
 .why-item:hover {
-    background-color: rgba(184, 139, 42, 0.08);
+    background-color: rgba(184, 139, 42, 0.08) !important;
 }
 
+#diferenciais .why-num,
 .why-num {
     font-family: 'Playfair Display', serif;
     font-size: 0.95rem;
-    color: #B88B2A;
+    color: #B88B2A !important;
     font-weight: 600;
 }
 
+#diferenciais .why-name,
 .why-name {
     font-family: 'Montserrat', sans-serif;
     font-size: 0.95rem;
     font-weight: 600;
-    color: #1C1512;
+    color: #1C1512 !important;
     padding-right: 10px;
 }
 
+#diferenciais .why-check,
 .why-check {
-    color: #1C1512;
+    color: #1C1512 !important;
     font-size: 0.9rem;
     text-align: right;
 }
