@@ -2194,147 +2194,216 @@ footer {
    ========================================================================== */
 #diferenciais,
 .why-choose-us-section {
-    background-color: #EDE5D8 !important;
-    background: #EDE5D8 !important;
-    color: #1C1512 !important;
-    padding: 100px 0;
+    background-color: #F3ECE2 !important;
+    background: #F3ECE2 !important;
+    color: #110C0A !important;
+    padding: 140px 0 !important;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
     position: relative;
+    border-top: 1px solid rgba(184, 139, 42, 0.25);
+    border-bottom: 1px solid rgba(184, 139, 42, 0.25);
+}
+
+#diferenciais .container,
+.why-choose-us-section .container {
+    width: 100%;
 }
 
 .why-choose-us-grid {
     display: grid;
-    grid-template-columns: 1fr 1.3fr;
-    gap: 70px;
+    grid-template-columns: 1fr 1.25fr;
+    gap: 80px;
     align-items: center;
+}
+
+#diferenciais .why-choose-us-content,
+.why-choose-us-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #diferenciais .why-tag,
 .why-tag {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    color: #9E7D3B !important;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 2px;
+    gap: 12px;
+    color: #8C6212 !important;
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 #diferenciais .why-tag::before,
 .why-tag::before {
     content: "";
     display: inline-block;
-    width: 30px;
-    height: 1.5px;
-    background-color: #9E7D3B !important;
+    width: 35px;
+    height: 2px;
+    background-color: #8C6212 !important;
 }
 
 #diferenciais .why-title,
 .why-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.2rem;
-    color: #1C1512 !important;
-    line-height: 1.15;
-    margin-bottom: 25px;
-    font-weight: 700;
+    font-family: 'Playfair Display', serif !important;
+    font-size: 3.6rem !important;
+    color: #110C0A !important;
+    line-height: 1.15 !important;
+    margin-bottom: 28px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px;
 }
 
 #diferenciais .why-title em,
 .why-title em {
-    font-style: italic;
-    color: #B88B2A !important;
-    font-weight: 400;
+    font-style: italic !important;
+    color: #966E18 !important;
+    font-weight: 700 !important;
 }
 
 #diferenciais .why-quote,
 .why-quote {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 1.25rem;
-    color: #4A4036 !important;
-    line-height: 1.6;
-    margin-bottom: 35px;
-    max-width: 480px;
+    font-family: 'Playfair Display', serif !important;
+    font-style: italic !important;
+    font-size: 1.35rem !important;
+    color: #2E2520 !important;
+    line-height: 1.65 !important;
+    margin-bottom: 40px !important;
+    max-width: 500px !important;
+    font-weight: 500 !important;
 }
 
 #diferenciais .why-cta-link,
 .why-cta-link {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #1C1512 !important;
-    text-decoration: underline;
-    text-underline-offset: 6px;
-    transition: var(--transition);
+    gap: 12px;
+    font-size: 1.05rem !important;
+    font-weight: 800 !important;
+    color: #110C0A !important;
+    text-decoration: none !important;
+    border-bottom: 2px solid #8C6212 !important;
+    padding-bottom: 6px;
+    width: fit-content;
+    transition: all 0.3s ease;
+}
+
+#diferenciais .why-cta-link i,
+.why-cta-link i {
+    color: #8C6212 !important;
+    transition: transform 0.3s ease;
 }
 
 #diferenciais .why-cta-link:hover,
 .why-cta-link:hover {
-    color: #B88B2A !important;
-    transform: translateX(5px);
+    color: #8C6212 !important;
+    border-bottom-color: #110C0A !important;
+}
+
+#diferenciais .why-cta-link:hover i,
+.why-cta-link:hover i {
+    transform: translateX(6px);
 }
 
 #diferenciais .why-items-grid,
 .why-items-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    border-top: 1px solid rgba(28, 21, 18, 0.2) !important;
-    border-left: 1px solid rgba(28, 21, 18, 0.2) !important;
+    background: #FAF6F0;
+    border: 1.5px solid rgba(28, 21, 18, 0.25) !important;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
 }
 
 #diferenciais .why-item,
 .why-item {
     display: grid;
-    grid-template-columns: 35px 1fr 30px;
+    grid-template-columns: 40px 1fr 30px;
     align-items: center;
-    padding: 22px 20px;
-    border-right: 1px solid rgba(28, 21, 18, 0.2) !important;
-    border-bottom: 1px solid rgba(28, 21, 18, 0.2) !important;
-    transition: background-color 0.3s ease;
+    padding: 26px 24px;
+    border-right: 1px solid rgba(28, 21, 18, 0.18) !important;
+    border-bottom: 1px solid rgba(28, 21, 18, 0.18) !important;
+    background-color: #FAF6F0 !important;
+    transition: all 0.3s ease;
+}
+
+#diferenciais .why-item:nth-child(2n),
+.why-item:nth-child(2n) {
+    border-right: none !important;
+}
+
+#diferenciais .why-item:nth-last-child(-n+2),
+.why-item:nth-last-child(-n+2) {
+    border-bottom: none !important;
 }
 
 #diferenciais .why-item:hover,
 .why-item:hover {
-    background-color: rgba(184, 139, 42, 0.08) !important;
+    background-color: #FFFFFF !important;
+    box-shadow: inset 0 0 0 1px #8C6212;
 }
 
 #diferenciais .why-num,
 .why-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.95rem;
-    color: #B88B2A !important;
-    font-weight: 600;
+    font-family: 'Playfair Display', serif !important;
+    font-size: 1.15rem !important;
+    color: #8C6212 !important;
+    font-weight: 800 !important;
 }
 
 #diferenciais .why-name,
 .why-name {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #1C1512 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    color: #110C0A !important;
     padding-right: 10px;
+    letter-spacing: -0.2px;
 }
 
 #diferenciais .why-check,
 .why-check {
-    color: #1C1512 !important;
-    font-size: 0.9rem;
-    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
-@media (max-width: 900px) {
+#diferenciais .why-check i,
+.why-check i {
+    color: #8C6212 !important;
+    font-size: 1.05rem !important;
+    font-weight: 900 !important;
+}
+
+@media (max-width: 992px) {
+    #diferenciais,
+    .why-choose-us-section {
+        padding: 90px 0 !important;
+        min-height: auto;
+    }
     .why-choose-us-grid {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 50px;
     }
     .why-items-grid {
         grid-template-columns: 1fr;
     }
+    #diferenciais .why-item,
+    .why-item {
+        border-right: none !important;
+    }
+    #diferenciais .why-item:not(:last-child),
+    .why-item:not(:last-child) {
+        border-bottom: 1px solid rgba(28, 21, 18, 0.18) !important;
+    }
+    #diferenciais .why-title,
     .why-title {
-        font-size: 2.4rem;
+        font-size: 2.8rem !important;
     }
 }
 
@@ -2485,60 +2554,73 @@ footer {
 /* 01. NOSSA ESSÊNCIA (OFF-WHITE #F6EFE6) */
 .essence-section {
     background-color: #F6EFE6 !important;
-    color: #1C1512 !important;
+    color: #110C0A !important;
+    padding: 130px 0 !important;
 }
 
 .essence-section .section-tag {
-    color: #9E7D3B !important;
+    color: #8C6212 !important;
+    font-weight: 800 !important;
 }
 
 .essence-section .section-tag::before {
-    background-color: #9E7D3B !important;
+    background-color: #8C6212 !important;
 }
 
 .essence-section .section-title-large {
-    color: #1C1512 !important;
+    color: #110C0A !important;
+    font-weight: 800 !important;
 }
 
 .essence-section .section-title-large em,
 .essence-section .section-title-large i {
-    color: #B88B2A !important;
+    color: #966E18 !important;
+    font-weight: 700 !important;
 }
 
 .essence-section .essence-text {
-    color: #3D342E !important;
+    color: #2E2520 !important;
+    font-size: 1.05rem !important;
+    line-height: 1.8 !important;
 }
 
 .essence-section .essence-text strong {
-    color: #1C1512 !important;
+    color: #110C0A !important;
+    font-weight: 700 !important;
 }
 
 .essence-section .essence-quote-card {
     background: #EAE1D3 !important;
-    border-left: 3px solid #B88B2A !important;
+    border-left: 4px solid #8C6212 !important;
+    padding: 24px 28px !important;
 }
 
 .essence-section .essence-quote-card p {
-    color: #2A201B !important;
+    color: #1A110E !important;
+    font-size: 1.08rem !important;
+    font-weight: 600 !important;
 }
 
 .essence-section .luxury-text-link {
-    color: #1C1512 !important;
-    border-bottom: 1px solid rgba(28, 21, 18, 0.4) !important;
+    color: #110C0A !important;
+    font-weight: 800 !important;
+    border-bottom: 2px solid #8C6212 !important;
 }
 
 .essence-section .luxury-text-link:hover {
-    color: #B88B2A !important;
-    border-bottom-color: #B88B2A !important;
+    color: #8C6212 !important;
+    border-bottom-color: #110C0A !important;
 }
 
 .essence-section .essence-number-badge {
-    color: #9E7D3B !important;
+    color: #8C6212 !important;
+    font-weight: 800 !important;
 }
 
 /* 02. NOSSOS SERVIÇOS (MARROM CAFÉ NOBRE #231714) */
 .services-section {
     background-color: #231714 !important;
+    padding: 130px 0 !important;
 }
 
 .services-requirements-box {
@@ -2559,18 +2641,20 @@ footer {
 /* 03. A EXPERIÊNCIA (CINZA GRAFITE #181818) */
 .experience-section {
     background-color: #181818 !important;
+    padding: 120px 0 !important;
 }
 
-/* 04. POR QUE NOS ESCOLHEM? (OFF-WHITE #EDE5D8) */
+/* 04. POR QUE NOS ESCOLHEM? (OFF-WHITE NOBRE #F3ECE2) */
 #diferenciais,
 .why-choose-us-section {
-    background-color: #EDE5D8 !important;
-    color: #1C1512 !important;
+    background-color: #F3ECE2 !important;
+    color: #110C0A !important;
 }
 
 /* 05. NOSSA HISTÓRIA & MARCAS (PRETO PROFUNDO #0C0B0A) */
 .history-section {
     background-color: #0C0B0A !important;
+    padding: 130px 0 !important;
 }
 
 .history-brand-card {
@@ -2581,59 +2665,67 @@ footer {
 /* 06. DEPOIMENTOS (OFF-WHITE / AREIA SUAVE #F5EFE6) */
 .testimonials-section {
     background-color: #F5EFE6 !important;
-    color: #1C1512 !important;
+    color: #110C0A !important;
+    padding: 130px 0 !important;
 }
 
 .testimonials-section .section-tag {
-    color: #9E7D3B !important;
+    color: #8C6212 !important;
+    font-weight: 800 !important;
 }
 
 .testimonials-section .section-tag::before {
-    background-color: #9E7D3B !important;
+    background-color: #8C6212 !important;
 }
 
 .testimonials-section .section-title-large {
-    color: #1C1512 !important;
+    color: #110C0A !important;
+    font-weight: 800 !important;
 }
 
 .testimonials-section .section-title-large em {
-    color: #B88B2A !important;
+    color: #966E18 !important;
+    font-weight: 700 !important;
 }
 
 .testimonials-section .section-subtitle {
-    color: #5C524A !important;
+    color: #382F28 !important;
+    font-size: 1.05rem !important;
 }
 
 .testimonial-card {
     background: #FFFFFF !important;
-    border: 1px solid rgba(184, 139, 42, 0.2) !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+    border: 1.5px solid rgba(184, 139, 42, 0.28) !important;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06) !important;
 }
 
 .testimonial-card .client-name {
-    color: #1C1512 !important;
+    color: #110C0A !important;
+    font-weight: 700 !important;
 }
 
 .testimonial-card .stars-date {
-    color: #7A6F66 !important;
+    color: #61554C !important;
 }
 
 .testimonial-card .testimonial-text {
-    color: #3D342E !important;
+    color: #2E2520 !important;
+    font-size: 0.95rem !important;
+    line-height: 1.65 !important;
 }
 
 .testimonial-card .quote-icon {
-    color: rgba(184, 139, 42, 0.3) !important;
+    color: rgba(184, 139, 42, 0.35) !important;
 }
 
 .testimonials-section .carousel-btn {
-    background: rgba(184, 139, 42, 0.12) !important;
-    border: 1px solid #B88B2A !important;
-    color: #9E7D3B !important;
+    background: rgba(184, 139, 42, 0.15) !important;
+    border: 1.5px solid #8C6212 !important;
+    color: #8C6212 !important;
 }
 
 .testimonials-section .carousel-btn:hover {
-    background: #B88B2A !important;
+    background: #8C6212 !important;
     color: #FFFFFF !important;
 }
 
@@ -2642,78 +2734,86 @@ footer {
 }
 
 .testimonials-section .carousel-dot.active {
-    background: #B88B2A !important;
+    background: #8C6212 !important;
 }
 
 /* 07. FAQ (CINZA CARVÃO #161616) */
 .faq-section {
     background-color: #161616 !important;
+    padding: 130px 0 !important;
 }
 
 /* 08. COMO CONTRATAR (OFF-WHITE / AREIA DOURADA #F0EAE0) */
 .how-it-works-section {
     background-color: #F0EAE0 !important;
-    color: #1C1512 !important;
+    color: #110C0A !important;
+    padding: 130px 0 !important;
 }
 
 .how-it-works-card {
     background: #FAF7F2 !important;
-    border: 1px solid rgba(184, 139, 42, 0.35) !important;
+    border: 1.5px solid rgba(184, 139, 42, 0.35) !important;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05) !important;
 }
 
 .how-it-works-header .brand-eyebrow {
-    color: #9E7D3B !important;
+    color: #8C6212 !important;
+    font-weight: 800 !important;
 }
 
 .how-it-works-title {
-    color: #1C1512 !important;
+    color: #110C0A !important;
+    font-weight: 800 !important;
 }
 
 .how-it-works-section .step-card {
     background: #FFFFFF !important;
-    border: 1px solid rgba(184, 139, 42, 0.22) !important;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04) !important;
+    border: 1.5px solid rgba(184, 139, 42, 0.25) !important;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.04) !important;
 }
 
 .how-it-works-section .step-card:hover {
-    border-color: #B88B2A !important;
-    box-shadow: 0 12px 28px rgba(184, 139, 42, 0.15) !important;
+    border-color: #8C6212 !important;
+    box-shadow: 0 14px 30px rgba(184, 139, 42, 0.18) !important;
 }
 
 .how-it-works-section .step-title {
-    color: #1C1512 !important;
+    color: #110C0A !important;
+    font-weight: 800 !important;
 }
 
 .how-it-works-section .step-desc {
-    color: #4A4036 !important;
+    color: #382F28 !important;
+    font-size: 0.9rem !important;
 }
 
 .how-it-works-section .step-desc strong {
-    color: #1C1512 !important;
+    color: #110C0A !important;
+    font-weight: 700 !important;
 }
 
 .how-it-works-section .step-icon-box {
-    background: radial-gradient(circle at center, rgba(184, 139, 42, 0.12) 0%, rgba(184, 139, 42, 0.02) 70%, transparent 100%) !important;
-    border: 1px solid rgba(184, 139, 42, 0.25) !important;
+    background: radial-gradient(circle at center, rgba(184, 139, 42, 0.15) 0%, rgba(184, 139, 42, 0.03) 70%, transparent 100%) !important;
+    border: 1px solid rgba(184, 139, 42, 0.3) !important;
 }
 
 .how-it-works-section .step-icon-box i {
-    color: #B88B2A !important;
-    filter: drop-shadow(0 0 8px rgba(184, 139, 42, 0.3)) !important;
+    color: #8C6212 !important;
+    filter: drop-shadow(0 0 8px rgba(184, 139, 42, 0.35)) !important;
 }
 
 .how-it-works-section .step-badge {
-    background: #B88B2A !important;
+    background: #8C6212 !important;
     color: #FFFFFF !important;
 }
 
 .how-it-works-section .how-it-works-footer {
-    border-top: 1px solid rgba(28, 21, 18, 0.15) !important;
+    border-top: 1px solid rgba(28, 21, 18, 0.2) !important;
 }
 
 .how-it-works-section .how-it-works-quote {
-    color: #4A4036 !important;
+    color: #382F28 !important;
+    font-weight: 500 !important;
 }
 
 /* 09. PRÉ-FOOTER CTA (MARROM NOBRE #261613) */
